@@ -18,18 +18,18 @@ interface OLTProps {
     name: string;
     numberOfPorts: number;
 }
+
 const connectionLosses = {
     connector: (lossPercentage: number) => {
-        return (-0.5 * lossPercentage) / 100;
+        return ((-0.3 * lossPercentage) / 100)-0.2;
     },
     fusion: (lossPercentage: number) => {
+        // return ((-0.2 * lossPercentage) / 100)-0.1;
         return (-0.1 * lossPercentage) / 100;
     },
 };
 
-const splittersBalancedLosses: {
-    [key: string]: number;
-} = {
+const splittersBalancedLosses: { [key: string]: number } = {
     "1x2 B": -3.7,
     "1x4 B": -7.3,
     "1x8 B": -10.5,
@@ -68,10 +68,10 @@ export class Project {
         handleSetNodes: (nodes: NodeFttx[]) => void,
         position: { x: number; y: number }
     ) {
-        const newDBmMeadure: NodeFttx = {
+        const newDBmMeasure: NodeFttx = {
             id: crypto.randomUUID(),
             type: "dBmMeasure",
-            data: { label: "" },
+            data: { label: "" ,client:false},
             fttx: {
                 ports: [{ port: 1, loss: 100, used: false }],
                 meters: 0,
@@ -82,7 +82,7 @@ export class Project {
                 height: 25,
             },
         };
-        handleSetNodes([...nodes, newDBmMeadure]);
+        handleSetNodes([...nodes, newDBmMeasure]);
     }
 
     static createNewBox(
@@ -256,7 +256,7 @@ export class Project {
         handleSetNodes(newNodes);
     }
 
-    static updatePowerClientsAllOlts(
+    static updatePowerDBmMeasuresAllOlts(
         nodes: NodeFttx[],
         edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
@@ -265,7 +265,7 @@ export class Project {
     ) {
         nodes.forEach((node) => {
             if (node.type === "olt") {
-                this.updatePowerClients(
+                this.updatePowerDBmMeasures(
                     nodes,
                     edges,
                     node,
@@ -277,7 +277,7 @@ export class Project {
         });
     }
 
-    static updatePowerClients(
+    static updatePowerDBmMeasures(
         nodes: NodeFttx[],
         edges: Edge[],
         startNode: NodeFttx,
@@ -287,7 +287,7 @@ export class Project {
     ) {
         const paths = this.getPaths(nodes, edges, startNode);
         let newEdges = edges;
-        const clients: NodeFttx[] = [];
+        const dBmMeasures: NodeFttx[] = [];
 
         for (const path of paths) {
             const nodesPaths: NodeFttx[] = [];
@@ -306,14 +306,23 @@ export class Project {
                 } else if (node.type === "distance") {
                     power += (node.fttx.meters! / 1000) * -0.35;
                 } else if (node.type === "dBmMeasure") {
-                    node.data.label = `${power.toFixed(2)}dBm`;
-                    clients.push(node);
+                    if(node.data.client){
+                        power += connectionLosses.connector(lossPercentage);
+                        power += connectionLosses.connector(lossPercentage);
+                        node.data.label = `${power.toFixed(2)}dBm`;
+
+                    }else{
+                        node.data.label = `${power.toFixed(2)}dBm`;
+
+                    }
+                    dBmMeasures.push(node);
                 } else if (node.type === "splitter") {
                     if (!node.fttx.unbalanced) {
                         power += splittersBalancedLosses[node.data.label];
                     } else {
                         if (index < nodesPaths.length - 1) {
-                            power += connectionLosses.fusion(lossPercentage); + connectionLosses.fusion(lossPercentage);;
+                            power += connectionLosses.fusion(lossPercentage);
+                            +connectionLosses.fusion(lossPercentage);
                             const edge = edges.find(
                                 (edge) =>
                                     edge.target === nodesPaths[index + 1].id
@@ -362,19 +371,19 @@ export class Project {
             });
         }
         handleSetEdges(newEdges);
-        this.setPowerInClients(clients, nodes, handleSetNodes);
+        this.setPowerInDBmMeasure(dBmMeasures, nodes, handleSetNodes);
     }
 
-    static setPowerInClients(
-        clients: NodeFttx[],
+    static setPowerInDBmMeasure(
+        dBmMeasures: NodeFttx[],
         nodes: NodeFttx[],
         handleSetNodes: (node: NodeFttx[]) => void
     ) {
         const newNodes = nodes.map((node) => {
             if (node.type === "dBmMeasure") {
-                clients.forEach((nodeClient) => {
-                    if (nodeClient.id === node.id) {
-                        return nodeClient;
+                dBmMeasures.forEach((nodeDBm) => {
+                    if (nodeDBm.id === node.id) {
+                        return nodeDBm;
                     }
                 });
             }

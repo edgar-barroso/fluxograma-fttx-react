@@ -81,7 +81,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
             fetchUpdateDiagram();
         }
         const intervalId = setInterval(() => {
-            Project.updatePowerClientsAllOlts(
+            Project.updatePowerDBmMeasuresAllOlts(
                 nodes,
                 edges,
                 handleSetNodes,

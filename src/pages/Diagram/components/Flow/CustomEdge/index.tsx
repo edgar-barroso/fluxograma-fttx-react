@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { EdgeProps, getBezierPath, EdgeLabelRenderer, getSmoothStepPath, BaseEdge } from "reactflow";
+import { EdgeProps, EdgeLabelRenderer, getSmoothStepPath, BaseEdge } from "reactflow";
 
 export const CustomEdge: FC<EdgeProps> = ({
     id,

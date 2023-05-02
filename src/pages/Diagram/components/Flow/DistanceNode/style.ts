@@ -4,22 +4,20 @@ export const DistanceStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30px;
-    padding: 5px;
+    height: 20px;
+    width: 10px;
     cursor: grab;
-    label {
-        padding: 10px;
-        color: #000;
-        font-size: 12px;
-        cursor: grab;
-    }
     input {
+        position: absolute;
+        left: 10px;
         text-align: center;
-        width: 60px;
-        margin-right: 10px;
+        margin: 5px;
         border: 1px solid #00b37e;
         border-radius: 5px;
         color: #000;
         font-size: 12px;
+        ::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
     }
 `;

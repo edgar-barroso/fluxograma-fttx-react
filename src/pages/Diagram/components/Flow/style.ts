@@ -1,8 +1,7 @@
 import { NodeToolbar } from "reactflow";
 import styled from "styled-components";
 
-interface ButtonContainerProps {
-}
+interface ButtonContainerProps {}
 
 export const ButtonContainer = styled.button<ButtonContainerProps>`
     display: flex;
@@ -19,15 +18,17 @@ export const ButtonContainer = styled.button<ButtonContainerProps>`
     border-radius: 6px;
     cursor: pointer;
 
-
-    :hover{
+    :hover {
         background-color: ${(props) => props.theme["green-300"]};
-        color:white;
+        color: white;
     }
 `;
 
+interface ButtonNodeProps {
+    color?: string;
+}
 
-export const ButtonNode = styled.div`
+export const ButtonNode = styled.div<ButtonNodeProps>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,13 +40,13 @@ export const ButtonNode = styled.div`
     :hover {
         color: white;
         background-color: #00b37e;
-        cursor:pointer;
+        cursor: pointer;
     }
-
-`
+    color: ${(props) => props.color};
+`;
 
 export const NodeToolbarStyled = styled(NodeToolbar)`
+    gap: 5px;
     display: flex;
     flex-direction: row;
-`
-
+`;

@@ -43,7 +43,6 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
     return (
         <DistanceStyled>
             <Handle type="target" position={Position.Top} isConnectable />
-            <label>metros:</label>
             <input
                 id={id}
                 autoComplete="off"
@@ -53,6 +52,7 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
                 className="nodrag"
                 min={0}
                 max={999999}
+                placeholder="metros"
             />
             <Handle type="source" position={Position.Bottom} isConnectable />
             <NodeToolbar>
