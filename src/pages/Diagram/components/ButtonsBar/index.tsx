@@ -3,7 +3,12 @@ import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { ButtonContainer } from "../Flow/style";
 import { ButtonsBarContainer } from "./style";
 import { BiWindow } from "react-icons/bi";
-import { AiFillPrinter, AiFillSignal, AiOutlineFall, AiOutlineUserAdd } from "react-icons/ai";
+import {
+    AiFillPrinter,
+    AiFillSignal,
+    AiOutlineFall,
+    AiOutlineUserAdd,
+} from "react-icons/ai";
 import { MdChangeHistory } from "react-icons/md";
 import * as Dialog from "@radix-ui/react-dialog";
 import { NewSplitterModal } from "../NewSplitterModal";
@@ -13,22 +18,22 @@ import { FaBroadcastTower } from "react-icons/fa";
 import { NewOLTModal } from "../NewOLTModal";
 
 export function ButtonsBar() {
-    const { nodes, handleSetNodes,getCenter } = useContext(DiagramContext);
+    const { nodes, handleSetNodes, getCenter } = useContext(DiagramContext);
 
     const handleCreateNewDistance = () => {
-        Project.createNewDistance(nodes, handleSetNodes,getCenter());
+        Project.createNewDistance(nodes, handleSetNodes, getCenter());
     };
 
     const handleDownloadPng = () => {
         Project.DownloadPng();
     };
 
-    const handleCreateNewClient = () => {
-        Project.createNewClient(nodes, handleSetNodes,getCenter());
+    const handleCreateNewDBmMeasure = () => {
+        Project.createNewDBmMeasure(nodes, handleSetNodes, getCenter());
     };
 
     return (
-        <ButtonsBarContainer >
+        <ButtonsBarContainer>
             <Dialog.Root>
                 <Dialog.Trigger asChild>
                     <ButtonContainer title="Caixa">
@@ -47,11 +52,15 @@ export function ButtonsBar() {
                 <NewSplitterModal />
             </Dialog.Root>
 
-            <ButtonContainer title="Medir dBm" onClick={handleCreateNewClient}>
+            <ButtonContainer
+                title="Medir dBm"
+                onClick={handleCreateNewDBmMeasure}>
                 <AiFillSignal />
             </ButtonContainer>
 
-            <ButtonContainer title="Distancia" onClick={handleCreateNewDistance}>
+            <ButtonContainer
+                title="Distancia"
+                onClick={handleCreateNewDistance}>
                 <AiOutlineFall />
             </ButtonContainer>
 

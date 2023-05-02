@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ClientContainer = styled.div`
+export const DBmMeasureContainer = styled.div`
     text-align: center;
     *{
         cursor: grab;

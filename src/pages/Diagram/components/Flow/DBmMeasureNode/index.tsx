@@ -1,19 +1,18 @@
-import { useContext, useState } from "react";
-import { Handle, NodeToolbar, Position } from "reactflow";
+import { useContext } from "react";
+import { Handle, Position } from "reactflow";
 import "./../styles-nodes.css";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsTrash3 } from "react-icons/bs";
 import { ButtonNode, NodeToolbarStyled } from "../style";
-import { ClientContainer } from "./style";
 import { Project } from "../../../../../utils/Project";
-import { AiOutlineHome } from "react-icons/ai";
+import { DBmMeasureContainer } from "./style";
 
 interface DistanceNodeProps {
     id: string;
     data: { label: string };
 }
 
-export function ClientNode({ id, data }: DistanceNodeProps) {
+export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
     const { nodes, edges, handleSetNodes, handleSetEdges } =
         useContext(DiagramContext);
 
@@ -22,16 +21,16 @@ export function ClientNode({ id, data }: DistanceNodeProps) {
     };
 
     return (
-        <ClientContainer>
+        <DBmMeasureContainer>
             <Handle type="target" position={Position.Top} isConnectable />
             <label htmlFor={id}>{data.label}</label>
             <Handle type="source" position={Position.Bottom} isConnectable />
-            
+
             <NodeToolbarStyled>
                 <ButtonNode onClick={handleButtonDeleteClick}>
                     <BsTrash3 />
                 </ButtonNode>
             </NodeToolbarStyled>
-        </ClientContainer>
+        </DBmMeasureContainer>
     );
 }

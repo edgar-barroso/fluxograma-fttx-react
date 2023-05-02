@@ -11,13 +11,15 @@ import { Project } from "../utils/Project";
 import { setupAPIClient } from "../lib/api";
 
 // useOnSelectionChange({
-//     onChange: ({ nodes, edges }) => 
+//     onChange: ({ nodes, edges }) =>
 //         console.log(nodes)
 // });
 
 interface DiagramContextType {
     nodes: NodeFttx[];
     edges: Edge[];
+    lossPercentage: number;
+    handleSetLossPercentage: (lossPercentage: number) => void;
     handleSetNodes: (data: NodeFttx[]) => void;
     handleSetEdges: (data: Edge[]) => void;
     getCenter: () => { x: number; y: number };
@@ -35,7 +37,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const [edges, setEdges] = useState<Edge[]>([]);
     const [load, setLoad] = useState(false);
     const [timelastSave, setTimeLastSave] = useState(new Date());
-
+    const [lossPercentage, setLossPercentage] = useState(100);
 
     const getCenter = () => {
         const { x, y, zoom } = getViewport();
@@ -83,7 +85,8 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
                 nodes,
                 edges,
                 handleSetNodes,
-                handleSetEdges
+                handleSetEdges,
+                lossPercentage
             );
         }, 1000);
         return () => clearInterval(intervalId);
@@ -97,11 +100,17 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
         setEdges(data);
     };
 
+    const handleSetLossPercentage = (lossPercentage: number) => {
+        setLossPercentage(lossPercentage);
+    };
+
     return (
         <DiagramContext.Provider
             value={{
                 nodes,
                 edges,
+                lossPercentage,
+                handleSetLossPercentage,
                 handleSetNodes,
                 handleSetEdges,
                 getCenter,

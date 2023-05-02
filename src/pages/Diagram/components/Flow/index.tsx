@@ -22,8 +22,8 @@ import "./styles-nodes.css";
 import { SplitterNode } from "./SplitterNode";
 import { BoxNode } from "./BoxNode";
 import { OLTNode } from "./OLTNode";
-import { ClientNode } from "./ClientNode";
 import { CustomEdge } from "./CustomEdge";
+import { DBmMeasureNode } from "./DBmMeasureNode";
 
 const edgeOptions: DefaultEdgeOptions = {
     animated: false,
@@ -37,7 +37,7 @@ const nodeTypes = {
     splitter: SplitterNode,
     box: BoxNode,
     olt: OLTNode,
-    client: ClientNode,
+    dBmMeasure: DBmMeasureNode,
 };
 
 const edgeTypes: EdgeTypes = {

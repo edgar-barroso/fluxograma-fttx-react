@@ -18,8 +18,16 @@ interface OLTProps {
     name: string;
     numberOfPorts: number;
 }
+const connectionLosses = {
+    connector: (lossPercentage: number) => {
+        return (-0.5 * lossPercentage) / 100;
+    },
+    fusion: (lossPercentage: number) => {
+        return (-0.1 * lossPercentage) / 100;
+    },
+};
 
-const splittersBalanced: {
+const splittersBalancedLosses: {
     [key: string]: number;
 } = {
     "1x2 B": -3.7,
@@ -29,7 +37,7 @@ const splittersBalanced: {
     "1x32 B": -17.2,
 };
 
-const splittersUnalanced: { [key: string]: number } = {
+const splittersUnalancedLosses: { [key: string]: number } = {
     "1": -21.6,
     "99": -0.3,
     "2": -18.7,
@@ -55,14 +63,14 @@ const splittersUnalanced: { [key: string]: number } = {
 };
 
 export class Project {
-    static createNewClient(
+    static createNewDBmMeasure(
         nodes: NodeFttx[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         position: { x: number; y: number }
     ) {
-        const newClient: NodeFttx = {
+        const newDBmMeadure: NodeFttx = {
             id: crypto.randomUUID(),
-            type: "client",
+            type: "dBmMeasure",
             data: { label: "" },
             fttx: {
                 ports: [{ port: 1, loss: 100, used: false }],
@@ -74,7 +82,7 @@ export class Project {
                 height: 25,
             },
         };
-        handleSetNodes([...nodes, newClient]);
+        handleSetNodes([...nodes, newDBmMeadure]);
     }
 
     static createNewBox(
@@ -110,7 +118,9 @@ export class Project {
                 label: `1x${splitter.ports.length} ${
                     splitter.unbalanced ? "D" : "B"
                 }`,
-                title:`${splitter.ports.map((item)=>`${item.loss}`).join(' | ')}`
+                title: `${splitter.ports
+                    .map((item) => `${item.loss}`)
+                    .join(" | ")}`,
             },
             type: "splitter",
             fttx: {
@@ -168,10 +178,10 @@ export class Project {
                 ports: oltPorts,
             },
             position,
-            style:{
+            style: {
                 width: 200,
-                height: 50
-            }
+                height: 50,
+            },
         };
         handleSetNodes([...nodes, newBox]);
     }
@@ -250,7 +260,8 @@ export class Project {
         nodes: NodeFttx[],
         edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
-        handleSetEdges: (edges: Edge[]) => void
+        handleSetEdges: (edges: Edge[]) => void,
+        lossPercentage: number
     ) {
         nodes.forEach((node) => {
             if (node.type === "olt") {
@@ -259,7 +270,8 @@ export class Project {
                     edges,
                     node,
                     handleSetNodes,
-                    handleSetEdges
+                    handleSetEdges,
+                    lossPercentage
                 );
             }
         });
@@ -270,7 +282,8 @@ export class Project {
         edges: Edge[],
         startNode: NodeFttx,
         handleSetNodes: (nodes: NodeFttx[]) => void,
-        handleSetEdges: (edges: Edge[]) => void
+        handleSetEdges: (edges: Edge[]) => void,
+        lossPercentage: number
     ) {
         const paths = this.getPaths(nodes, edges, startNode);
         let newEdges = edges;
@@ -288,19 +301,19 @@ export class Project {
 
             nodesPaths.forEach((node: NodeFttx, index: number) => {
                 if (node.type === "olt") {
-                    power += -0.5;
-                    power += -0.1;
+                    power += connectionLosses.connector(lossPercentage);
+                    power += connectionLosses.fusion(lossPercentage);
                 } else if (node.type === "distance") {
                     power += (node.fttx.meters! / 1000) * -0.35;
-                } else if (node.type === "client") {
+                } else if (node.type === "dBmMeasure") {
                     node.data.label = `${power.toFixed(2)}dBm`;
                     clients.push(node);
                 } else if (node.type === "splitter") {
                     if (!node.fttx.unbalanced) {
-                        power += splittersBalanced[node.data.label];
+                        power += splittersBalancedLosses[node.data.label];
                     } else {
                         if (index < nodesPaths.length - 1) {
-                            power += -0.1 + -0.1;
+                            power += connectionLosses.fusion(lossPercentage); + connectionLosses.fusion(lossPercentage);;
                             const edge = edges.find(
                                 (edge) =>
                                     edge.target === nodesPaths[index + 1].id
@@ -314,13 +327,17 @@ export class Project {
                             );
 
                             power +=
-                                splittersUnalanced[`${portAtributes?.loss}`];
+                                splittersUnalancedLosses[
+                                    `${portAtributes?.loss}`
+                                ];
                         } else {
                             const portAtributes = node.fttx.ports?.find(
                                 (item) => item.port === 2
                             );
                             power +=
-                                splittersUnalanced[`${portAtributes?.loss}`];
+                                splittersUnalancedLosses[
+                                    `${portAtributes?.loss}`
+                                ];
                         }
                     }
                 }
@@ -330,9 +347,12 @@ export class Project {
                         newEdge.style = {
                             ...newEdge.style,
                             stroke: "#00B37E",
-                            opacity: 1 / (1 + Math.abs(5.38 - power) / 40) * 0.8 + 0.3,
+                            opacity:
+                                (1 / (1 + Math.abs(5.38 - power) / 40)) * 0.8 +
+                                0.3,
                             strokeWidth:
-                                (1 / (1 + Math.abs(5.38 - power) / 40)) * 1.5  + 0.5,
+                                (1 / (1 + Math.abs(5.38 - power) / 40)) * 1.5 +
+                                0.5,
                         };
                         newEdge.animated = true;
                         return newEdge;
@@ -351,7 +371,7 @@ export class Project {
         handleSetNodes: (node: NodeFttx[]) => void
     ) {
         const newNodes = nodes.map((node) => {
-            if (node.type === "client") {
+            if (node.type === "dBmMeasure") {
                 clients.forEach((nodeClient) => {
                     if (nodeClient.id === node.id) {
                         return nodeClient;
