@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef, useEffect, useState } from "react";
+import { useCallback, useContext, useRef } from "react";
 import ReactFlow, {
     addEdge,
     applyEdgeChanges,
@@ -6,14 +6,12 @@ import ReactFlow, {
     Background,
     Controls,
     DefaultEdgeOptions,
-    Edge,
     EdgeChange,
     EdgeTypes,
     MiniMap,
     NodeChange,
     NodeFttx,
     updateEdge,
-    useOnSelectionChange,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
@@ -111,45 +109,65 @@ export function Flow() {
 
     //@ts-ignore
     const onEdgeUpdate = (oldEdge, newConnection) => {
-        const newSourceNode = nodes.find(
-            (node) => node.id === newConnection.source
-        );
-        const usedNewNode = edges.find(
-            (edge) => edge.source === newConnection.source
-        );
-        const freePorts = newSourceNode!.fttx.ports!.filter(({ used }) => {
-            return !used;
-        });
-        if (freePorts.length > 0 && !usedNewNode) {
-            newConnection.label = `${freePorts[0].loss}%`;
-            newConnection.port = freePorts[0].port;
-            newConnection.type = "custom";
-
-            const oldSourceNode = nodes.find(
-                (node) => node.id === oldEdge.source
+        if (oldEdge.source !== newConnection.source) {
+            const newSourceNode = nodes.find(
+                (node) => node.id === newConnection.source
             );
-            //@ts-ignore
-            oldSourceNode.fttx.ports[oldEdge.port - 1].used = false;
 
-            //@ts-ignore
-            newSourceNode.fttx.ports[freePorts[0].port - 1].used = true;
+            const usedNewNode = edges.find(
+                (edge) => edge.source === newConnection.source
+            );
 
-            //@ts-ignore
-            const newNodes = nodes.map((node) => {
-                if (node.id === oldSourceNode!.id) {
-                    return oldSourceNode;
-                }
-                if (node.id === newSourceNode!.id) {
-                    return newSourceNode;
-                }
-                return node;
+            const freePorts = newSourceNode!.fttx.ports!.filter(({ used }) => {
+                return !used;
             });
-            edgeUpdateSuccessful.current = true;
+            if (freePorts.length > 0 && !usedNewNode) {
+                newConnection.label = `${freePorts[0].loss}%`;
+                newConnection.port = freePorts[0].port;
+                newConnection.type = "custom";
 
-            //@ts-ignore
-            handleSetNodes(newNodes);
-            //@ts-ignore
-            handleSetEdges((els) => updateEdge(oldEdge, newConnection, els));
+                const oldSourceNode = nodes.find(
+                    (node) => node.id === oldEdge.source
+                );
+                //@ts-ignore
+                oldSourceNode.fttx.ports[oldEdge.port - 1].used = false;
+
+                //@ts-ignore
+                newSourceNode.fttx.ports[freePorts[0].port - 1].used = true;
+
+                //@ts-ignore
+                const newNodes = nodes.map((node) => {
+                    if (node.id === oldSourceNode!.id) {
+                        return oldSourceNode;
+                    }
+                    if (node.id === newSourceNode!.id) {
+                        return newSourceNode;
+                    }
+                    return node;
+                });
+                edgeUpdateSuccessful.current = true;
+
+                //@ts-ignore
+                handleSetNodes(newNodes);
+                //@ts-ignore
+                handleSetEdges((els) =>
+                    updateEdge(oldEdge, newConnection, els)
+                );
+            }
+        } else if (oldEdge.target !== newConnection.target) {
+            const usedNewNode = edges.find(
+                (edge) => edge.target === newConnection.target
+            );
+
+            if (!usedNewNode) {
+                const newEdge = { ...oldEdge };
+                newEdge.target = newConnection.target;
+                //@ts-ignore
+                edgeUpdateSuccessful.current = true;
+
+                //@ts-ignore
+                handleSetEdges((els) => updateEdge(oldEdge, newEdge, els));
+            }
         }
     };
 
@@ -173,6 +191,7 @@ export function Flow() {
 
         edgeUpdateSuccessful.current = true;
     };
+    
     return (
         <ReactFlow
             //@ts-ignore

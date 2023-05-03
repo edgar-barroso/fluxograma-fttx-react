@@ -21,7 +21,7 @@ interface OLTProps {
 
 const connectionLosses = {
     connector: (lossPercentage: number) => {
-        return ((-0.3 * lossPercentage) / 100)-0.2;
+        return (-0.3 * lossPercentage) / 100 - 0.2;
     },
     fusion: (lossPercentage: number) => {
         // return ((-0.2 * lossPercentage) / 100)-0.1;
@@ -71,7 +71,7 @@ export class Project {
         const newDBmMeasure: NodeFttx = {
             id: crypto.randomUUID(),
             type: "dBmMeasure",
-            data: { label: "" ,client:false},
+            data: { label: "", client: false },
             fttx: {
                 ports: [{ port: 1, loss: 100, used: false }],
                 meters: 0,
@@ -130,6 +130,7 @@ export class Project {
             position,
             style: {
                 width: 60,
+                height: 30,
             },
         };
         handleSetNodes([...nodes, newSplitter]);
@@ -149,6 +150,9 @@ export class Project {
             },
             position,
             data: { label: "" },
+            style: {
+
+            },
         };
 
         handleSetNodes([...nodes, newDistance]);
@@ -306,14 +310,12 @@ export class Project {
                 } else if (node.type === "distance") {
                     power += (node.fttx.meters! / 1000) * -0.35;
                 } else if (node.type === "dBmMeasure") {
-                    if(node.data.client){
+                    if (node.data.client) {
                         power += connectionLosses.connector(lossPercentage);
                         power += connectionLosses.connector(lossPercentage);
                         node.data.label = `${power.toFixed(2)}dBm`;
-
-                    }else{
+                    } else {
                         node.data.label = `${power.toFixed(2)}dBm`;
-
                     }
                     dBmMeasures.push(node);
                 } else if (node.type === "splitter") {
@@ -322,7 +324,7 @@ export class Project {
                     } else {
                         if (index < nodesPaths.length - 1) {
                             power += connectionLosses.fusion(lossPercentage);
-                            +connectionLosses.fusion(lossPercentage);
+                            power += connectionLosses.fusion(lossPercentage);
                             const edge = edges.find(
                                 (edge) =>
                                     edge.target === nodesPaths[index + 1].id

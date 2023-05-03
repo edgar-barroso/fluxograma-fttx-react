@@ -4,14 +4,13 @@ export const DistanceStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20px;
-    width: 10px;
-    cursor: grab;
+    width: 20px;
+    height: 30px;
     input {
         position: absolute;
-        left: 10px;
+        left: 25px;
+        top: 5px;
         text-align: center;
-        margin: 5px;
         border: 1px solid #00b37e;
         border-radius: 5px;
         color: #000;

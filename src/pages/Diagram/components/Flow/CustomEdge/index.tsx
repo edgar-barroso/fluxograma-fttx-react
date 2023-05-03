@@ -26,18 +26,16 @@ export const CustomEdge: FC<EdgeProps> = ({
     return (
         <>
         <BaseEdge path={edgePath} style={style}  />
-            
-            <EdgeLabelRenderer  >
+            <EdgeLabelRenderer>
                 <div
                     style={{
                         position: "absolute",
                         transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
                         background: "#FFF",
-                        borderRadius: 5,
                         fontSize: 10,
                         
                     }}
-                    className="nodrag nopan">
+                    >
                     {label}
                 </div>
             </EdgeLabelRenderer>
