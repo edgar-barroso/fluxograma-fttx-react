@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from 'react-router-dom'
 import { ProjectsContainer } from "./style";
 import { ButtonContainer } from "../Diagram/components/Flow/style";
@@ -14,7 +13,6 @@ interface InfoProject {
 export function UserProjects() {
     
     const navigate = useNavigate();
-    const { handleSetProjectId } = useContext(UserContext);
     const [arrayProjects, setArrayProjects] = useState<InfoProject[]>([]);
     async function fetchGetProjects() {
         const api = setupAPIClient();
@@ -35,8 +33,7 @@ export function UserProjects() {
             {arrayProjects.map((item) => {
                 return (
                     <ButtonContainer onClick={() => {
-                        handleSetProjectId(item.id)
-                        navigate('/diagram')
+                        navigate(`/diagram/${item.id}`)
                         }} key={item.id}>
                         {item.name}
                     </ButtonContainer   >

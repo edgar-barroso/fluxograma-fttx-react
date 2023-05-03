@@ -3,12 +3,11 @@ import {
     createContext,
     useEffect,
     useState,
-    useContext,
 } from "react";
 import { Edge, NodeFttx, useReactFlow } from "reactflow";
-import { UserContext } from "./UserContext";
 import { Project } from "../utils/Project";
 import { setupAPIClient } from "../lib/api";
+import { useParams } from "react-router-dom";
 
 // useOnSelectionChange({
 //     onChange: ({ nodes, edges }) =>
@@ -32,7 +31,7 @@ export const DiagramContext = createContext({} as DiagramContextType);
 
 export function DiagramProvider({ children }: DiagramProviderProps) {
     const { getViewport } = useReactFlow();
-    const { projectId } = useContext(UserContext);
+    const { projectId } = useParams();
     const [nodes, setNodes] = useState<NodeFttx[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
     const [load, setLoad] = useState(false);
