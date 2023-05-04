@@ -1,5 +1,5 @@
 import { toPng } from "html-to-image";
-import { Edge, NodeFttx, Node } from "reactflow";
+import { Edge, NodeFttx, Node, DefaultEdgeOptions } from "reactflow";
 
 interface SplitterProps {
     ports: Array<{
@@ -18,6 +18,15 @@ interface OLTProps {
     name: string;
     numberOfPorts: number;
 }
+
+const defaultEdgeOptions: DefaultEdgeOptions = {
+    animated: false,
+    style: {
+        stroke: "#7c7c7c",
+        strokeWidth: 1,
+        width: 1,
+    },
+};
 
 const connectionLosses = {
     connector: (lossPercentage: number) => {
@@ -150,9 +159,7 @@ export class Project {
             },
             position,
             data: { label: "" },
-            style: {
-
-            },
+            style: {},
         };
 
         handleSetNodes([...nodes, newDistance]);
@@ -267,30 +274,40 @@ export class Project {
         handleSetEdges: (edges: Edge[]) => void,
         lossPercentage: number
     ) {
+        let newEdges = edges.map((edge) => {
+            const newEdge = { ...edge };
+            newEdge.style = {
+                ...newEdge.style,
+                stroke: "#7c7c7c",
+                opacity: 0.8,
+                strokeWidth: 1,
+            };
+            newEdge.animated = false;
+            return newEdge;
+        });
+
         nodes.forEach((node) => {
             if (node.type === "olt") {
-                this.updatePowerDBmMeasures(
+                newEdges = this.updatePowerDBmMeasures(
                     nodes,
-                    edges,
+                    newEdges,
                     node,
                     handleSetNodes,
-                    handleSetEdges,
                     lossPercentage
                 );
             }
         });
+        handleSetEdges(newEdges);
     }
 
     static updatePowerDBmMeasures(
         nodes: NodeFttx[],
-        edges: Edge[],
+        newEdges: Edge[],
         startNode: NodeFttx,
         handleSetNodes: (nodes: NodeFttx[]) => void,
-        handleSetEdges: (edges: Edge[]) => void,
         lossPercentage: number
     ) {
-        const paths = this.getPaths(nodes, edges, startNode);
-        let newEdges = edges;
+        const paths = this.getPaths(nodes, newEdges, startNode);
         const dBmMeasures: NodeFttx[] = [];
 
         for (const path of paths) {
@@ -325,7 +342,7 @@ export class Project {
                         if (index < nodesPaths.length - 1) {
                             power += connectionLosses.fusion(lossPercentage);
                             power += connectionLosses.fusion(lossPercentage);
-                            const edge = edges.find(
+                            const edge = newEdges.find(
                                 (edge) =>
                                     edge.target === nodesPaths[index + 1].id
                             );
@@ -372,8 +389,9 @@ export class Project {
                 });
             });
         }
-        handleSetEdges(newEdges);
+
         this.setPowerInDBmMeasure(dBmMeasures, nodes, handleSetNodes);
+        return newEdges;
     }
 
     static setPowerInDBmMeasure(

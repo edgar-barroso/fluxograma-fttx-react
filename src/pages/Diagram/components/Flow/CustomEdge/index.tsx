@@ -22,7 +22,6 @@ export const CustomEdge: FC<EdgeProps> = ({
 
 
     });
-    
     return (
         <>
         <BaseEdge path={edgePath} style={style}  />

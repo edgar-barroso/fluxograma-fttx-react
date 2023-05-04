@@ -27,6 +27,8 @@ const edgeOptions: DefaultEdgeOptions = {
     animated: false,
     style: {
         stroke: "#7c7c7c",
+        opacity: 0.8,
+        strokeWidth: 1,
     },
 };
 
@@ -191,7 +193,7 @@ export function Flow() {
 
         edgeUpdateSuccessful.current = true;
     };
-    
+
     return (
         <ReactFlow
             //@ts-ignore
