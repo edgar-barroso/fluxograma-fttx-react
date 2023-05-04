@@ -11,6 +11,7 @@ declare module "reactflow" {
             }>;
             unbalanced?: boolean;
             meters?: number;
+            power?:number
         };
     }
 }

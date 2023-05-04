@@ -17,6 +17,7 @@ interface BoxProps {
 interface OLTProps {
     name: string;
     numberOfPorts: number;
+    power:number
 }
 
 const defaultEdgeOptions: DefaultEdgeOptions = {
@@ -187,6 +188,7 @@ export class Project {
             data: { label: olt.name },
             fttx: {
                 ports: oltPorts,
+                power:olt.power
             },
             position,
             style: {
@@ -318,7 +320,7 @@ export class Project {
                     nodesPaths.push(node);
                 }
             });
-            let power = 5.38;
+            let power = startNode.fttx.power ?? 5.38;
 
             nodesPaths.forEach((node: NodeFttx, index: number) => {
                 if (node.type === "olt") {

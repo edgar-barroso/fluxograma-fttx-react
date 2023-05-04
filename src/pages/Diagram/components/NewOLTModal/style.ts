@@ -40,6 +40,10 @@ export const Content = styled(Dialog.Content)`
             &::placeholder {
                 color: ${(props) => props.theme["gray-100"]};
             }
+
+            ::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
         }
     }
 `;

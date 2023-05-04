@@ -10,8 +10,7 @@ import {
 } from "react-icons/bs";
 import { ButtonNode, NodeToolbarStyled } from "../style";
 import { Project } from "../../../../../utils/Project";
-import { DBmMeasureContainer, CheckBoxClientContainer } from "./style";
-import { SlOptions } from "react-icons/sl";
+import { DBmMeasureContainer} from "./style";
 
 interface DistanceNodeProps {
     id: string;
@@ -31,7 +30,7 @@ export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
     return (
         <DBmMeasureContainer>
             <Handle type="target" position={Position.Top} isConnectable />
-            <label htmlFor={id}>{data.label}</label>
+            <label>{data.label}</label>
 
             {!data.client && (
                 <Handle

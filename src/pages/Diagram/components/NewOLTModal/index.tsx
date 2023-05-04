@@ -6,21 +6,33 @@ import { Project } from "../../../../utils/Project";
 import { useReactFlow } from "reactflow";
 
 export function NewOLTModal() {
-    const { nodes, handleSetNodes,getCenter } = useContext(DiagramContext);
-    const [nameOLT, setNameOLT] = useState('');
+    const { nodes, handleSetNodes, getCenter } = useContext(DiagramContext);
+    const [nameOLT, setNameOLT] = useState("");
+    const [powerOLT, setPowerOLT] = useState(5.0);
 
-
-    const handleCheckboxChange = (
+    const handleInputNameOLTChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         setNameOLT(event.target.value);
     };
 
-    const handleCreateNewBox = (
-        event: React.MouseEvent<HTMLButtonElement>
+    const handleInputPowerOLTChange = (
+        event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        Project.createNewOLT(nodes, handleSetNodes,{name:nameOLT,numberOfPorts:20},getCenter());
-        
+        setPowerOLT(Number(event.target.value));
+    };
+
+    const handleCreateNewBox = (event: React.MouseEvent<HTMLButtonElement>) => {
+        Project.createNewOLT(
+            nodes,
+            handleSetNodes,
+            {
+                name: `${nameOLT} - ${String(powerOLT)}`,
+                numberOfPorts: 20,
+                power: powerOLT,
+            },
+            getCenter()
+        );
     };
 
     return (
@@ -28,21 +40,29 @@ export function NewOLTModal() {
             <Overlay />
             <Content>
                 <Title>OLT</Title>
-                    <div>
-                        <input
-                            type="text"
-                            id="name-olt"
-                            placeholder="nome da OLT"
-                            onChange={handleCheckboxChange}
-                            autoComplete="off"
-                            maxLength={32}
-                        />
+                <div>
+                    <input
+                        type="text"
+                        placeholder="nome da OLT"
+                        onChange={handleInputNameOLTChange}
+                        autoComplete="off"
+                        value={nameOLT}
+                        maxLength={32}
+                    />
+                    <input
+                        autoComplete="off"
+                        type="number"
+                        placeholder="potencia"
+                        step={0.1}
+                        min={0}
+                        onChange={handleInputPowerOLTChange}
+                        
+                    />
 
                     <ButtonCreate onClick={handleCreateNewBox}>
                         CRIAR
                     </ButtonCreate>
-                    </div>
-
+                </div>
             </Content>
         </Dialog.Portal>
     );

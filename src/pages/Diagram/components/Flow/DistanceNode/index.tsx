@@ -58,7 +58,6 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
                     type="number"
                     onChange={onChange}
                     value={value}
-                    className="nodrag"
                     min={0}
                     max={999999}
                     placeholder="metros"
