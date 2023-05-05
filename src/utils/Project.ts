@@ -227,7 +227,7 @@ export class Project {
         return paths;
     }
 
-    static deleteNodeBy(
+    static deleteNodeById(
         nodeId: string,
         nodes: NodeFttx[],
         edges: Edge[],
@@ -273,7 +273,7 @@ export class Project {
         edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         handleSetEdges: (edges: Edge[]) => void,
-        intervalONU:IntervalONU ,
+        intervalONU: IntervalONU
     ) {
         let newEdges = edges.map((edge) => {
             const newEdge = { ...edge };
@@ -306,7 +306,7 @@ export class Project {
         newEdges: Edge[],
         startNode: NodeFttx,
         handleSetNodes: (nodes: NodeFttx[]) => void,
-        intervalONU:IntervalONU ,
+        intervalONU: IntervalONU
     ) {
         const paths = this.getPaths(nodes, newEdges, startNode);
         const dBmMeasures: NodeFttx[] = [];
@@ -335,10 +335,13 @@ export class Project {
                     } else {
                         node.data.label = `${power.toFixed(2)}dBm`;
                     }
-                    if(power<intervalONU.maxValue && power > intervalONU.minValue){
-                        node.data.withinRange=true
-                    }else{
-                        node.data.withinRange=false
+                    if (
+                        power < intervalONU.maxValue &&
+                        power > intervalONU.minValue
+                    ) {
+                        node.data.withinRange = true;
+                    } else {
+                        node.data.withinRange = false;
                     }
                     dBmMeasures.push(node);
                 } else if (node.type === "splitter") {

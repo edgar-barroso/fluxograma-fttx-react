@@ -32,7 +32,7 @@ export function OLTNode({ data, id }: OLTNodeProps) {
     };
 
     const handleButtonDeleteClick = () => {
-        Project.deleteNodeBy(id, nodes, edges, handleSetNodes, handleSetEdges);
+        Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
     };
 
     return (

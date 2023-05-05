@@ -44,7 +44,7 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
     };
 
     const handleButtonDeleteClick = () => {
-        Project.deleteNodeBy(id, nodes, edges, handleSetNodes, handleSetEdges);
+        Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
     };
 
     return (
