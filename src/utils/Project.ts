@@ -10,6 +10,10 @@ interface SplitterProps {
     unbalanced: boolean;
 }
 
+export interface IntervalONU {
+    minValue: number;
+    maxValue: number;
+}
 interface BoxProps {
     name: string;
 }
@@ -268,7 +272,8 @@ export class Project {
         nodes: NodeFttx[],
         edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
-        handleSetEdges: (edges: Edge[]) => void
+        handleSetEdges: (edges: Edge[]) => void,
+        intervalONU:IntervalONU ,
     ) {
         let newEdges = edges.map((edge) => {
             const newEdge = { ...edge };
@@ -288,7 +293,8 @@ export class Project {
                     nodes,
                     newEdges,
                     node,
-                    handleSetNodes
+                    handleSetNodes,
+                    intervalONU
                 );
             }
         });
@@ -299,7 +305,8 @@ export class Project {
         nodes: NodeFttx[],
         newEdges: Edge[],
         startNode: NodeFttx,
-        handleSetNodes: (nodes: NodeFttx[]) => void
+        handleSetNodes: (nodes: NodeFttx[]) => void,
+        intervalONU:IntervalONU ,
     ) {
         const paths = this.getPaths(nodes, newEdges, startNode);
         const dBmMeasures: NodeFttx[] = [];
@@ -327,6 +334,11 @@ export class Project {
                         node.data.label = `${power.toFixed(2)}dBm`;
                     } else {
                         node.data.label = `${power.toFixed(2)}dBm`;
+                    }
+                    if(power<intervalONU.maxValue && power > intervalONU.minValue){
+                        node.data.withinRange=true
+                    }else{
+                        node.data.withinRange=false
                     }
                     dBmMeasures.push(node);
                 } else if (node.type === "splitter") {

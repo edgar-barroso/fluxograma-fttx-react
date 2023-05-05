@@ -10,11 +10,11 @@ import {
 } from "react-icons/bs";
 import { ButtonNode, NodeToolbarStyled } from "../style";
 import { Project } from "../../../../../utils/Project";
-import { DBmMeasureContainer} from "./style";
+import { DBmMeasureContainer } from "./style";
 
 interface DistanceNodeProps {
     id: string;
-    data: { label: string; client: boolean };
+    data: { label: string; client: boolean; withinRange: boolean };
 }
 
 export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
@@ -28,7 +28,7 @@ export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
     };
 
     return (
-        <DBmMeasureContainer>
+        <DBmMeasureContainer withinRange={data.withinRange} client={data.client} >
             <Handle type="target" position={Position.Top} isConnectable />
             <label>{data.label}</label>
 

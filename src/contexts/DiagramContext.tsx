@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { Edge, NodeFttx, useReactFlow } from "reactflow";
-import { Project } from "../utils/Project";
+import { IntervalONU, Project } from "../utils/Project";
 import { setupAPIClient } from "../lib/api";
 import { useParams } from "react-router-dom";
 
@@ -9,9 +9,12 @@ import { useParams } from "react-router-dom";
 //         console.log(nodes)
 // });
 
+
 interface DiagramContextType {
     nodes: NodeFttx[];
     edges: Edge[];
+    intervalONU: IntervalONU;
+    handleSetIntervalONU: ({ minValue, maxValue }: IntervalONU) => void;
     handleSetNodes: (data: NodeFttx[]) => void;
     handleSetEdges: (data: Edge[]) => void;
     getCenter: () => { x: number; y: number };
@@ -29,6 +32,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const [edges, setEdges] = useState<Edge[]>([]);
     const [load, setLoad] = useState(false);
     const [timelastSave, setTimeLastSave] = useState(new Date());
+    const [intervalONU,setIntervalONU] = useState<IntervalONU>({minValue:-27,maxValue:-8})
 
     const getCenter = () => {
         const { x, y, zoom } = getViewport();
@@ -76,7 +80,8 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
                 nodes,
                 edges,
                 handleSetNodes,
-                handleSetEdges
+                handleSetEdges,
+                intervalONU
             );
         }, 1000);
         return () => clearInterval(intervalId);
@@ -90,14 +95,20 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
         setEdges(data);
     };
 
+    const handleSetIntervalONU = (data:IntervalONU) =>{
+        setIntervalONU(data)
+    }
+
     return (
         <DiagramContext.Provider
             value={{
                 nodes,
                 edges,
+                intervalONU,
                 handleSetNodes,
                 handleSetEdges,
                 getCenter,
+                handleSetIntervalONU,
             }}>
             {children}
         </DiagramContext.Provider>

@@ -16,32 +16,17 @@ export const ConfigBarContainer = styled.div`
         font-weight: 700;
         color: ${(props) => props.theme["green-300"]};
     }
-    input[type="range"] {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 10px;
+    input {
+        text-align: center;
+        font-size: 1.4rem;
+        width: 70px;
+        height: 50px;
         border-radius: 5px;
-        background-color: #eee;
-        outline: none;
-        ::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #333;
-            cursor: pointer;
-        }
-        ::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #333;
-            cursor: pointer;
-        }
-        ::-webkit-slider-thumb {
-            background-color:white;
-            border: 2px solid  ${(props) => props.theme["green-300"]};;
-        }
+        border: 1px solid ${(props) => props.theme["green-300"]};
+        color: ${(props) => props.theme["green-300"]};
+
+        -webkit-appearance: textfield !important;
+        -moz-appearance: textfield !important;
+        appearance: textfield !important;
     }
 `;

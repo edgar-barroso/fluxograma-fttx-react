@@ -18,6 +18,7 @@ declare module "reactflow" {
             title?: string;
             client?: boolean;
             visible?: boolean;
+            withinRange?:boolean;
         };
     }
 }
