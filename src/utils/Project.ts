@@ -17,7 +17,7 @@ interface BoxProps {
 interface OLTProps {
     name: string;
     numberOfPorts: number;
-    power:number
+    power: number;
 }
 
 const defaultEdgeOptions: DefaultEdgeOptions = {
@@ -30,13 +30,8 @@ const defaultEdgeOptions: DefaultEdgeOptions = {
 };
 
 const connectionLosses = {
-    connector: (lossPercentage: number) => {
-        return (-0.3 * lossPercentage) / 100 - 0.2;
-    },
-    fusion: (lossPercentage: number) => {
-        // return ((-0.2 * lossPercentage) / 100)-0.1;
-        return (-0.1 * lossPercentage) / 100;
-    },
+    connector: -0.5,
+    fusion: -0.1,
 };
 
 const splittersBalancedLosses: { [key: string]: number } = {
@@ -188,7 +183,7 @@ export class Project {
             data: { label: olt.name },
             fttx: {
                 ports: oltPorts,
-                power:olt.power
+                power: olt.power,
             },
             position,
             style: {
@@ -273,8 +268,7 @@ export class Project {
         nodes: NodeFttx[],
         edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
-        handleSetEdges: (edges: Edge[]) => void,
-        lossPercentage: number
+        handleSetEdges: (edges: Edge[]) => void
     ) {
         let newEdges = edges.map((edge) => {
             const newEdge = { ...edge };
@@ -294,8 +288,7 @@ export class Project {
                     nodes,
                     newEdges,
                     node,
-                    handleSetNodes,
-                    lossPercentage
+                    handleSetNodes
                 );
             }
         });
@@ -306,8 +299,7 @@ export class Project {
         nodes: NodeFttx[],
         newEdges: Edge[],
         startNode: NodeFttx,
-        handleSetNodes: (nodes: NodeFttx[]) => void,
-        lossPercentage: number
+        handleSetNodes: (nodes: NodeFttx[]) => void
     ) {
         const paths = this.getPaths(nodes, newEdges, startNode);
         const dBmMeasures: NodeFttx[] = [];
@@ -324,14 +316,14 @@ export class Project {
 
             nodesPaths.forEach((node: NodeFttx, index: number) => {
                 if (node.type === "olt") {
-                    power += connectionLosses.connector(lossPercentage);
-                    power += connectionLosses.fusion(lossPercentage);
+                    power += connectionLosses.connector;
+                    power += connectionLosses.fusion;
                 } else if (node.type === "distance") {
                     power += (node.fttx.meters! / 1000) * -0.35;
                 } else if (node.type === "dBmMeasure") {
                     if (node.data.client) {
-                        power += connectionLosses.connector(lossPercentage);
-                        power += connectionLosses.connector(lossPercentage);
+                        power += connectionLosses.connector;
+                        power += connectionLosses.connector;
                         node.data.label = `${power.toFixed(2)}dBm`;
                     } else {
                         node.data.label = `${power.toFixed(2)}dBm`;
@@ -342,8 +334,8 @@ export class Project {
                         power += splittersBalancedLosses[node.data.label];
                     } else {
                         if (index < nodesPaths.length - 1) {
-                            power += connectionLosses.fusion(lossPercentage);
-                            power += connectionLosses.fusion(lossPercentage);
+                            power += connectionLosses.fusion;
+                            power += connectionLosses.fusion;
                             const edge = newEdges.find(
                                 (edge) =>
                                     edge.target === nodesPaths[index + 1].id

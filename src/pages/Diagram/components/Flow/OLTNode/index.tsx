@@ -17,8 +17,6 @@ export function OLTNode({ data, id }: OLTNodeProps) {
     const { nodes, edges, handleSetNodes, handleSetEdges } =
         useContext(DiagramContext);
 
-    const handleButtonClick = () => {};
-
     const handleButtonDeleteClick = () => {
         Project.deleteNodeBy(id, nodes, edges, handleSetNodes, handleSetEdges);
     };
