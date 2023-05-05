@@ -27,7 +27,7 @@ export function NewOLTModal() {
             nodes,
             handleSetNodes,
             {
-                name: `${nameOLT} - ${String(powerOLT)}`,
+                name: nameOLT,
                 numberOfPorts: 20,
                 power: powerOLT,
             },

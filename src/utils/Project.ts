@@ -391,7 +391,7 @@ export class Project {
     static setPowerInDBmMeasure(
         dBmMeasures: NodeFttx[],
         nodes: NodeFttx[],
-        handleSetNodes: (node: NodeFttx[]) => void
+        handleSetNodes: (nodes: NodeFttx[]) => void
     ) {
         const newNodes = nodes.map((node) => {
             if (node.type === "dBmMeasure") {
@@ -424,6 +424,22 @@ export class Project {
                 },
             }).then(this.downloadImage);
         }
+    }
+
+    static setPowerOLT(
+        id: string,
+        powerOLT: number,
+        nodes: NodeFttx[],
+        handleSetNodes: (nodes: NodeFttx[]) => void
+    ) {
+        handleSetNodes(
+            nodes.map((node) => {
+                if (node.id === id) {
+                    node.fttx.power = powerOLT;
+                }
+                return node;
+            })
+        );
     }
 
     static downloadImage(dataUrl: string): void {

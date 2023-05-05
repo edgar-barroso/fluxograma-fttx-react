@@ -7,4 +7,18 @@ export const OLTStyled = styled.div`
     justify-content: center;
     align-items: center;
     word-wrap: break-word;
+    gap: 20px;
+    input[type="number"] {
+        text-align: center;
+        font-size: 20px;
+        width: 60px;
+        border-radius: 6px;
+        border: 0;
+        border: 2px solid ${(props) => props.theme["green-300"]};
+
+        &::placeholder {
+            color: ${(props) => props.theme["gray-100"]};
+        }
+
+    }
 `;

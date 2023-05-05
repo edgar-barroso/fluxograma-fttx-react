@@ -11,7 +11,13 @@ declare module "reactflow" {
             }>;
             unbalanced?: boolean;
             meters?: number;
-            power?:number
+            power?: number;
+        };
+        data: {
+            label: string;
+            title?: string;
+            client?: boolean;
+            visible?: boolean;
         };
     }
 }
