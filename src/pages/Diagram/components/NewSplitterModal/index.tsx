@@ -1,9 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { ButtonCreate, Content, Overlay, Ports, Title } from "./style";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
-import { useContext, useState } from "react";
+import { useContext, useState,useCallback } from "react";
 import { Project } from "../../../../utils/Project";
-import { useReactFlow } from "reactflow";
 
 export function NewSplitterModal() {
     const { nodes, handleSetNodes,getCenter} = useContext(DiagramContext);
@@ -11,73 +10,78 @@ export function NewSplitterModal() {
     const [selectedValues, setSelectedValues] = useState(2);
     const [unbalancedLoss, setUnbalancedLoss] = useState("1/99");
 
-    const handleCheckboxChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        if (event.target.checked) {
+    const handleCheckboxChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+          if (event.target.checked) {
             setSelectedValues(2);
             setUnbalancedLoss("1/99");
-        }
-        setIsChecked(event.target.checked);
-    };
-
-    const handleSelectChangeSplitter = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-        const [_, numberSplitterPorts] = event.target.value
-            .split("x")
-            .map(Number);
-        setSelectedValues(numberSplitterPorts);
-    };
-
-    const handleSelectChangeUnbalancedSplitter = (
-        event: React.ChangeEvent<HTMLSelectElement>
-    ) => {
-        setUnbalancedLoss(event.target.value);
-    };
-
-    const handleCreateNewSplitter = (
-        event: React.MouseEvent<HTMLButtonElement>
-    ) => {
-        if (isChecked) {
+          }
+          setIsChecked(event.target.checked);
+        },
+        []
+      );
+      
+      const handleSelectChangeSplitter = useCallback(
+        (event: React.ChangeEvent<HTMLSelectElement>) => {
+          const [_, numberSplitterPorts] = event.target.value.split("x").map(Number);
+          setSelectedValues(numberSplitterPorts);
+        },
+        []
+      );
+      
+      const handleSelectChangeUnbalancedSplitter = useCallback(
+        (event: React.ChangeEvent<HTMLSelectElement>) => {
+          setUnbalancedLoss(event.target.value);
+        },
+        []
+      );
+      
+      const handleCreateNewSplitter = useCallback(
+        (event: React.MouseEvent<HTMLButtonElement>) => {
+          if (isChecked) {
             Project.createNewSplitter(
-                nodes,
-                handleSetNodes,
-                {
-                    ports: [
-                        {
-                            port: 1,
-                            loss: Number(unbalancedLoss.split("/")[0]),
-                            used: false,
-                        },
-                        {
-                            port: 2,
-                            loss: Number(unbalancedLoss.split("/")[1]),
-                            used: false,
-                        },
-                    ],
-                    unbalanced: true,
-                },
-                getCenter()
+              nodes,
+              handleSetNodes,
+              {
+                ports: [
+                  {
+                    port: 1,
+                    loss: Number(unbalancedLoss.split("/")[0]),
+                    used: false,
+                  },
+                  {
+                    port: 2,
+                    loss: Number(unbalancedLoss.split("/")[1]),
+                    used: false,
+                  },
+                ],
+                unbalanced: true,
+              },
+              getCenter()
             );
-        } else {
+          } else {
             Project.createNewSplitter(
-                nodes,
-                handleSetNodes,
-                {
-                    ports: new Array(selectedValues).fill(0).map((_, index) => {
-                        return {
-                            port: index + 1,
-                            loss: 100 / selectedValues,
-                            used: false,
-                        };
-                    }),
-                    unbalanced: false,
-                },
-                getCenter()
+              nodes,
+              handleSetNodes,
+              {
+                ports: new Array(selectedValues)
+                  .fill(0)
+                  .map((_, index) => {
+                    return {
+                      port: index + 1,
+                      loss: 100 / selectedValues,
+                      used: false,
+                    };
+                  }),
+                unbalanced: false,
+              },
+              getCenter()
             );
-        }
-    };
+          }
+        },
+        [isChecked, nodes, handleSetNodes, selectedValues, unbalancedLoss, getCenter]
+      );
+      
 
     return (
         <Dialog.Portal>

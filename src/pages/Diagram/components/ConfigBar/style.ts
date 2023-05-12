@@ -9,7 +9,7 @@ export const ConfigBarContainer = styled.div`
     right: 20px;
     gap: 10px;
     border: 1px solid ${(props) => props.theme["green-300"]};
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     label {
         text-align: center;
@@ -18,9 +18,9 @@ export const ConfigBarContainer = styled.div`
     }
     input {
         text-align: center;
-        font-size: 1.4rem;
-        width: 70px;
-        height: 50px;
+        font-size: 1.2rem;
+        width: 60px;
+        height: 40px;
         border-radius: 5px;
         border: 1px solid ${(props) => props.theme["green-300"]};
         color: ${(props) => props.theme["green-300"]};

@@ -1,5 +1,5 @@
 import { useCallback, useContext, useRef } from "react";
-import ReactFlow, {
+import {
     addEdge,
     applyEdgeChanges,
     applyNodeChanges,
@@ -16,12 +16,12 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { DistanceNode } from "./DistanceNode";
-import "./styles-nodes.css";
 import { SplitterNode } from "./SplitterNode";
 import { BoxNode } from "./BoxNode";
 import { OLTNode } from "./OLTNode";
 import { CustomEdge } from "./CustomEdge";
 import { DBmMeasureNode } from "./DBmMeasureNode";
+import { ReactFlowContainer } from "./style";
 
 const edgeOptions: DefaultEdgeOptions = {
     animated: false,
@@ -195,7 +195,8 @@ export function Flow() {
     };
 
     return (
-        <ReactFlow
+        <ReactFlowContainer
+            // onContextMenu={(event)=>{event.preventDefault()}}
             //@ts-ignore
             nodes={nodes}
             edges={edges}
@@ -221,6 +222,6 @@ export function Flow() {
             />
             <Controls />
             <Background />
-        </ReactFlow>
+        </ReactFlowContainer>
     );
 }

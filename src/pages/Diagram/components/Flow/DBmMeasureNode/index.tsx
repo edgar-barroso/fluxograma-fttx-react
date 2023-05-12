@@ -1,11 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useCallback } from "react";
 import { Handle, Position } from "reactflow";
-import "./../styles-nodes.css";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import {
     BsHouseCheckFill,
     BsHouseSlashFill,
-    BsHouseUpFill,
     BsTrash3,
 } from "react-icons/bs";
 import { ButtonNode, NodeToolbarStyled } from "../style";
@@ -20,18 +18,17 @@ interface DistanceNodeProps {
 export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
     const { nodes, edges, handleSetNodes, handleSetEdges } =
         useContext(DiagramContext);
-
     const [activate, setActivate] = useState(data.client);
 
-    const handleButtonDeleteClick = () => {
+    
+    const handleButtonDeleteClick = useCallback(() => {
         Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
-    };
-
-    const handleButtonClientClick = () => {
+    }, [id, nodes, edges, handleSetNodes, handleSetEdges]);
+    
+    const handleButtonClientClick = useCallback(() => {
         data.client = !data.client;
-        setActivate(!activate);
-    };
-
+        setActivate(prevActivate => !prevActivate);
+    }, []);
     return (
         <DBmMeasureContainer
             withinRange={data.withinRange}

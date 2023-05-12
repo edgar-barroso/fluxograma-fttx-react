@@ -14,7 +14,7 @@ export const OLTStyled = styled.div`
         width: 60px;
         border-radius: 6px;
         border: 0;
-        border: 2px solid ${(props) => props.theme["green-300"]};
+        border: 1px solid ${(props) => props.theme["green-300"]};
 
         &::placeholder {
             color: ${(props) => props.theme["gray-100"]};

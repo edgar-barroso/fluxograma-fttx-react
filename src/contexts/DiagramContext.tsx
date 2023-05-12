@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useState,useCallback } from "react";
 import { Edge, NodeFttx, useReactFlow } from "reactflow";
 import { IntervalONU, Project } from "../utils/Project";
 import { setupAPIClient } from "../lib/api";
@@ -34,34 +34,6 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const [timelastSave, setTimeLastSave] = useState(new Date());
     const [intervalONU,setIntervalONU] = useState<IntervalONU>({minValue:-27,maxValue:-8})
 
-    const getCenter = () => {
-        const { x, y, zoom } = getViewport();
-
-        return {
-            x: (-x + window.innerWidth / 2) * (1 / zoom),
-            y: (-y + window.innerHeight / 2) * (1 / zoom),
-        };
-    };
-
-    async function fetchGetDiagram() {
-        const api = setupAPIClient();
-        const response = await api.get(`projects/${projectId}`);
-        setNodes(await response.data.project.flow.nodes);
-        setEdges(await response.data.project.flow.edges);
-    }
-
-    async function fetchUpdateDiagram() {
-        const data = {
-            id: projectId,
-            flow: {
-                nodes,
-                edges,
-            },
-        };
-        const api = setupAPIClient();
-        api.patch("projects/update", data);
-    }
-
     useEffect(() => {
         fetchGetDiagram();
         setLoad(true);
@@ -87,17 +59,48 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
         return () => clearInterval(intervalId);
     }, [nodes, edges]);
 
-    const handleSetNodes = (data: NodeFttx[]) => {
-        setNodes(data);
-    };
 
-    const handleSetEdges = (data: Edge[]) => {
-        setEdges(data);
-    };
 
-    const handleSetIntervalONU = (data:IntervalONU) =>{
-        setIntervalONU(data)
+
+    async function fetchGetDiagram() {
+        const api = setupAPIClient();
+        const response = await api.get(`projects/${projectId}`);
+        setNodes(await response.data.project.flow.nodes);
+        setEdges(await response.data.project.flow.edges);
     }
+
+    async function fetchUpdateDiagram() {
+        const data = {
+            id: projectId,
+            flow: {
+                nodes,
+                edges,
+            },
+        };
+        const api = setupAPIClient();
+        api.patch("projects/update", data);
+    }
+
+    const handleSetNodes = useCallback((data: NodeFttx[]) => {
+        setNodes(data);
+    }, []);
+
+    const handleSetEdges = useCallback((data: Edge[]) => {
+        setEdges(data);
+    }, []);
+
+    const handleSetIntervalONU = useCallback((data: IntervalONU) => {
+        setIntervalONU(data);
+    }, []);
+
+    const getCenter = useCallback(() => {
+        const { x, y, zoom } = getViewport();
+
+        return {
+            x: (-x + window.innerWidth / 2) * (1 / zoom),
+            y: (-y + window.innerHeight / 2) * (1 / zoom),
+        };
+    },[getViewport,window.innerWidth,window.innerHeight])
 
     return (
         <DiagramContext.Provider

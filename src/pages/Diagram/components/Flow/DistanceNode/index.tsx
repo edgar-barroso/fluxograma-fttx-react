@@ -1,6 +1,5 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect ,useCallback} from "react";
 import { Handle, Position } from "reactflow";
-import "./../styles-nodes.css";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsTrash3 } from "react-icons/bs";
 import { ButtonNode, NodeToolbarStyled } from "../style";
@@ -25,28 +24,34 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
         data.visible = inputView;
     }, [inputView]);
 
-    const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-        let metros = Number(evt.target.value);
-        if (metros > 999999) {
-            metros = 999999;
-        } else if (metros < 0) {
-            metros = 0;
-        }
-        setValue(`${metros}`);
-        const newNodes = nodes.map((node) => {
-            if (node.id === id) {
-                node.fttx.meters = metros;
-                node.data.label = `${metros}`;
+    const handleInputOnChange = useCallback(
+        (evt: React.ChangeEvent<HTMLInputElement>) => {
+            let metros = Number(evt.target.value);
+            if (metros > 999999) {
+                metros = 999999;
+            } else if (metros < 0) {
+                metros = 0;
             }
-            return node;
-        });
-        handleSetNodes(newNodes);
-    };
-
-    const handleButtonDeleteClick = () => {
-        Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
-    };
-
+            setValue(`${metros}`);
+            const newNodes = nodes.map((node) => {
+                if (node.id === id) {
+                    node.fttx.meters = metros;
+                    node.data.label = `${metros}`;
+                }
+                return node;
+            });
+            handleSetNodes(newNodes);
+        },
+        [handleSetNodes, nodes, id]
+    );
+    
+    const handleButtonDeleteClick = useCallback(
+        () => {
+            Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
+        },
+        [id, nodes, edges, handleSetNodes, handleSetEdges]
+    );
+    
     return (
         <DistanceStyled>
             <GiPathDistance/>
@@ -56,7 +61,7 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
                     id={id}
                     autoComplete="off"
                     type="number"
-                    onChange={onChange}
+                    onChange={handleInputOnChange}
                     value={value}
                     min={0}
                     max={999999}

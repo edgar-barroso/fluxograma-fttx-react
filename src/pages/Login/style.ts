@@ -48,18 +48,15 @@ export const Button = styled.button`
     font-size: 1rem;
     cursor: pointer;
     transition: 0.25s;
-    color:${(props) => props.theme["green-500"]};
-    background-color:white;
+    color: ${(props) => props.theme["green-500"]};
+    background-color: white;
     border: 1px solid ${(props) => props.theme["green-500"]};
     margin: 10px;
     cursor: pointer;
 
     &:hover {
-    }
-
-    &:hover {
         background-color: ${(props) => props.theme["green-500"]};
-        color:white;
+        color: white;
         transition: 0s;
     }
 `;

@@ -1,9 +1,7 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import { Handle, NodeFttx, NodeToolbar, Position } from "reactflow";
-import "./../styles-nodes.css";
+import { useContext, useEffect, useState,useCallback } from "react";
+import { Handle, Position } from "reactflow";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { ButtonNode, NodeToolbarStyled } from "../style";
-import { SlOptions } from "react-icons/sl";
 import { Project } from "../../../../../utils/Project";
 import { OLTStyled } from "./style";
 import { BsTrash3 } from "react-icons/bs";
@@ -22,18 +20,25 @@ export function OLTNode({ data, id }: OLTNodeProps) {
     );
 
     useEffect(() => {
-        Project.setPowerOLT(id,powerOLT,nodes,handleSetNodes)
+        Project.setPowerOLT(id, powerOLT, nodes, handleSetNodes);
     }, [powerOLT]);
 
-    const handleInputPowerOLTChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        setPowerOLT(Number(event.target.value));
-    };
+    const handleInputPowerOLTChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            setPowerOLT(Number(event.target.value));
+        },
+        [setPowerOLT]
+    );
 
-    const handleButtonDeleteClick = () => {
-        Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
-    };
+    const handleButtonDeleteClick = useCallback(() => {
+        Project.deleteNodeById(
+            id,
+            nodes,
+            edges,
+            handleSetNodes,
+            handleSetEdges
+        );
+    }, [id, nodes, edges, handleSetNodes, handleSetEdges]);
 
     return (
         <OLTStyled>

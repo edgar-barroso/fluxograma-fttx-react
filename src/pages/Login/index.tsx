@@ -29,25 +29,24 @@ export function Login() {
 
     return (
         <ContainerLogin>
-            <div>
-                <Form onSubmit={handleSubmit}>
-                    <label>Email</label>
-                    <Input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <label>Senha</label>
-                    <Input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <Button type="submit">Login</Button>
-                </Form>
-            </div>
+            
+            <Form onSubmit={handleSubmit}>
+                <label>Email</label>
+                <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <label>Senha</label>
+                <Input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <Button type="submit">Login</Button>
+            </Form>
         </ContainerLogin>
     );
 }

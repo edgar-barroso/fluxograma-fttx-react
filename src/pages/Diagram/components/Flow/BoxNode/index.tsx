@@ -1,11 +1,8 @@
-import { useCallback, useContext } from "react";
-import { Handle, NodeFttx, NodeToolbar, Position } from "reactflow";
-import "./../styles-nodes.css";
+import {  useContext ,useCallback} from "react";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsTrash3 } from "react-icons/bs";
 import { ButtonNode, NodeToolbarStyled } from "../style";
 import { Project } from "../../../../../utils/Project";
-import { SlOptions } from "react-icons/sl";
 import { BoxStyled } from "./style";
 
 interface BoxNodeProps {
@@ -16,9 +13,10 @@ interface BoxNodeProps {
 export function BoxNode({ data, id }: BoxNodeProps) {
     const { nodes, edges,handleSetNodes,handleSetEdges} = useContext(DiagramContext);
 
-    const handleButtonDeleteClick = () => {
-        Project.deleteNodeById(id,nodes,edges,handleSetNodes,handleSetEdges);
-    };
+    const handleButtonDeleteClick = useCallback(() => {
+        Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
+    }, [id, nodes, edges, handleSetNodes, handleSetEdges]);
+    
 
     return (
         <BoxStyled>

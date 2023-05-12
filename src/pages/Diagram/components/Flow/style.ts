@@ -1,9 +1,51 @@
-import { NodeToolbar } from "reactflow";
+import { NodeToolbar, ReactFlow } from "reactflow";
 import styled from "styled-components";
 
-interface ButtonContainerProps {}
+export const ReactFlowContainer = styled(ReactFlow)`
+    .react-flow__node {
+        border: none;
+        border: 1px solid ${(props) => props.theme["green-300"]};
+        border-radius: 5px;
+        background: white;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    }
 
-export const ButtonContainer = styled.button<ButtonContainerProps>`
+    .react-flow__node:focus {
+        border: 1px solid black;
+        box-shadow: none;
+    }
+
+    .react-flow__controls-button {
+        border: none;
+        border: 1px solid ${(props) => props.theme["green-300"]};
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 1rem;
+        background: transparent;
+    }
+    .react-flow__controls-button:hover {
+        background: #00b37e;
+    }
+
+    .react-flow__controls-button:hover svg path {
+        fill: white;
+    }
+
+    .react-flow__controls-button svg path {
+        fill: #00b37e;
+    }
+
+    .react-flow__controls-button svg {
+        max-width: none;
+        max-height: none;
+    }
+
+    .react-flow__controls {
+        box-shadow: none;
+    }
+`;
+
+export const ButtonContainer = styled.button`
     display: flex;
     padding: 1rem;
     font-size: 1.5rem;

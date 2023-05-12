@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext ,useCallback} from "react";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { ButtonContainer } from "../Flow/style";
 import { ButtonsBarContainer } from "./style";
@@ -20,17 +20,18 @@ import { NewOLTModal } from "../NewOLTModal";
 export function ButtonsBar() {
     const { nodes, handleSetNodes, getCenter } = useContext(DiagramContext);
 
-    const handleCreateNewDistance = () => {
+    const handleCreateNewDistance = useCallback(() => {
         Project.createNewDistance(nodes, handleSetNodes, getCenter());
-    };
-
-    const handleDownloadPng = () => {
+      }, [nodes, handleSetNodes, getCenter]);
+      
+      const handleDownloadPng = useCallback(() => {
         Project.DownloadPng();
-    };
-
-    const handleCreateNewDBmMeasure = () => {
+      }, []);
+      
+      const handleCreateNewDBmMeasure = useCallback(() => {
         Project.createNewDBmMeasure(nodes, handleSetNodes, getCenter());
-    };
+      }, [nodes, handleSetNodes, getCenter]);
+      
 
     return (
         <ButtonsBarContainer>
