@@ -79,7 +79,7 @@ const splittersUnalancedLosses: { [key: string]: number } = {
 
 export class Project {
     
-    static oldProjects = new Stack<OldProject>()
+    static oldProjects = new Stack<OldProject>(10)
 
     static createNewDBmMeasure(
         nodes: NodeFttx[],

@@ -47,9 +47,6 @@ const edgeTypes: EdgeTypes = {
     custom: CustomEdge,
 };
 
-const rfStyle = {
-    backgroundColor: "#fff",
-};
 
 export function Flow() {
     const { nodes, edges, handleSetNodes, handleSetEdges } =
@@ -244,7 +241,6 @@ export function Flow() {
             onEdgeUpdateStart={onEdgeUpdateStart}
             onEdgeUpdateEnd={onEdgeUpdateEnd}
             onConnect={onConnect}
-            style={rfStyle}
             attributionPosition="top-right"
             defaultEdgeOptions={edgeOptions}
             nodeTypes={nodeTypes}
