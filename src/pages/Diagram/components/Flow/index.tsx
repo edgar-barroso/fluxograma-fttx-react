@@ -36,41 +36,7 @@ const edgeOptions: DefaultEdgeOptions = {
         strokeWidth: 1,
     },
 };
-const portSchema = z.object({
-    port: z.number(),
-    loss: z.number(),
-    used: z.boolean(),
-});
 
-const nodeSchema = z.object({
-    id: z.string(),
-    type: z.string(),
-    fttx: z
-        .object({
-            ports: z.array(portSchema).optional(),
-            unbalanced: z.boolean().optional(),
-            meters: z.number().optional(),
-            power: z.number().optional(),
-        })
-        .optional(),
-    data: z.object({
-        label: z.string().optional(),
-        title: z.string().optional(),
-        client: z.boolean().optional(),
-        visible: z.boolean().optional(),
-    }),
-    position: z.object({
-        x: z.number(),
-        y: z.number(),
-    }),
-    style: z
-        .object({
-            width: z.number().optional(),
-            height: z.number().optional(),
-            zIndex: z.number().optional(),
-        })
-        .optional(),
-});
 const nodeTypes = {
     distance: DistanceNode,
     splitter: SplitterNode,
