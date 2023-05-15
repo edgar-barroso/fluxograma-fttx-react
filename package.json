@@ -21,7 +21,8 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.10.0",
     "reactflow": "^11.7.0",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.9",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",

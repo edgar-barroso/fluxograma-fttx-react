@@ -42,6 +42,13 @@ export const ReactFlowContainer = styled(ReactFlow)`
     .react-flow__controls {
         box-shadow: none;
     }
+    .react-flow__handle {
+        height: 6px;
+        width: 6px;
+        border-radius: 0;
+        border:  1px solid ${(props) => props.theme["green-300"]};
+        
+    }
 
     @media (max-width: 767px) {
         .react-flow__minimap,

@@ -7,7 +7,6 @@ import {
     AiFillPrinter,
     AiFillSignal,
     AiOutlineFall,
-    AiOutlineUserAdd,
 } from "react-icons/ai";
 import { MdChangeHistory } from "react-icons/md";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -15,7 +14,6 @@ import { NewSplitterModal } from "../NewSplitterModal";
 import { Project } from "../../../../utils/Project";
 import { NewBoxModal } from "../NewBoxModal";
 import { FaBroadcastTower } from "react-icons/fa";
-import { GrRotateLeft } from "react-icons/gr";
 import { NewOLTModal } from "../NewOLTModal";
 
 export function ButtonsBar() {

@@ -37,7 +37,6 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
         minValue: -27,
         maxValue: -8,
     });
-    const [StackProject,setStackProject] = useState()
 
 
     useEffect(() => {

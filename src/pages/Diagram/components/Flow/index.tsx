@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef, useState,useEffect } from "react";
+import { useCallback, useContext, useRef, useState, useEffect } from "react";
 import {
     addEdge,
     applyEdgeChanges,
@@ -15,6 +15,7 @@ import {
     updateEdge,
     useOnSelectionChange,
 } from "reactflow";
+import z from "zod";
 import "reactflow/dist/style.css";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { DistanceNode } from "./DistanceNode";
@@ -25,6 +26,7 @@ import { CustomEdge } from "./CustomEdge";
 import { DBmMeasureNode } from "./DBmMeasureNode";
 import { ReactFlowContainer } from "./style";
 import { Project } from "../../../../utils/Project";
+import { Content } from "@radix-ui/react-dialog";
 
 const edgeOptions: DefaultEdgeOptions = {
     animated: false,
@@ -34,7 +36,41 @@ const edgeOptions: DefaultEdgeOptions = {
         strokeWidth: 1,
     },
 };
+const portSchema = z.object({
+    port: z.number(),
+    loss: z.number(),
+    used: z.boolean(),
+});
 
+const nodeSchema = z.object({
+    id: z.string(),
+    type: z.string(),
+    fttx: z
+        .object({
+            ports: z.array(portSchema).optional(),
+            unbalanced: z.boolean().optional(),
+            meters: z.number().optional(),
+            power: z.number().optional(),
+        })
+        .optional(),
+    data: z.object({
+        label: z.string().optional(),
+        title: z.string().optional(),
+        client: z.boolean().optional(),
+        visible: z.boolean().optional(),
+    }),
+    position: z.object({
+        x: z.number(),
+        y: z.number(),
+    }),
+    style: z
+        .object({
+            width: z.number().optional(),
+            height: z.number().optional(),
+            zIndex: z.number().optional(),
+        })
+        .optional(),
+});
 const nodeTypes = {
     distance: DistanceNode,
     splitter: SplitterNode,
@@ -47,18 +83,41 @@ const edgeTypes: EdgeTypes = {
     custom: CustomEdge,
 };
 
-
 export function Flow() {
     const { nodes, edges, handleSetNodes, handleSetEdges } =
         useContext(DiagramContext);
     const edgeUpdateSuccessful = useRef(false);
     const [selectedNodes, setSelectedNodes] = useState<NodeFttx[]>([]);
-
+    useOnSelectionChange({
+        onChange: ({ nodes, edges }) => {
+            //@ts-ignore
+            setSelectedNodes(nodes);
+        },
+    });
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
             if (event.ctrlKey && event.key === "z") {
-                // Lógica a ser executada quando o atalho for pressionado
-                Project.returnOldProject(handleSetNodes,handleSetEdges)
+                Project.returnOldProject(handleSetNodes, handleSetEdges);
+            } else if (event.ctrlKey && event.key === "c") {
+                event.preventDefault(); // Prevenir o comportamento padrão de copiar
+                const newNode = { ...selectedNodes[0] };
+                newNode.id = crypto.randomUUID();
+                const content = JSON.stringify(newNode); // Conteúdo a ser copiado
+
+                // Criar um elemento temporário para armazenar o conteúdo a ser copiado
+                const tempElement = document.createElement("textarea");
+                tempElement.value = content;
+
+                // Adicionar o elemento temporário ao DOM
+                document.body.appendChild(tempElement);
+
+                // Selecionar e copiar o conteúdo
+                tempElement.select();
+                document.execCommand("copy");
+
+                // Remover o elemento temporário do DOM
+                document.body.removeChild(tempElement);
+            } else if (event.ctrlKey && event.key === "v") {
             }
         }
 
@@ -69,13 +128,6 @@ export function Flow() {
         };
     }, []);
 
-    useOnSelectionChange({
-        onChange: ({ nodes, edges }) => {
-            //@ts-ignore
-            setSelectedNodes(nodes);
-        },
-    });
-    
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === "Delete") {
             Project.deleteNodesById(
