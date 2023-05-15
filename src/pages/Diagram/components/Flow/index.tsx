@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef } from "react";
+import { useCallback, useContext, useRef, useState,useEffect } from "react";
 import {
     addEdge,
     applyEdgeChanges,
@@ -6,12 +6,14 @@ import {
     Background,
     Controls,
     DefaultEdgeOptions,
+    Edge,
     EdgeChange,
     EdgeTypes,
     MiniMap,
     NodeChange,
     NodeFttx,
     updateEdge,
+    useOnSelectionChange,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
@@ -22,6 +24,7 @@ import { OLTNode } from "./OLTNode";
 import { CustomEdge } from "./CustomEdge";
 import { DBmMeasureNode } from "./DBmMeasureNode";
 import { ReactFlowContainer } from "./style";
+import { Project } from "../../../../utils/Project";
 
 const edgeOptions: DefaultEdgeOptions = {
     animated: false,
@@ -52,6 +55,40 @@ export function Flow() {
     const { nodes, edges, handleSetNodes, handleSetEdges } =
         useContext(DiagramContext);
     const edgeUpdateSuccessful = useRef(false);
+    const [selectedNodes, setSelectedNodes] = useState<NodeFttx[]>([]);
+
+    useEffect(() => {
+        function handleKeyDown(event: KeyboardEvent) {
+            if (event.ctrlKey && event.key === "z") {
+                // Lógica a ser executada quando o atalho for pressionado
+                Project.returnOldProject(handleSetNodes,handleSetEdges)
+            }
+        }
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
+    useOnSelectionChange({
+        onChange: ({ nodes, edges }) => {
+            //@ts-ignore
+            setSelectedNodes(nodes);
+        },
+    });
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === "Delete") {
+            Project.deleteNodesById(
+                selectedNodes.map((node) => node.id),
+                nodes,
+                edges,
+                handleSetNodes,
+                handleSetEdges
+            );
+        }
+    };
 
     const onNodesChange = useCallback(
         //@ts-ignore
@@ -196,6 +233,7 @@ export function Flow() {
 
     return (
         <ReactFlowContainer
+            onKeyDown={handleKeyDown}
             // onContextMenu={(event)=>{event.preventDefault()}}
             //@ts-ignore
             nodes={nodes}

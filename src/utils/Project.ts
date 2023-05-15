@@ -1,5 +1,6 @@
 import { toPng } from "html-to-image";
 import { Edge, NodeFttx, Node, DefaultEdgeOptions } from "reactflow";
+import { Stack } from "./Stack";
 
 interface SplitterProps {
     ports: Array<{
@@ -22,6 +23,11 @@ interface OLTProps {
     name: string;
     numberOfPorts: number;
     power: number;
+}
+
+interface OldProject{
+    nodes:NodeFttx[]
+    edges:Edge[]
 }
 
 const defaultEdgeOptions: DefaultEdgeOptions = {
@@ -72,6 +78,9 @@ const splittersUnalancedLosses: { [key: string]: number } = {
 };
 
 export class Project {
+    
+    static oldProjects = new Stack<OldProject>()
+
     static createNewDBmMeasure(
         nodes: NodeFttx[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
@@ -222,20 +231,22 @@ export class Project {
         return paths;
     }
 
-    static deleteNodeById(
-        nodeId: string,
+    static deleteNodesById(
+        nodeIds: string[],
         nodes: NodeFttx[],
         edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         handleSetEdges: (edges: Edge[]) => void
     ) {
+        this.oldProjects.push({nodes,edges})
+
+
         const updateParamsNodes: {
             id: string;
             port: number;
         }[] = [];
-
         const newEdges = edges.filter((edge) => {
-            if (edge.target === nodeId) {
+            if (nodeIds.includes(edge.target)) {
                 updateParamsNodes.push({
                     id: edge.source,
                     //@ts-ignore
@@ -243,13 +254,13 @@ export class Project {
                 });
                 return false;
             }
-            if (edge.source === nodeId) {
+            if (nodeIds.includes(edge.source)) {
                 return false;
             }
             return true;
         });
 
-        const newNodes = nodes.filter((node: NodeFttx) => node.id !== nodeId);
+        const newNodes = nodes.filter((node: NodeFttx) => !nodeIds.includes(node.id));
         newNodes.forEach((node: NodeFttx) => {
             updateParamsNodes.forEach(({ id, port }) => {
                 if (id === node.id) {
@@ -450,6 +461,20 @@ export class Project {
                 return node;
             })
         );
+
+        
+    }
+
+    static returnOldProject(
+        handleSetNodes: (nodes: NodeFttx[]) => void,
+        handleSetEdges: (edges: Edge[]) => void
+    ) {
+       if(!this.oldProjects.isEmpty()) {
+        const {nodes,edges} = this.oldProjects.pop()!
+        handleSetNodes(nodes)
+        handleSetEdges(edges)
+       }
+
     }
 
     static downloadImage(dataUrl: string): void {

@@ -5,12 +5,14 @@ export const ConfigBarContainer = styled.div`
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 0px;
+    right: 0px;
     gap: 10px;
     border: 1px solid ${(props) => props.theme["green-300"]};
     padding: 10px;
     border-radius: 10px;
+    margin: 15px;
+
     label {
         text-align: center;
         font-weight: 700;

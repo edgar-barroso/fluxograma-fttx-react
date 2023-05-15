@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect ,useCallback} from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { Handle, Position } from "reactflow";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsTrash3 } from "react-icons/bs";
@@ -6,7 +6,7 @@ import { ButtonNode, NodeToolbarStyled } from "../style";
 import { DistanceStyled } from "./style";
 import { Project } from "../../../../../utils/Project";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import {GiPathDistance} from 'react-icons/gi'
+import { GiPathDistance } from "react-icons/gi";
 
 interface DistanceNodeProps {
     id: string;
@@ -44,17 +44,31 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
         },
         [handleSetNodes, nodes, id]
     );
-    
-    const handleButtonDeleteClick = useCallback(
-        () => {
-            Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
-        },
-        [id, nodes, edges, handleSetNodes, handleSetEdges]
-    );
-    
+
+    const handleButtonDeleteClick = useCallback(() => {
+        Project.deleteNodesById(
+            [id],
+            nodes,
+            edges,
+            handleSetNodes,
+            handleSetEdges
+        );
+    }, [id, nodes, edges, handleSetNodes, handleSetEdges]);
+
     return (
         <DistanceStyled>
-            <GiPathDistance/>
+            <NodeToolbarStyled>
+                <ButtonNode onClick={handleButtonDeleteClick}>
+                    <BsTrash3 />
+                </ButtonNode>
+                <ButtonNode
+                    onClick={() => {
+                        setInputView(!inputView);
+                    }}>
+                    {inputView ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                </ButtonNode>
+            </NodeToolbarStyled>
+            <GiPathDistance />
             <Handle type="target" position={Position.Top} isConnectable />
             {inputView && (
                 <input
@@ -69,17 +83,6 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
                 />
             )}
             <Handle type="source" position={Position.Bottom} isConnectable />
-            <NodeToolbarStyled>
-                <ButtonNode onClick={handleButtonDeleteClick}>
-                    <BsTrash3 />
-                </ButtonNode>
-                <ButtonNode
-                    onClick={() => {
-                        setInputView(!inputView);
-                    }}>
-                    {inputView ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-                </ButtonNode>
-            </NodeToolbarStyled>
         </DistanceStyled>
     );
 }

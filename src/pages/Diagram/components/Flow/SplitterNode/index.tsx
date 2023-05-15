@@ -17,13 +17,7 @@ export function SplitterNode({ data, id }: SplitterNodeProps) {
         useContext(DiagramContext);
 
     const handleButtonDeleteClick = useCallback(() => {
-        Project.deleteNodeById(
-            id,
-            nodes,
-            edges,
-            handleSetNodes,
-            handleSetEdges
-        );
+        Project.deleteNodesById([id], nodes, edges, handleSetNodes, handleSetEdges);
     }, [id, nodes, edges, handleSetNodes, handleSetEdges]);
 
     return (

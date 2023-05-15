@@ -12,7 +12,6 @@ export const ReactFlowContainer = styled(ReactFlow)`
 
     .react-flow__node:focus {
         border: 1px solid black;
-        box-shadow: none;
     }
 
     .react-flow__controls-button {
@@ -43,7 +42,17 @@ export const ReactFlowContainer = styled(ReactFlow)`
     .react-flow__controls {
         box-shadow: none;
     }
+
+    @media (max-width: 767px) {
+        *{
+
+        }
+        .react-flow__minimap,.react-flow__controls-zoomin ,.react-flow__controls-zoomout{
+            display: none;
+        }
+    }
 `;
+
 
 export const ButtonContainer = styled.button`
     display: flex;

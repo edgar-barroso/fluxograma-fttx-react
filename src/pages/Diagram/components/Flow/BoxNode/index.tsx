@@ -14,7 +14,7 @@ export function BoxNode({ data, id }: BoxNodeProps) {
     const { nodes, edges,handleSetNodes,handleSetEdges} = useContext(DiagramContext);
 
     const handleButtonDeleteClick = useCallback(() => {
-        Project.deleteNodeById(id, nodes, edges, handleSetNodes, handleSetEdges);
+        Project.deleteNodesById([id], nodes, edges, handleSetNodes, handleSetEdges);
     }, [id, nodes, edges, handleSetNodes, handleSetEdges]);
     
 

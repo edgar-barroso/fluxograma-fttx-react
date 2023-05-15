@@ -1,14 +1,14 @@
-import { ReactNode, createContext, useEffect, useState,useCallback } from "react";
-import { Edge, NodeFttx, useReactFlow } from "reactflow";
+import {
+    ReactNode,
+    createContext,
+    useEffect,
+    useState,
+    useCallback,
+} from "react";
+import { Edge, NodeFttx, useOnSelectionChange, useReactFlow } from "reactflow";
 import { IntervalONU, Project } from "../utils/Project";
 import { setupAPIClient } from "../lib/api";
 import { useParams } from "react-router-dom";
-
-// useOnSelectionChange({
-//     onChange: ({ nodes, edges }) =>
-//         console.log(nodes)
-// });
-
 
 interface DiagramContextType {
     nodes: NodeFttx[];
@@ -23,6 +23,7 @@ interface DiagramContextType {
 interface DiagramProviderProps {
     children: ReactNode;
 }
+
 export const DiagramContext = createContext({} as DiagramContextType);
 
 export function DiagramProvider({ children }: DiagramProviderProps) {
@@ -32,7 +33,11 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const [edges, setEdges] = useState<Edge[]>([]);
     const [load, setLoad] = useState(false);
     const [timelastSave, setTimeLastSave] = useState(new Date());
-    const [intervalONU,setIntervalONU] = useState<IntervalONU>({minValue:-27,maxValue:-8})
+    const [intervalONU, setIntervalONU] = useState<IntervalONU>({
+        minValue: -27,
+        maxValue: -8,
+    });
+
 
     useEffect(() => {
         fetchGetDiagram();
@@ -58,9 +63,6 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
         }, 1000);
         return () => clearInterval(intervalId);
     }, [nodes, edges]);
-
-
-
 
     async function fetchGetDiagram() {
         const api = setupAPIClient();
@@ -100,7 +102,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
             x: (-x + window.innerWidth / 2) * (1 / zoom),
             y: (-y + window.innerHeight / 2) * (1 / zoom),
         };
-    },[getViewport,window.innerWidth,window.innerHeight])
+    }, [getViewport, window.innerWidth, window.innerHeight]);
 
     return (
         <DiagramContext.Provider
