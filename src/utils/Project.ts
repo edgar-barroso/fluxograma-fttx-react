@@ -1,5 +1,5 @@
 import { toPng } from "html-to-image";
-import { Edge, NodeFttx, Node, DefaultEdgeOptions } from "reactflow";
+import { Edge, NodeFttx, Node, DefaultEdgeOptions, Position } from "reactflow";
 import { Stack } from "./Stack";
 
 interface SplitterProps {
@@ -25,9 +25,9 @@ interface OLTProps {
     power: number;
 }
 
-interface OldProject{
-    nodes:NodeFttx[]
-    edges:Edge[]
+interface OldProject {
+    nodes: NodeFttx[];
+    edges: Edge[];
 }
 
 const defaultEdgeOptions: DefaultEdgeOptions = {
@@ -78,17 +78,16 @@ const splittersUnalancedLosses: { [key: string]: number } = {
 };
 
 export class Project {
-    
     static oldProjects = new Stack<OldProject>(20);
 
     static createNewDBmMeasure(
         nodes: NodeFttx[],
-        edges:Edge[],
+        edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         position: { x: number; y: number }
     ) {
-        this.oldProjects.push({nodes,edges});
-        
+        this.oldProjects.push({ nodes, edges });
+
         const newDBmMeasure: NodeFttx = {
             id: crypto.randomUUID(),
             type: "dBmMeasure",
@@ -108,12 +107,12 @@ export class Project {
 
     static createNewBox(
         nodes: NodeFttx[],
-        edges:Edge[],
+        edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         box: BoxProps,
         position: { x: number; y: number }
     ) {
-        this.oldProjects.push({nodes,edges});
+        this.oldProjects.push({ nodes, edges });
         const newBox: NodeFttx = {
             id: crypto.randomUUID(),
             type: "box",
@@ -131,12 +130,12 @@ export class Project {
 
     static createNewSplitter(
         nodes: NodeFttx[],
-        edges:Edge[],
+        edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         splitter: SplitterProps,
         position: { x: number; y: number }
     ) {
-        this.oldProjects.push({nodes,edges});
+        this.oldProjects.push({ nodes, edges });
 
         const newSplitter: NodeFttx = {
             id: crypto.randomUUID(),
@@ -154,19 +153,18 @@ export class Project {
                 unbalanced: splitter.unbalanced,
             },
             position,
-            style: {
-            },
+            style: {},
         };
         handleSetNodes([...nodes, newSplitter]);
     }
 
     static createNewDistance(
         nodes: NodeFttx[],
-        edges:Edge[],
+        edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         position: { x: number; y: number }
     ) {
-        this.oldProjects.push({nodes,edges});
+        this.oldProjects.push({ nodes, edges });
 
         const newDistance: NodeFttx = {
             id: crypto.randomUUID(),
@@ -185,13 +183,12 @@ export class Project {
 
     static createNewOLT(
         nodes: NodeFttx[],
-        edges:Edge[],
+        edges: Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         olt: OLTProps,
         position: { x: number; y: number }
     ) {
-
-        this.oldProjects.push({nodes,edges});
+        this.oldProjects.push({ nodes, edges });
 
         const oltPorts = [];
 
@@ -253,8 +250,7 @@ export class Project {
         handleSetNodes: (nodes: NodeFttx[]) => void,
         handleSetEdges: (edges: Edge[]) => void
     ) {
-        this.oldProjects.push({nodes,edges});
-
+        this.oldProjects.push({ nodes, edges });
 
         const updateParamsNodes: {
             id: string;
@@ -275,7 +271,9 @@ export class Project {
             return true;
         });
 
-        const newNodes = nodes.filter((node: NodeFttx) => !nodeIds.includes(node.id));
+        const newNodes = nodes.filter(
+            (node: NodeFttx) => !nodeIds.includes(node.id)
+        );
         newNodes.forEach((node: NodeFttx) => {
             updateParamsNodes.forEach(({ id, port }) => {
                 if (id === node.id) {
@@ -287,6 +285,22 @@ export class Project {
 
         handleSetEdges(newEdges);
         handleSetNodes(newNodes);
+    }
+
+    static addNodes(
+        nodes: NodeFttx[],
+        edges: Edge[],
+        handleSetNodes: (data: NodeFttx[]) => void,
+        nodesIds: string[]
+    ) {
+        const addNodes = nodes.filter((node) => nodesIds.includes(node.id));
+        this.oldProjects.push({ nodes, edges });
+        handleSetNodes([
+            ...nodes,
+            ...addNodes.map((node) => {
+                return { ...node, id: crypto.randomUUID(), selected: false };
+            }),
+        ]);
     }
 
     static updatePowerDBmMeasuresAllOlts(
@@ -476,20 +490,17 @@ export class Project {
                 return node;
             })
         );
-
-        
     }
 
     static returnOldProject(
         handleSetNodes: (nodes: NodeFttx[]) => void,
         handleSetEdges: (edges: Edge[]) => void
     ) {
-       if(!this.oldProjects.isEmpty()) {
-        const {nodes,edges} = this.oldProjects.pop()!
-        handleSetNodes(nodes)
-        handleSetEdges(edges)
-       }
-
+        if (!this.oldProjects.isEmpty()) {
+            const { nodes, edges } = this.oldProjects.pop()!;
+            handleSetNodes(nodes);
+            handleSetEdges(edges);
+        }
     }
 
     static downloadImage(dataUrl: string): void {

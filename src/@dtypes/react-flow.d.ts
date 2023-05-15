@@ -1,5 +1,6 @@
 import "reactflow";
 import { Node, Edge } from "reactflow";
+import z from "zod";
 
 declare module "reactflow" {
     export interface NodeFttx extends Node {
@@ -18,7 +19,9 @@ declare module "reactflow" {
             title?: string;
             client?: boolean;
             visible?: boolean;
-            withinRange?:boolean;
+            withinRange?: boolean;
         };
     }
 }
+
+

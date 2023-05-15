@@ -15,7 +15,6 @@ import {
     updateEdge,
     useOnSelectionChange,
 } from "reactflow";
-import z from "zod";
 import "reactflow/dist/style.css";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { DistanceNode } from "./DistanceNode";
@@ -26,7 +25,6 @@ import { CustomEdge } from "./CustomEdge";
 import { DBmMeasureNode } from "./DBmMeasureNode";
 import { ReactFlowContainer } from "./style";
 import { Project } from "../../../../utils/Project";
-import { Content } from "@radix-ui/react-dialog";
 
 const edgeOptions: DefaultEdgeOptions = {
     animated: false,
@@ -54,6 +52,8 @@ export function Flow() {
         useContext(DiagramContext);
     const edgeUpdateSuccessful = useRef(false);
     const [selectedNodes, setSelectedNodes] = useState<NodeFttx[]>([]);
+    const [copyIds, setCopyIds] = useState<string[]>([]);
+
     useOnSelectionChange({
         onChange: ({ nodes, edges }) => {
             //@ts-ignore
@@ -64,26 +64,19 @@ export function Flow() {
         function handleKeyDown(event: KeyboardEvent) {
             if (event.ctrlKey && event.key === "z") {
                 Project.returnOldProject(handleSetNodes, handleSetEdges);
-            } else if (event.ctrlKey && event.key === "c") {
-                event.preventDefault(); // Prevenir o comportamento padrão de copiar
-                const newNode = { ...selectedNodes[0] };
-                newNode.id = crypto.randomUUID();
-                const content = JSON.stringify(newNode); // Conteúdo a ser copiado
+            }
+            if (event.ctrlKey && event.key === "c") {
+                // const textarea = document.createElement("textarea");
+                // textarea.value = JSON.stringify(selectedNodes);
+                // document.body.appendChild(textarea);
+                // textarea.select();
+                // document.execCommand("copy");
+                // document.body.removeChild(textarea);
 
-                // Criar um elemento temporário para armazenar o conteúdo a ser copiado
-                const tempElement = document.createElement("textarea");
-                tempElement.value = content;
-
-                // Adicionar o elemento temporário ao DOM
-                document.body.appendChild(tempElement);
-
-                // Selecionar e copiar o conteúdo
-                tempElement.select();
-                document.execCommand("copy");
-
-                // Remover o elemento temporário do DOM
-                document.body.removeChild(tempElement);
-            } else if (event.ctrlKey && event.key === "v") {
+                setCopyIds(selectedNodes.map(node=>node.id));
+            }
+            if (event.ctrlKey && event.key === "v") {
+                Project.addNodes(nodes, edges, handleSetNodes, copyIds);
             }
         }
 
@@ -92,7 +85,7 @@ export function Flow() {
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, []);
+    }, [selectedNodes,setSelectedNodes,copyIds,setCopyIds]);
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === "Delete") {
