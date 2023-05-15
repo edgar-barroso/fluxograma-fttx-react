@@ -138,8 +138,6 @@ export class Project {
             },
             position,
             style: {
-                width: 60,
-                height: 30,
             },
         };
         handleSetNodes([...nodes, newSplitter]);
@@ -190,10 +188,7 @@ export class Project {
                 power: olt.power,
             },
             position,
-            style: {
-                width: 200,
-                height: 50,
-            },
+            style: {},
         };
         handleSetNodes([...nodes, newBox]);
     }

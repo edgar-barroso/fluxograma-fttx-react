@@ -2,23 +2,19 @@ import styled from "styled-components";
 
 export const OLTStyled = styled.div`
     display: flex;
-    width: 100%;
-    height: 100%;
     justify-content: center;
     align-items: center;
-    word-wrap: break-word;
-    gap: 20px;
+    margin:10px;
     input[type="number"] {
         text-align: center;
-        font-size: 20px;
+        font-size: 1.2rem;
         width: 60px;
-        border-radius: 6px;
-        border: 0;
+        border-radius: 4px;
         border: 1px solid ${(props) => props.theme["green-300"]};
-
-        &::placeholder {
-            color: ${(props) => props.theme["gray-100"]};
-        }
+        margin: 10px;
+    }
+    label{
+        cursor: grab;
 
     }
 `;

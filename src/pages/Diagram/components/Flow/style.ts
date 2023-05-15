@@ -24,7 +24,7 @@ export const ReactFlowContainer = styled(ReactFlow)`
         background: transparent;
     }
     .react-flow__controls-button:hover {
-        background: #00b37e;
+        background: ${(props) => props.theme["green-300"]};
     }
 
     .react-flow__controls-button:hover svg path {
@@ -32,7 +32,7 @@ export const ReactFlowContainer = styled(ReactFlow)`
     }
 
     .react-flow__controls-button svg path {
-        fill: #00b37e;
+        fill: ${(props) => props.theme["green-300"]};
     }
 
     .react-flow__controls-button svg {

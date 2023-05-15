@@ -29,6 +29,7 @@ export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
         data.client = !data.client;
         setActivate(prevActivate => !prevActivate);
     }, []);
+    
     return (
         <DBmMeasureContainer
             withinRange={data.withinRange}
