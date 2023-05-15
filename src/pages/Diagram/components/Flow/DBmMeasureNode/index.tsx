@@ -14,7 +14,7 @@ interface DistanceNodeProps {
 export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
     const { nodes, edges, handleSetNodes, handleSetEdges } =
         useContext(DiagramContext);
-    const [activate, setActivate] = useState(data.client);
+    const [activated, setActivated] = useState(data.client);
 
     const handleButtonDeleteClick = useCallback(() => {
         Project.deleteNodesById(
@@ -28,7 +28,7 @@ export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
 
     const handleButtonClientClick = useCallback(() => {
         data.client = !data.client;
-        setActivate((prevActivate) => !prevActivate);
+        setActivated((prevActivate) => !prevActivate);
     }, []);
 
     return (
@@ -49,9 +49,9 @@ export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
                     <BsTrash3 />
                 </ButtonNodeDelete>
                 <ButtonNode
-                    color={activate ? "#00B37E" : "black"}
+                    color={activated ? "#00B37E" : "black"}
                     onClick={handleButtonClientClick}>
-                    {!activate ? <BsHouseSlashFill /> : <BsHouseCheckFill />}
+                    {!activated ? <BsHouseSlashFill /> : <BsHouseCheckFill />}
                 </ButtonNode>
             </NodeToolbarStyled>
         </DBmMeasureContainer>

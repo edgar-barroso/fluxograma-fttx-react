@@ -1,4 +1,4 @@
-import { useContext ,useCallback} from "react";
+import { useContext, useCallback } from "react";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { ButtonContainer } from "../Flow/style";
 import { ButtonsBarContainer } from "./style";
@@ -15,23 +15,26 @@ import { NewSplitterModal } from "../NewSplitterModal";
 import { Project } from "../../../../utils/Project";
 import { NewBoxModal } from "../NewBoxModal";
 import { FaBroadcastTower } from "react-icons/fa";
+import { GrRotateLeft } from "react-icons/gr";
 import { NewOLTModal } from "../NewOLTModal";
 
 export function ButtonsBar() {
-    const { nodes,edges, handleSetNodes, getCenter } = useContext(DiagramContext);
+    const { nodes, edges, handleSetNodes, getCenter } =
+        useContext(DiagramContext);
 
     const handleCreateNewDistance = useCallback(() => {
-        Project.createNewDistance(nodes,edges, handleSetNodes, getCenter());
-      }, [nodes, handleSetNodes, getCenter]);
-      
-      const handleDownloadPng = useCallback(() => {
+        Project.createNewDistance(nodes, edges, handleSetNodes, getCenter());
+    }, [nodes, handleSetNodes, getCenter]);
+
+    const handleDownloadPng = useCallback(() => {
         Project.DownloadPng();
-      }, []);
-      
-      const handleCreateNewDBmMeasure = useCallback(() => {
-        Project.createNewDBmMeasure(nodes,edges, handleSetNodes, getCenter());
-      }, [nodes, handleSetNodes, getCenter]);
-      
+    }, []);
+
+    const handleCreateNewDBmMeasure = useCallback(() => {
+        Project.createNewDBmMeasure(nodes, edges, handleSetNodes, getCenter());
+    }, [nodes, handleSetNodes, getCenter]);
+
+
 
     return (
         <ButtonsBarContainer>
