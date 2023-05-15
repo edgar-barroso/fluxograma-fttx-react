@@ -2,7 +2,7 @@ import { useContext, useState, useCallback } from "react";
 import { Handle, Position } from "reactflow";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsHouseCheckFill, BsHouseSlashFill, BsTrash3 } from "react-icons/bs";
-import { ButtonNode, NodeToolbarStyled } from "../style";
+import { ButtonNode, ButtonNodeDelete, NodeToolbarStyled } from "../style";
 import { Project } from "../../../../../utils/Project";
 import { DBmMeasureContainer } from "./style";
 
@@ -45,9 +45,9 @@ export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
                 />
             )}
             <NodeToolbarStyled>
-                <ButtonNode onClick={handleButtonDeleteClick}>
+                <ButtonNodeDelete onClick={handleButtonDeleteClick}>
                     <BsTrash3 />
-                </ButtonNode>
+                </ButtonNodeDelete>
                 <ButtonNode
                     color={activate ? "#00B37E" : "black"}
                     onClick={handleButtonClientClick}>

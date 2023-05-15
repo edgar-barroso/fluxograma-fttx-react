@@ -5,7 +5,7 @@ import { useContext, useState ,useCallback} from "react";
 import { Project } from "../../../../utils/Project";
 
 export function NewBoxModal() {
-    const { nodes, handleSetNodes, getCenter } = useContext(DiagramContext);
+    const { nodes, edges,handleSetNodes, getCenter } = useContext(DiagramContext);
     const [nameBox, setNameBox] = useState("");
 
     const handleCheckboxChange = useCallback(
@@ -19,6 +19,7 @@ export function NewBoxModal() {
         (event: React.MouseEvent<HTMLButtonElement>) => {
             Project.createNewBox(
                 nodes,
+                edges,
                 handleSetNodes,
                 { name: nameBox },
                 getCenter()

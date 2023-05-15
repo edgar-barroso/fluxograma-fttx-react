@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState,useCallback } from "react";
 import { Handle, Position } from "reactflow";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
-import { ButtonNode, NodeToolbarStyled } from "../style";
+import { ButtonNode, ButtonNodeDelete, NodeToolbarStyled } from "../style";
 import { Project } from "../../../../../utils/Project";
 import { OLTStyled } from "./style";
 import { BsTrash3 } from "react-icons/bs";
@@ -37,9 +37,9 @@ export function OLTNode({ data, id }: OLTNodeProps) {
     return (
         <OLTStyled>
             <NodeToolbarStyled>
-                <ButtonNode onClick={handleButtonDeleteClick}>
+                <ButtonNodeDelete onClick={handleButtonDeleteClick}>
                     <BsTrash3 />
-                </ButtonNode>
+                </ButtonNodeDelete>
             </NodeToolbarStyled>
             <label>{data.label}</label>
             <input

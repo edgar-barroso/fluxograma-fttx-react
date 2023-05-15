@@ -1,7 +1,7 @@
 import {  useContext ,useCallback} from "react";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsTrash3 } from "react-icons/bs";
-import { ButtonNode, NodeToolbarStyled } from "../style";
+import { ButtonNode, ButtonNodeDelete, NodeToolbarStyled } from "../style";
 import { Project } from "../../../../../utils/Project";
 import { BoxStyled } from "./style";
 
@@ -22,9 +22,9 @@ export function BoxNode({ data, id }: BoxNodeProps) {
         <BoxStyled>
             {data.label}
             <NodeToolbarStyled >
-                <ButtonNode onClick={handleButtonDeleteClick}>
+                <ButtonNodeDelete onClick={handleButtonDeleteClick}>
                     <BsTrash3 />
-                </ButtonNode>
+                </ButtonNodeDelete>
             </NodeToolbarStyled>
         </BoxStyled>
     );

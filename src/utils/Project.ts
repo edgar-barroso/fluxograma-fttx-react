@@ -79,13 +79,16 @@ const splittersUnalancedLosses: { [key: string]: number } = {
 
 export class Project {
     
-    static oldProjects = new Stack<OldProject>(10)
+    static oldProjects = new Stack<OldProject>(20);
 
     static createNewDBmMeasure(
         nodes: NodeFttx[],
+        edges:Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         position: { x: number; y: number }
     ) {
+        this.oldProjects.push({nodes,edges});
+        
         const newDBmMeasure: NodeFttx = {
             id: crypto.randomUUID(),
             type: "dBmMeasure",
@@ -105,10 +108,12 @@ export class Project {
 
     static createNewBox(
         nodes: NodeFttx[],
+        edges:Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         box: BoxProps,
         position: { x: number; y: number }
     ) {
+        this.oldProjects.push({nodes,edges});
         const newBox: NodeFttx = {
             id: crypto.randomUUID(),
             type: "box",
@@ -126,10 +131,13 @@ export class Project {
 
     static createNewSplitter(
         nodes: NodeFttx[],
+        edges:Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         splitter: SplitterProps,
         position: { x: number; y: number }
     ) {
+        this.oldProjects.push({nodes,edges});
+
         const newSplitter: NodeFttx = {
             id: crypto.randomUUID(),
             data: {
@@ -154,9 +162,12 @@ export class Project {
 
     static createNewDistance(
         nodes: NodeFttx[],
+        edges:Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         position: { x: number; y: number }
     ) {
+        this.oldProjects.push({nodes,edges});
+
         const newDistance: NodeFttx = {
             id: crypto.randomUUID(),
             type: "distance",
@@ -174,10 +185,14 @@ export class Project {
 
     static createNewOLT(
         nodes: NodeFttx[],
+        edges:Edge[],
         handleSetNodes: (nodes: NodeFttx[]) => void,
         olt: OLTProps,
         position: { x: number; y: number }
     ) {
+
+        this.oldProjects.push({nodes,edges});
+
         const oltPorts = [];
 
         for (let i = 0; i < olt.numberOfPorts; i++) {
@@ -238,7 +253,7 @@ export class Project {
         handleSetNodes: (nodes: NodeFttx[]) => void,
         handleSetEdges: (edges: Edge[]) => void
     ) {
-        this.oldProjects.push({nodes,edges})
+        this.oldProjects.push({nodes,edges});
 
 
         const updateParamsNodes: {

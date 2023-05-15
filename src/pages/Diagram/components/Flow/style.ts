@@ -44,15 +44,13 @@ export const ReactFlowContainer = styled(ReactFlow)`
     }
 
     @media (max-width: 767px) {
-        *{
-
-        }
-        .react-flow__minimap,.react-flow__controls-zoomin ,.react-flow__controls-zoomout{
+        .react-flow__minimap,
+        .react-flow__controls-zoomin,
+        .react-flow__controls-zoomout {
             display: none;
         }
     }
 `;
-
 
 export const ButtonContainer = styled.button`
     display: flex;
@@ -94,6 +92,12 @@ export const ButtonNode = styled.div<ButtonNodeProps>`
         cursor: pointer;
     }
     color: ${(props) => props.color};
+`;
+
+export const ButtonNodeDelete = styled(ButtonNode)`
+    @media (min-width: 767px) {
+        display: none;
+    }
 `;
 
 export const NodeToolbarStyled = styled(NodeToolbar)`

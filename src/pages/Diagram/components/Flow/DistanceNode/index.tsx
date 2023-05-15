@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useCallback } from "react";
 import { Handle, Position } from "reactflow";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsTrash3 } from "react-icons/bs";
-import { ButtonNode, NodeToolbarStyled } from "../style";
+import { ButtonNode, ButtonNodeDelete, NodeToolbarStyled } from "../style";
 import { DistanceStyled } from "./style";
 import { Project } from "../../../../../utils/Project";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -58,9 +58,9 @@ export function DistanceNode({ id, data }: DistanceNodeProps) {
     return (
         <DistanceStyled>
             <NodeToolbarStyled>
-                <ButtonNode onClick={handleButtonDeleteClick}>
+                <ButtonNodeDelete onClick={handleButtonDeleteClick}>
                     <BsTrash3 />
-                </ButtonNode>
+                </ButtonNodeDelete>
                 <ButtonNode
                     onClick={() => {
                         setInputView(!inputView);

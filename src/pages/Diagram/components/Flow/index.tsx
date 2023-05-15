@@ -75,6 +75,7 @@ export function Flow() {
             setSelectedNodes(nodes);
         },
     });
+    
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === "Delete") {
             Project.deleteNodesById(

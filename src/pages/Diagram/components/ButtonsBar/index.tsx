@@ -18,10 +18,10 @@ import { FaBroadcastTower } from "react-icons/fa";
 import { NewOLTModal } from "../NewOLTModal";
 
 export function ButtonsBar() {
-    const { nodes, handleSetNodes, getCenter } = useContext(DiagramContext);
+    const { nodes,edges, handleSetNodes, getCenter } = useContext(DiagramContext);
 
     const handleCreateNewDistance = useCallback(() => {
-        Project.createNewDistance(nodes, handleSetNodes, getCenter());
+        Project.createNewDistance(nodes,edges, handleSetNodes, getCenter());
       }, [nodes, handleSetNodes, getCenter]);
       
       const handleDownloadPng = useCallback(() => {
@@ -29,7 +29,7 @@ export function ButtonsBar() {
       }, []);
       
       const handleCreateNewDBmMeasure = useCallback(() => {
-        Project.createNewDBmMeasure(nodes, handleSetNodes, getCenter());
+        Project.createNewDBmMeasure(nodes,edges, handleSetNodes, getCenter());
       }, [nodes, handleSetNodes, getCenter]);
       
 

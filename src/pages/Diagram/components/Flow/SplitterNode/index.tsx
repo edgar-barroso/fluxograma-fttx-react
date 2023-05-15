@@ -3,7 +3,7 @@ import { Handle, Position } from "reactflow";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsTrash3 } from "react-icons/bs";
 
-import { ButtonNode, NodeToolbarStyled } from "../style";
+import { ButtonNode, ButtonNodeDelete, NodeToolbarStyled } from "../style";
 import { SplitterStyled } from "./style";
 import { Project } from "../../../../../utils/Project";
 
@@ -23,9 +23,9 @@ export function SplitterNode({ data, id }: SplitterNodeProps) {
     return (
         <SplitterStyled title={data.title}>
             <NodeToolbarStyled>
-                <ButtonNode onClick={handleButtonDeleteClick}>
+                <ButtonNodeDelete onClick={handleButtonDeleteClick}>
                     <BsTrash3 />
-                </ButtonNode>
+                </ButtonNodeDelete>
             </NodeToolbarStyled>
             <Handle type="target" position={Position.Top} isConnectable />
             <label>{data.label}</label>

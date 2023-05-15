@@ -5,7 +5,7 @@ import { useContext, useState,useCallback } from "react";
 import { Project } from "../../../../utils/Project";
 
 export function NewOLTModal() {
-    const { nodes, handleSetNodes, getCenter } = useContext(DiagramContext);
+    const { nodes,edges, handleSetNodes, getCenter } = useContext(DiagramContext);
     const [nameOLT, setNameOLT] = useState("");
     const [powerOLT, setPowerOLT] = useState(5.0);
 
@@ -27,6 +27,7 @@ export function NewOLTModal() {
         (event: React.MouseEvent<HTMLButtonElement>) => {
           Project.createNewOLT(
             nodes,
+            edges,
             handleSetNodes,
             {
               name: nameOLT,

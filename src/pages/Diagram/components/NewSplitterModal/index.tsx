@@ -5,7 +5,7 @@ import { useContext, useState,useCallback } from "react";
 import { Project } from "../../../../utils/Project";
 
 export function NewSplitterModal() {
-    const { nodes, handleSetNodes,getCenter} = useContext(DiagramContext);
+    const { nodes, edges,handleSetNodes,getCenter} = useContext(DiagramContext);
     const [isChecked, setIsChecked] = useState(false);
     const [selectedValues, setSelectedValues] = useState(2);
     const [unbalancedLoss, setUnbalancedLoss] = useState("1/99");
@@ -41,6 +41,7 @@ export function NewSplitterModal() {
           if (isChecked) {
             Project.createNewSplitter(
               nodes,
+              edges,
               handleSetNodes,
               {
                 ports: [
@@ -62,6 +63,7 @@ export function NewSplitterModal() {
           } else {
             Project.createNewSplitter(
               nodes,
+              edges,
               handleSetNodes,
               {
                 ports: new Array(selectedValues)
