@@ -52,7 +52,7 @@ export function Flow() {
         useContext(DiagramContext);
     const edgeUpdateSuccessful = useRef(false);
     const [selectedNodes, setSelectedNodes] = useState<NodeFttx[]>([]);
-    const [copyIds, setCopyIds] = useState<string[]>([]);
+    // const [copyIds, setCopyIds] = useState<string[]>([]);
 
     useOnSelectionChange({
         onChange: ({ nodes, edges }) => {
@@ -60,24 +60,18 @@ export function Flow() {
             setSelectedNodes(nodes);
         },
     });
+
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
             if (event.ctrlKey && event.key === "z") {
                 Project.returnOldProject(handleSetNodes, handleSetEdges);
             }
-            if (event.ctrlKey && event.key === "c") {
-                // const textarea = document.createElement("textarea");
-                // textarea.value = JSON.stringify(selectedNodes);
-                // document.body.appendChild(textarea);
-                // textarea.select();
-                // document.execCommand("copy");
-                // document.body.removeChild(textarea);
-
-                setCopyIds(selectedNodes.map(node=>node.id));
-            }
-            if (event.ctrlKey && event.key === "v") {
-                Project.addNodes(nodes, edges, handleSetNodes, copyIds);
-            }
+            // if (event.ctrlKey && event.key === "c") {
+            //     setCopyIds(selectedNodes.map(node=>node.id));
+            // }
+            // if (event.ctrlKey && event.key === "v") {
+            //     Project.addNodes(nodes, edges, handleSetNodes, copyIds);
+            // }
         }
 
         document.addEventListener("keydown", handleKeyDown);
@@ -85,7 +79,7 @@ export function Flow() {
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [selectedNodes,setSelectedNodes,copyIds,setCopyIds]);
+    }, [selectedNodes,setSelectedNodes]);
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === "Delete") {

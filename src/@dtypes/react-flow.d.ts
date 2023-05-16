@@ -20,6 +20,7 @@ declare module "reactflow" {
             client?: boolean;
             visible?: boolean;
             withinRange?: boolean;
+            fusion?: boolean;
         };
     }
 }

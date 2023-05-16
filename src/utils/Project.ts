@@ -146,6 +146,7 @@ export class Project {
                 title: `${splitter.ports
                     .map((item) => `${item.loss}`)
                     .join(" | ")}`,
+                fusion:true
             },
             type: "splitter",
             fttx: {
@@ -287,21 +288,38 @@ export class Project {
         handleSetNodes(newNodes);
     }
 
-    static addNodes(
-        nodes: NodeFttx[],
-        edges: Edge[],
-        handleSetNodes: (data: NodeFttx[]) => void,
-        nodesIds: string[]
-    ) {
-        const addNodes = nodes.filter((node) => nodesIds.includes(node.id));
-        this.oldProjects.push({ nodes, edges });
-        handleSetNodes([
-            ...nodes,
-            ...addNodes.map((node) => {
-                return { ...node, id: crypto.randomUUID(), selected: false };
-            }),
-        ]);
-    }
+    // static addNodes(
+    //     nodes: NodeFttx[],
+    //     edges: Edge[],
+    //     handleSetNodes: (data: NodeFttx[]) => void,
+    //     nodesIds: string[]
+    // ) {
+    //     const addNodes = nodes.filter((node) => nodesIds.includes(node.id));
+    //     this.oldProjects.push({ nodes, edges });
+    //     handleSetNodes([
+    //         ...nodes,
+    //         ...addNodes.map((node) => {
+    //             return {
+    //                 ...node,
+    //                 id: crypto.randomUUID(),
+    //                 selected: false,
+    //                 position: {
+    //                     x: node.position.x + 15,
+    //                     y: node.position.y + 15,
+    //                 },
+    //                 fttx: {
+    //                     ...node.fttx,
+    //                     ports: node.fttx.ports?.map((port) => {
+    //                         return {
+    //                             ...port,
+    //                             used: false,
+    //                         };
+    //                     }),
+    //                 },
+    //             };
+    //         }),
+    //     ]);
+    // }
 
     static updatePowerDBmMeasuresAllOlts(
         nodes: NodeFttx[],
@@ -365,7 +383,6 @@ export class Project {
                 } else if (node.type === "dBmMeasure") {
                     if (node.data.client) {
                         power += connectionLosses.connector;
-                        power += connectionLosses.connector;
                         node.data.label = `${power.toFixed(2)}dBm`;
                     } else {
                         node.data.label = `${power.toFixed(2)}dBm`;
@@ -380,12 +397,15 @@ export class Project {
                     }
                     dBmMeasures.push(node);
                 } else if (node.type === "splitter") {
+                    if(node.data.fusion){
+                        power += 2*connectionLosses.fusion;
+                    }else{
+                        power += connectionLosses.connector;
+                    }
                     if (!node.fttx.unbalanced) {
                         power += splittersBalancedLosses[node.data.label];
                     } else {
                         if (index < nodesPaths.length - 1) {
-                            power += connectionLosses.fusion;
-                            power += connectionLosses.fusion;
                             const edge = newEdges.find(
                                 (edge) =>
                                     edge.target === nodesPaths[index + 1].id
