@@ -79,7 +79,7 @@ export function Flow() {
         return () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [selectedNodes,setSelectedNodes]);
+    }, []);
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === "Delete") {
