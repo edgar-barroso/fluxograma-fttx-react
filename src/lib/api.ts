@@ -5,11 +5,10 @@ interface AxiosErrorResponse {
     status?: number;
     code?: string;
 }
-
 export function setupAPIClient() {
     const cookieToken = Cookies.get("auth.diagram.token");
     const api = axios.create({
-        baseURL: "http://localhost:3333",
+        baseURL: "https://api-diagrama-fttx.onrender.com",
         headers: {
             Authorization: `Bearer ${cookieToken}`,
         },
