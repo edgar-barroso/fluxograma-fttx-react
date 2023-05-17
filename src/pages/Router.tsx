@@ -7,7 +7,6 @@ import { Register } from "./Register";
 export function Router() {
     return (
         <Routes>
-            <Route path="*" element={<Navigate to="/login" />} />
             <Route
                 path="/diagram/:projectId"
                 element={<Diagram />}
@@ -15,6 +14,8 @@ export function Router() {
             <Route path="/my-projects" element={<UserProjects />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>} />
+            <Route path="*" element={<Navigate to="/login" />} />
+
         </Routes>
     );
 }
