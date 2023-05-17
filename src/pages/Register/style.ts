@@ -7,6 +7,7 @@ export const ContainerLogin = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
+
 `;
 
 export const Form = styled.form`
@@ -24,11 +25,8 @@ export const Form = styled.form`
     }
     p{
         color: #cc1111;
-        font-size: 0.8rem;
     }
-    a{
-        font-size: 0.8rem;
-    }
+
 `;
 
 export const Input = styled.input`

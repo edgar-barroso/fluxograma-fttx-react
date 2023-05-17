@@ -25,18 +25,21 @@ export function setupAPIClient() {
                 error?.response.statusText === "Unauthorized"
             ) {
                 try {
-                    
                     const response = await api.patch("token/refresh");
-
                     const newToken = await response.data.token;
                     Cookies.set("auth.diagram.token", newToken);
+
+                    // Retorna a resposta atualizada e o erro
+                    return Promise.reject({ response, error });
                 } catch {
                     Cookies.remove("auth.diagram.token");
                 }
             }
 
-            
+            // Retorna apenas o erro original
+            return Promise.reject(error);
         }
     );
+
     return api;
 }

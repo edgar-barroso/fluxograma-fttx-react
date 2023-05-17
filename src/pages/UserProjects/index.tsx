@@ -18,7 +18,7 @@ export function UserProjects() {
         const api = setupAPIClient();
         const response = await api.get("projects/listing", {
         });
-        const listOfProjects = await response.data.listOfProjects;
+        const listOfProjects:InfoProject[] = await response.data.listOfProjects;
         if (listOfProjects) {
             setArrayProjects(listOfProjects);
         }

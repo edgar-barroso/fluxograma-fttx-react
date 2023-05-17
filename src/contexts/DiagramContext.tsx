@@ -47,7 +47,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     useEffect(() => {
         if (
             load &&
-            Math.abs(new Date().getTime() - timelastSave.getTime()) > 1000 * 5 //segundos
+            Math.abs(new Date().getTime() - timelastSave.getTime()) > 1000 * 1 //segundos
         ) {
             setTimeLastSave(new Date());
             fetchUpdateDiagram();
