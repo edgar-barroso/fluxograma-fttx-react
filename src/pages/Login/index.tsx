@@ -10,9 +10,11 @@ export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [clickedButton,setClickedButton] = useState(false)
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setClickedButton(true)
         const data = {
             email,
             password,
@@ -29,6 +31,7 @@ export function Login() {
                 navigate("/my-projects");
             }
         } catch (err:any) {
+            setClickedButton(false)
             if (err.response.status === 400) {
                 setError("Usuário não encontrado");
             }
@@ -41,7 +44,6 @@ export function Login() {
                 <label>Email</label>
                 <Input
                     type="email"
-                    placeholder="example@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -50,12 +52,11 @@ export function Login() {
                 <Input
                     minLength={6}
                     type="password"
-                    placeholder="******"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <Button type="submit">Login</Button>
+                <Button disabled={clickedButton} type="submit">Login</Button>
                 {error !== "" && <p>{error}</p>}
 
                 <a href="/register">Registrar-se</a>

@@ -10,6 +10,7 @@ export function Register() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
+    const [clickedButton, setClickedButton] = useState(false);
 
     useEffect(() => {
         if (password !== confirmPassword) {
@@ -20,7 +21,8 @@ export function Register() {
     }, [password, confirmPassword]);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+        event.preventDefault();
+        setClickedButton(true);
         const data = {
             name,
             email,
@@ -28,15 +30,15 @@ export function Register() {
         };
         const api = setupAPIClient();
         try {
-            const response = await api.post("/users", data, {
+            await api.post("/users", data, {
                 withCredentials: true,
-            });        
+            });
             navigate("/login");
-            
-        } catch (err:any) {
+        } catch (err: any) {
             if (err.response.status === 409) {
                 setError("Email já cadastrado");
-                setEmail("")
+                setEmail("");
+                setClickedButton(false);
             }
         }
     };
@@ -75,8 +77,10 @@ export function Register() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                 />
-                {error!=="" && <p>{error}</p>}
-                <Button type="submit">Registrar</Button>
+                {error !== "" && <p>{error}</p>}
+                <Button disabled={clickedButton} type="submit">
+                    Registrar
+                </Button>
             </Form>
         </ContainerLogin>
     );

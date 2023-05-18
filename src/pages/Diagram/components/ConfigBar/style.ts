@@ -12,6 +12,11 @@ export const ConfigBarContainer = styled.div`
     padding: 10px;
     border-radius: 10px;
     margin: 15px;
+    flex-direction: column;
+        div{
+            display: flex;
+            gap:0.8rem;
+        }
 
     label {
         text-align: center;
@@ -30,5 +35,9 @@ export const ConfigBarContainer = styled.div`
         -webkit-appearance: textfield !important;
         -moz-appearance: textfield !important;
         appearance: textfield !important;
+    }
+    @media (max-width: 767px) {
+        font-size: 1rem;
+        
     }
 `;

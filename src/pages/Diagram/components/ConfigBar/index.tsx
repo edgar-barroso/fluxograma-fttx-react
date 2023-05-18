@@ -32,19 +32,20 @@ export function ConfigBar() {
     return (
         <ConfigBarContainer>
             <label>Intervalor dBm ONU</label>
-            <input
-                type="number"
-                value={minValue}
-                onChange={handleChangeInputMinValue}
-                step={0.1}
-            />
-            <input
-                type="number"
-                value={maxValue}
-                onChange={handleChangeInputMaxValue}
-                step={0.1}
-            />
-            
+            <div>
+                <input
+                    type="number"
+                    value={minValue}
+                    onChange={handleChangeInputMinValue}
+                    step={0.1}
+                />
+                <input
+                    type="number"
+                    value={maxValue}
+                    onChange={handleChangeInputMaxValue}
+                    step={0.1}
+                />
+            </div>
         </ConfigBarContainer>
     );
 }

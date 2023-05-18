@@ -56,6 +56,9 @@ export const ReactFlowContainer = styled(ReactFlow)`
         .react-flow__controls-zoomout {
             display: none;
         }
+        .react-flow__controls{
+            padding-bottom: 50px;
+        }
     }
 `;
 
