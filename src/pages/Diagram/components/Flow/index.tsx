@@ -260,7 +260,7 @@ export function Flow() {
                 zoomable
                 pannable
             />
-            <Controls />
+            <Controls  />
             <Background />
         </ReactFlowContainer>
     );

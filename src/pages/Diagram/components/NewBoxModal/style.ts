@@ -22,6 +22,9 @@ export const Content = styled(Dialog.Content)`
     border: 2px solid ${(props) => props.theme["green-300"]};
     border-radius: 10px;
     background: ${(props) => props.theme["white"]};
+    @media (max-width: 767px){
+        top: 35%;
+    }
 
     div {
         margin-top: 2rem;

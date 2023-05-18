@@ -39,9 +39,8 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     });
 
 
-    useEffect(() => {
+    useEffect( () => {
         fetchGetDiagram();
-        setLoad(true);
     }, []);
 
     useEffect(() => {
@@ -69,6 +68,8 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
         const response = await api.get(`projects/${projectId}`);
         setNodes(await response.data.project.flow.nodes);
         setEdges(await response.data.project.flow.edges);
+        setLoad(true);
+
     }
 
     async function fetchUpdateDiagram() {

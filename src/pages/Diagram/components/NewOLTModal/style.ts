@@ -20,6 +20,9 @@ export const Content = styled(Dialog.Content)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media (max-width: 767px){
+        top: 35%;
+    }
     border: 2px solid ${(props) => props.theme["green-300"]};
     border-radius: 10px;
     background: ${(props) => props.theme["white"]};
