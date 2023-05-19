@@ -153,7 +153,11 @@ export function Flow() {
 
     //@ts-ignore
     const onEdgeUpdate = (oldEdge, newConnection) => {
-        if (oldEdge.source !== newConnection.source) {
+        if(oldEdge.source === newConnection.source && 
+            oldEdge.target === newConnection.target){
+                edgeUpdateSuccessful.current = true;
+        }
+        else if (oldEdge.source !== newConnection.source) {
             const newSourceNode = nodes.find(
                 (node) => node.id === newConnection.source
             );
