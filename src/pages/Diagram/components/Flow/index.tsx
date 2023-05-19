@@ -52,7 +52,6 @@ export function Flow() {
         useContext(DiagramContext);
     const edgeUpdateSuccessful = useRef(false);
     const [selectedNodes, setSelectedNodes] = useState<NodeFttx[]>([]);
-    // const [copyIds, setCopyIds] = useState<string[]>([]);
 
     useOnSelectionChange({
         onChange: ({ nodes, edges }) => {
@@ -68,12 +67,6 @@ export function Flow() {
             ) {
                 Project.returnOldProject(handleSetNodes, handleSetEdges);
             }
-            // if (event.ctrlKey && event.key === "c") {
-            //     setCopyIds(selectedNodes.map(node=>node.id));
-            // }
-            // if (event.ctrlKey && event.key === "v") {
-            //     Project.addNodes(nodes, edges, handleSetNodes, copyIds);
-            // }
         }
 
         document.addEventListener("keydown", handleKeyDown);

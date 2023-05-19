@@ -48,6 +48,11 @@ export const ReactFlowContainer = styled(ReactFlow)`
         border-radius: 0;
         border: 1px solid ${(props) => props.theme["green-300"]};
     }
+    .react-flow__connection-path {
+        stroke: ${(props) => props.theme["green-300"]};
+        stroke-width: 1;
+        fill: none;
+    }
     .react-flow__handle-top {
         top: -8px;
     }
