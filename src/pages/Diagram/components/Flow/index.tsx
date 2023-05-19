@@ -63,7 +63,9 @@ export function Flow() {
 
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent) {
-            if (event.ctrlKey && event.key === "z") {
+            if (
+                (event.ctrlKey && ['Z','z'].includes(event.key))
+            ) {
                 Project.returnOldProject(handleSetNodes, handleSetEdges);
             }
             // if (event.ctrlKey && event.key === "c") {
@@ -252,6 +254,7 @@ export function Flow() {
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
             zoomOnDoubleClick={false}
+            maxZoom={4}
             fitView>
             <MiniMap
                 style={{
@@ -260,7 +263,7 @@ export function Flow() {
                 zoomable
                 pannable
             />
-            <Controls  />
+            <Controls />
             <Background />
         </ReactFlowContainer>
     );

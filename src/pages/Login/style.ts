@@ -41,7 +41,7 @@ export const Input = styled.input`
 
     font-weight: 500;
 
-    :focus {
+    :focus{
         border-bottom: 2px solid ${(props) => props.theme["green-500"]};
         margin: none;
     }

@@ -31,7 +31,7 @@ export function ConfigBar() {
 
     return (
         <ConfigBarContainer>
-            <label>Intervalor dBm ONU</label>
+            <label>Intervalo dBm ONU</label>
             <div>
                 <input
                     type="number"
