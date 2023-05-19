@@ -43,16 +43,16 @@ export const ReactFlowContainer = styled(ReactFlow)`
         box-shadow: none;
     }
     .react-flow__handle {
-        width: 10px;
-        height: 10px;
-        border-radius:100%;
+        width: 12px;
+        height: 6px;
+        border-radius: 0;
         border: 1px solid ${(props) => props.theme["green-300"]};
     }
     .react-flow__handle-top {
-        top: -14px;
+        top: -8px;
     }
     .react-flow__handle-bottom {
-        bottom: -14px;
+        bottom: -8px;
     }
     .react-flow__edgeupdater {
         r: 15px;
@@ -65,6 +65,18 @@ export const ReactFlowContainer = styled(ReactFlow)`
         }
         .react-flow__controls {
             padding-bottom: 50px;
+        }
+        .react-flow__handle {
+            width: 12px;
+            height: 12px;
+            border-radius: 100%;
+            border: 1px solid ${(props) => props.theme["green-300"]};
+        }
+        .react-flow__handle-top {
+            top: -16px;
+        }
+        .react-flow__handle-bottom {
+            bottom: -16px;
         }
     }
 `;
