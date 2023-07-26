@@ -25,7 +25,7 @@ interface OLTProps {
     power: number;
 }
 
-interface OldProject {
+interface DiagramFttx {
     nodes: NodeFttx[];
     edges: Edge[];
 }
@@ -78,7 +78,7 @@ const splittersUnalancedLosses: { [key: string]: number } = {
 };
 
 export class Project {
-    static oldProjects = new Stack<OldProject>(20);
+    static oldProjects = new Stack<DiagramFttx>(20);
 
     static createNewDBmMeasure(
         nodes: NodeFttx[],

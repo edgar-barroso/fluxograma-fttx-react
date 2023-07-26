@@ -9,6 +9,7 @@ import { Edge, NodeFttx, useOnSelectionChange, useReactFlow } from "reactflow";
 import { IntervalONU, Project } from "../utils/Project";
 import { setupAPIClient } from "../lib/api";
 import { useParams } from "react-router-dom";
+import { initialProject } from "../utils/initialProject";
 
 interface DiagramContextType {
     nodes: NodeFttx[];
@@ -64,24 +65,60 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     }, [nodes, edges]);
 
     async function fetchGetDiagram() {
-        const api = setupAPIClient();
-        const response = await api.get(`projects/${projectId}`);
-        setNodes(await response.data.project.flow.nodes);
-        setEdges(await response.data.project.flow.edges);
-        setLoad(true);
+        const data = localStorage.getItem('diagramFttx');
+        if(data){
+            const diagramData:{
+                flow:{
+                    nodes:NodeFttx[],
+                    edges:Edge[]
+                }
+            } = JSON.parse(data)
+            if(diagramData.flow.nodes.length ===0 && diagramData.flow.edges.length===0){
+                setNodes(initialProject.flow.nodes);
+                setEdges(initialProject.flow.edges);
+    
+            }else{
+    
+                setNodes(diagramData.flow.nodes);
+                setEdges(diagramData.flow.edges);
+    
+            }
+
+        }else{
+            setNodes(initialProject.flow.nodes);
+            setEdges(initialProject.flow.edges);
+        }
+        setLoad(true)
+
+
+
+
+        
+        // const api = setupAPIClient();
+        // const response = await api.get(`projects/${projectId}`);
+        // setNodes(await response.data.project.flow.nodes);
+        // setEdges(await response.data.project.flow.edges);
+        // setLoad(true);
 
     }
 
     async function fetchUpdateDiagram() {
         const data = {
-            id: projectId,
             flow: {
                 nodes,
                 edges,
             },
         };
-        const api = setupAPIClient();
-        api.patch("projects/update", data);
+        localStorage.setItem('diagramFttx', JSON.stringify(data));
+        // const data = {
+        //     id: projectId,
+        //     flow: {
+        //         nodes,
+        //         edges,
+        //     },
+        // };
+        // const api = setupAPIClient();
+        // api.patch("projects/update", data);
     }
 
     const handleSetNodes = useCallback((data: NodeFttx[]) => {

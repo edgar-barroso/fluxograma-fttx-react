@@ -43,10 +43,11 @@ export const ReactFlowContainer = styled(ReactFlow)`
         box-shadow: none;
     }
     .react-flow__handle {
-        width: 12px;
+        width: 8px;
         height: 6px;
         border-radius: 0;
-        border: 1px solid ${(props) => props.theme["green-300"]};
+        background-color: ${(props) => props.theme["green-300"]};
+        border: 1px solid black;
     }
     .react-flow__connection-path {
         stroke: ${(props) => props.theme["green-300"]};
@@ -120,6 +121,7 @@ export const ButtonNode = styled.div<ButtonNodeProps>`
     border: none;
     border: 1px solid #00b37e;
     transition: 0.25s;
+    background-color: white;
     :hover {
         color: white;
         background-color: #00b37e;

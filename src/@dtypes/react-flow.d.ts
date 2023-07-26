@@ -23,6 +23,7 @@ declare module "reactflow" {
             fusion?: boolean;
         };
     }
+
 }
 
 
