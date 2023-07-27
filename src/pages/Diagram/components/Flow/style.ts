@@ -2,6 +2,9 @@ import { NodeToolbar, ReactFlow } from "reactflow";
 import styled from "styled-components";
 
 export const ReactFlowContainer = styled(ReactFlow)`
+    background: white;
+
+
     .react-flow__node {
         border: none;
         border: 1px solid ${(props) => props.theme["green-300"]};
@@ -51,8 +54,6 @@ export const ReactFlowContainer = styled(ReactFlow)`
     }
     .react-flow__connection-path {
         stroke: ${(props) => props.theme["green-300"]};
-        stroke-width: 1;
-        fill: none;
     }
     .react-flow__handle-top {
         top: -8px;
