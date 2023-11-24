@@ -6,6 +6,9 @@ interface DBmMeasureContainerProps{
 }
 
 export const DBmMeasureContainer = styled.div<DBmMeasureContainerProps>`
+    height: 23px;
+    border:1px solid black;
+    border-radius: 5px;
     text-align: center;
     * {
         cursor: grab;

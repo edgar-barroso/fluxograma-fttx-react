@@ -2,9 +2,9 @@ import { useContext, useCallback, useState, useEffect } from "react";
 import { Handle, Position } from "reactflow";
 import { DiagramContext } from "../../../../../contexts/DiagramContext";
 import { BsTrash3 } from "react-icons/bs";
-import { GrLink } from "react-icons/gr";
 import { ButtonNode, ButtonNodeDelete, NodeToolbarStyled } from "../style";
 import { SplitterStyled } from "./style";
+
 import { Project } from "../../../../../utils/Project";
 
 interface SplitterNodeProps {
@@ -33,6 +33,19 @@ export function SplitterNode({ data, id }: SplitterNodeProps) {
 
     return (
         <SplitterStyled title={data.title}>
+            <svg width="50" height="40">
+                <polygon points="25,0 0,39 50,39" fill="white" stroke="black" />
+                <text
+                    x="11"
+                    y="35"
+                    font-family="Arial"
+                    font-size="10"
+                    fill="black"
+                >
+                    {data.label}
+                </text>
+            </svg>
+
             <NodeToolbarStyled>
                 <ButtonNodeDelete onClick={handleButtonDeleteClick}>
                     <BsTrash3 />
@@ -41,13 +54,13 @@ export function SplitterNode({ data, id }: SplitterNodeProps) {
                     onClick={() => {
                         setFusion(!fusion);
                     }}
-                    color={"#00B37E"}>
-                    {fusion ? 'fusionado' : 'conectorizado'}
+                    color={"#00B37E"}
+                >
+                    {fusion ? "fusionado" : "conectorizado"}
                 </ButtonNode>
             </NodeToolbarStyled>
             <Handle type="target" position={Position.Top} isConnectable />
-            <label>{data.label}</label>
-            <Handle type="source" position={Position.Bottom} isConnectable />
+            <Handle type="source" style={{background: data.fusion ? "blue" : ""}} position={Position.Bottom} isConnectable />
         </SplitterStyled>
     );
 }

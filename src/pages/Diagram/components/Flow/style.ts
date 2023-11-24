@@ -7,14 +7,10 @@ export const ReactFlowContainer = styled(ReactFlow)`
 
     .react-flow__node {
         border: none;
-        border: 1px solid ${(props) => props.theme["green-300"]};
-        border-radius: 5px;
-        background: white;
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        background: transparent;
     }
 
     .react-flow__node:focus {
-        border: 1px solid black;
     }
 
     .react-flow__controls-button {
@@ -56,10 +52,8 @@ export const ReactFlowContainer = styled(ReactFlow)`
         stroke: ${(props) => props.theme["green-300"]};
     }
     .react-flow__handle-top {
-        top: -8px;
     }
     .react-flow__handle-bottom {
-        bottom: -8px;
     }
     .react-flow__edgeupdater {
         r: 15px;
@@ -89,8 +83,9 @@ export const ReactFlowContainer = styled(ReactFlow)`
 `;
 
 export const ButtonContainer = styled.button`
+    width: 70px;
     display: flex;
-    padding: 1rem;
+    padding: .5rem;
     font-size: 1.5rem;
     align-items: center;
     justify-content: center;
@@ -103,10 +98,6 @@ export const ButtonContainer = styled.button`
     border-radius: 6px;
     cursor: pointer;
 
-    :hover {
-        background-color: ${(props) => props.theme["green-300"]};
-        color: white;
-    }
 `;
 
 interface ButtonNodeProps {
@@ -140,5 +131,5 @@ export const ButtonNodeDelete = styled(ButtonNode)`
 export const NodeToolbarStyled = styled(NodeToolbar)`
     gap: 5px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 `;

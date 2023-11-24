@@ -3,6 +3,12 @@ import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { ButtonContainer } from "../Flow/style";
 import { ButtonsBarContainer } from "./style";
 import { BiWindow } from "react-icons/bi";
+import caixaSVG from '../../../../../public/ceo.svg'
+import medidorSVG from '../../../../../public/medidor.svg'
+import fibraSVG from '../../../../../public/fibra.svg'
+import splitterSVG from '../../../../../public/splitter.svg'
+import oltSVG from '../../../../../public/olt.svg'
+
 import {
     AiFillPrinter,
     AiFillSignal,
@@ -39,7 +45,7 @@ export function ButtonsBar() {
             <Dialog.Root>
                 <Dialog.Trigger asChild>
                     <ButtonContainer title="Caixa">
-                        <BiWindow />
+                        <img src={caixaSVG}/>
                     </ButtonContainer>
                 </Dialog.Trigger>
                 <NewBoxModal />
@@ -48,7 +54,7 @@ export function ButtonsBar() {
             <Dialog.Root>
                 <Dialog.Trigger asChild>
                     <ButtonContainer title="Splitter">
-                        <MdChangeHistory />
+                        <img src={splitterSVG}/>
                     </ButtonContainer>
                 </Dialog.Trigger>
                 <NewSplitterModal />
@@ -57,19 +63,20 @@ export function ButtonsBar() {
             <ButtonContainer
                 title="Medir dBm"
                 onClick={handleCreateNewDBmMeasure}>
-                <AiFillSignal />
+                        <img src={medidorSVG}/>
             </ButtonContainer>
 
             <ButtonContainer
                 title="Distancia"
                 onClick={handleCreateNewDistance}>
-                <AiOutlineFall />
+                        <img src={fibraSVG}/>
+
             </ButtonContainer>
 
             <Dialog.Root>
                 <Dialog.Trigger asChild>
                     <ButtonContainer title="OLT">
-                        <FaBroadcastTower />
+                    <img src={oltSVG}/>
                     </ButtonContainer>
                 </Dialog.Trigger>
                 <NewOLTModal />

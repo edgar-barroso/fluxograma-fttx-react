@@ -1,8 +1,6 @@
 import { useState, useContext, useEffect, useCallback } from "react";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { ConfigBarContainer } from "./style";
-import { ButtonContainer } from "../Flow/style";
-import { BsFillGearFill } from "react-icons/bs";
 
 export function ConfigBar() {
     const { handleSetIntervalONU, intervalONU } = useContext(DiagramContext);
