@@ -42,8 +42,8 @@ export const ReactFlowContainer = styled(ReactFlow)`
         box-shadow: none;
     }
     .react-flow__handle {
-        width: 8px;
-        height: 6px;
+        width: 5px;
+        height: 10px;
         border-radius: 0;
         background-color: ${(props) => props.theme["green-300"]};
         border: 1px solid black;
@@ -74,7 +74,7 @@ export const ReactFlowContainer = styled(ReactFlow)`
             border: 1px solid ${(props) => props.theme["green-300"]};
         }
         .react-flow__handle-top {
-            top: -16px;
+            /* top: -16px; */
         }
         .react-flow__handle-bottom {
             bottom: -16px;

@@ -77,8 +77,48 @@ const splittersUnalancedLosses: { [key: string]: number } = {
     "55": -3.15,
 };
 
+const splittersTypes = {
+    "B":{
+        "2":"splitterNode1x2B"
+    },
+    "D":{
+        "2":"splitterNode1x2D"
+    }
+}
+
 export class Project {
     static oldProjects = new Stack<DiagramFttx>(20);
+
+    static createNewSplitter(
+        nodes: NodeFttx[],
+        edges: Edge[],
+        handleSetNodes: (nodes: NodeFttx[]) => void,
+        splitter: SplitterProps,
+        position: { x: number; y: number }
+    ) {
+        this.oldProjects.push({ nodes, edges });
+    
+        const newSplitter: NodeFttx = {
+            id: crypto.randomUUID(),
+            data: {
+                label: `1x${splitter.ports.length} ${
+                    splitter.unbalanced ? "D" : "B"
+                }`,
+                title: `${splitter.ports
+                    .map((item) => `${item.loss}`)
+                    .join(" | ")}`,
+                fusion:true
+            },
+            type:"",
+            fttx: {
+                ports: splitter.ports,
+                unbalanced: splitter.unbalanced,
+            },
+            position,
+            style: {},
+        };
+        handleSetNodes([...nodes, newSplitter]);
+    }
 
     static createNewDBmMeasure(
         nodes: NodeFttx[],
@@ -128,36 +168,6 @@ export class Project {
         handleSetNodes([...nodes, newBox]);
     }
 
-    static createNewSplitter(
-        nodes: NodeFttx[],
-        edges: Edge[],
-        handleSetNodes: (nodes: NodeFttx[]) => void,
-        splitter: SplitterProps,
-        position: { x: number; y: number }
-    ) {
-        this.oldProjects.push({ nodes, edges });
-
-        const newSplitter: NodeFttx = {
-            id: crypto.randomUUID(),
-            data: {
-                label: `1x${splitter.ports.length} ${
-                    splitter.unbalanced ? "D" : "B"
-                }`,
-                title: `${splitter.ports
-                    .map((item) => `${item.loss}`)
-                    .join(" | ")}`,
-                fusion:true
-            },
-            type: "splitter",
-            fttx: {
-                ports: splitter.ports,
-                unbalanced: splitter.unbalanced,
-            },
-            position,
-            style: {},
-        };
-        handleSetNodes([...nodes, newSplitter]);
-    }
 
     static createNewDistance(
         nodes: NodeFttx[],

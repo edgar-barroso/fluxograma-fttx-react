@@ -14,7 +14,7 @@ export function Router() {
             {/* <Route path="/my-projects" element={<UserProjects />} /> */}
             {/* <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>} /> */}
-            <Route path="*" element={<Navigate to="/" />} />
+            {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Routes>
     );
 }
