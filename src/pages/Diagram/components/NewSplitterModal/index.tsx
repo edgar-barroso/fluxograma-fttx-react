@@ -30,6 +30,10 @@ export function NewSplitterModal() {
     };
 
     const handelCreateNewSplitter = () =>{
+        if(selectedSplitter.includes("D")){
+            createNewSplitter(selectedSplitter,)
+
+        }
         createNewSplitter(selectedSplitter)
     }
 

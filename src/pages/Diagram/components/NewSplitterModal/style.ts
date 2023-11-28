@@ -15,6 +15,7 @@ export const Title = styled(Dialog.Title)`
 
 export const Content = styled(Dialog.Content)`
     padding: 20px;
+    width: 200px;
     position: absolute;
     top: 50%;
     left: 50%;
