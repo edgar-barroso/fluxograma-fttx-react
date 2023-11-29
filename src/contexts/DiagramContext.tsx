@@ -17,6 +17,7 @@ interface DiagramProviderProps {
     children: ReactNode;
 }
 
+
 export const DiagramContext = createContext({} as DiagramContextType);
 
 export function DiagramProvider({ children }: DiagramProviderProps) {
@@ -37,7 +38,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const createNewSplitter = (type: string) => {
         const splitter: NodeFttx = {
             id: crypto.randomUUID(),
-            data: {},
+            data: {losses:type.includes("D") && type.split("-")[1].split("/").map((v)=>Number(v)) },
             type: `splitterNode${type}`,
             position: getCenter(),
         };

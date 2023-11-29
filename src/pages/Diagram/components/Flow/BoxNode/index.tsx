@@ -15,8 +15,6 @@ export function BoxNode({ data, id }: BoxNodeProps) {
                     border: "1px solid black",
                 }}
                 handleStyle={{background:"rgb(0, 179, 126)",height:20,width:20,borderRadius:"100%"}}
-                minWidth={200}
-                minHeight={200}
             />
         </BoxStyled>
     );

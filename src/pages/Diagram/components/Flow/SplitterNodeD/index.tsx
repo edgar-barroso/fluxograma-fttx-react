@@ -1,29 +1,47 @@
 import { Handle, Position } from "reactflow";
 import { SplitterStyled } from "./style";
 interface SplitterNodeDProps {
-    data: {};
+    data: { losses: [number, number] };
     id: string;
 }
 
 export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
     return (
         <SplitterStyled>
-            <svg width="100" height="80">
+            <svg width="120" height="80">
                 <polygon
-                    points="50,0 0,79 100,79"
+                    points="60,0 0,79 120,79"
                     fill="white"
                     stroke="black"
                 />
                 <text
-                    x="30"
-                    y="70"
+                    x="40"
+                    y="50"
                     style={{
                         fontFamily: "Arial",
-                        fontSize: "20",
-                        fill: "black",
+
                     }}
                 >
                     1x2D
+                </text>
+                <text
+                    x="22"
+                    y="75"
+                    style={{
+                        fontSize:"12px",
+                    }}
+                >
+                    {data.losses[0]}%
+                </text>
+                <text
+                    x="80"
+                    y="75"
+                    style={{
+                        fontSize:"12px",
+
+                    }}
+                >
+                    {data.losses[1]}%
                 </text>
             </svg>
 
@@ -33,7 +51,7 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                 id="port-1"
                 position={Position.Bottom}
                 style={{
-                    left: "15%",
+                    left: "25%",
                 }}
                 onConnect={(params) => console.log("handle onConnect", params)}
                 isConnectable
@@ -44,7 +62,7 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                 position={Position.Bottom}
                 id="port-2"
                 style={{
-                    left: "85%",
+                    left: "75%",
                 }}
                 isConnectable
             />
