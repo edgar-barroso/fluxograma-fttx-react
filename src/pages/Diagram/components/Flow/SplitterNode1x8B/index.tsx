@@ -8,15 +8,15 @@ interface SplitterNode1x8BProps {
 export function SplitterNode1x8B({ data, id }: SplitterNode1x8BProps) {
     return (
         <SplitterStyled>
-            <svg width="150" height="120">
+            <svg width="150" height="80">
                 <polygon
-                    points="75,0 0,119 150,119"
+                    points="75,0 0,79 150,79"
                     fill="white"
                     stroke="black"
                 />
                 <text
                     x="50"
-                    y="105"
+                    y="65"
                     style={{
                         fontFamily: "Arial",
                         fontSize: "24px",

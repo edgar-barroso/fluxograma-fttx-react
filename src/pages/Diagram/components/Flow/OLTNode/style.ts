@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const OLTStyled = styled.div`
+    background-color: white;
+    width: 100px;
     padding: 10px 20px;
     border:1px solid black;
     border-radius: 5px;
@@ -11,7 +13,7 @@ export const OLTStyled = styled.div`
     input[type="number"] {
         text-align: center;
         font-size: 1.2rem;
-        width: 60px;
+        width: 80px;
         border-radius: 4px;
         border: 1px solid ${(props) => props.theme["green-300"]};
         margin: 5px;

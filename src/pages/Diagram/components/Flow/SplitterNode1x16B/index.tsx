@@ -8,18 +8,18 @@ interface SplitterNode1x16BProps {
 export function SplitterNode1x16B({ data, id }: SplitterNode1x16BProps) {
     return (
         <SplitterStyled>
-            <svg width="250" height="200">
+            <svg width="250" height="80">
                 <polygon
-                    points="125,0 0,199 250,199"
+                    points="125,0 0,79 250,79"
                     fill="white"
                     stroke="black"
                 />
                 <text
-                    x="70"
-                    y="175"
+                    x="90"
+                    y="65"
                     style={{
                         fontFamily: "Arial",
-                        fontSize: "40px",
+                        fontSize: "24px",
                         fill: "black",
                     }}
                 >

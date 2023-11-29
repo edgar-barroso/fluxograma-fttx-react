@@ -1,42 +1,27 @@
-import { useContext, useCallback } from "react";
+import { useContext } from "react";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { ButtonContainer } from "../Flow/style";
 import { ButtonsBarContainer } from "./style";
-import { BiWindow } from "react-icons/bi";
-import caixaSVG from '../../../../../public/ceo.svg'
-import medidorSVG from '../../../../../public/medidor.svg'
-import fibraSVG from '../../../../../public/fibra.svg'
-import splitterSVG from '../../../../../public/splitter.svg'
-import oltSVG from '../../../../../public/olt.svg'
-
-import {
-    AiFillPrinter,
-    AiFillSignal,
-    AiOutlineFall,
-} from "react-icons/ai";
-import { MdChangeHistory } from "react-icons/md";
 import * as Dialog from "@radix-ui/react-dialog";
 import { NewSplitterModal } from "../NewSplitterModal";
-import { Project } from "../../../../utils/Project";
 import { NewBoxModal } from "../NewBoxModal";
-import { FaBroadcastTower } from "react-icons/fa";
 import { NewOLTModal } from "../NewOLTModal";
+import { caixaSVG, splitterSVG, fibraSVG, oltSVG } from "../../assets";
 
 export function ButtonsBar() {
-    const { nodes, edges, handleSetNodes, getCenter } =
+    const { nodes, edges,createNewDistance } =
         useContext(DiagramContext);
 
-    const handleCreateNewDistance = useCallback(() => {
-        Project.createNewDistance(nodes, edges, handleSetNodes, getCenter());
-    }, [nodes, handleSetNodes, getCenter]);
+    const handleCreateNewDistance =  () => {
+        createNewDistance()
+    }
+    // const handleDownloadPng = useCallback(() => {
+    //     Project.DownloadPng();
+    // }, []);
 
-    const handleDownloadPng = useCallback(() => {
-        Project.DownloadPng();
-    }, []);
-
-    const handleCreateNewDBmMeasure = useCallback(() => {
-        Project.createNewDBmMeasure(nodes, edges, handleSetNodes, getCenter());
-    }, [nodes, handleSetNodes, getCenter]);
+    // const handleCreateNewDBmMeasure = useCallback(() => {
+    //     Project.createNewDBmMeasure(nodes, edges, handleSetNodes, getCenter());
+    // }, [nodes, handleSetNodes, getCenter]);
 
 
 
@@ -60,11 +45,11 @@ export function ButtonsBar() {
                 <NewSplitterModal />
             </Dialog.Root>
 
-            <ButtonContainer
+            {/* <ButtonContainer
                 title="Medir dBm"
                 onClick={handleCreateNewDBmMeasure}>
                         <img src={medidorSVG}/>
-            </ButtonContainer>
+            </ButtonContainer> */}
 
             <ButtonContainer
                 title="Distancia"
@@ -82,9 +67,9 @@ export function ButtonsBar() {
                 <NewOLTModal />
             </Dialog.Root>
 
-            <ButtonContainer title="Print" onClick={handleDownloadPng}>
+            {/* <ButtonContainer title="Print" onClick={handleDownloadPng}>
                 <AiFillPrinter />
-            </ButtonContainer>
+            </ButtonContainer> */}
         </ButtonsBarContainer>
     );
 }

@@ -1,45 +1,30 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { ButtonCreate, Content, Overlay, Title } from "./style";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
-import { useContext, useState,useCallback } from "react";
-import { Project } from "../../../../utils/Project";
+import { useContext, useState, useCallback } from "react";
 
 export function NewOLTModal() {
-    const { nodes,edges, handleSetNodes, getCenter } = useContext(DiagramContext);
+    const {  createNewOLT } = useContext(DiagramContext);
     const [nameOLT, setNameOLT] = useState("");
     const [powerOLT, setPowerOLT] = useState(5.0);
 
     const handleInputNameOLTChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
-          setNameOLT(event.target.value);
+            setNameOLT(event.target.value);
         },
         []
-      );
-      
-      const handleInputPowerOLTChange = useCallback(
+    );
+
+    const handleInputPowerOLTChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
-          setPowerOLT(Number(event.target.value));
+            setPowerOLT(Number(event.target.value));
         },
         []
-      );
-      
-      const handleCreateNewBox = useCallback(
-        (event: React.MouseEvent<HTMLButtonElement>) => {
-          Project.createNewOLT(
-            nodes,
-            edges,
-            handleSetNodes,
-            {
-              name: nameOLT,
-              numberOfPorts: 20,
-              power: powerOLT,
-            },
-            getCenter()
-          );
-        },
-        [nodes, handleSetNodes, nameOLT, powerOLT, getCenter]
-      );
-      
+    );
+
+    const handleCreateNewBox = (event: React.MouseEvent<HTMLButtonElement>) => {
+        createNewOLT({ name:nameOLT, power:powerOLT });
+    };
 
     return (
         <Dialog.Portal>
@@ -62,7 +47,6 @@ export function NewOLTModal() {
                         step={0.1}
                         min={0}
                         onChange={handleInputPowerOLTChange}
-                        
                     />
 
                     <ButtonCreate onClick={handleCreateNewBox}>

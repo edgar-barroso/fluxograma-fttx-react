@@ -7,6 +7,8 @@ interface DiagramContextType {
     setNodes:React.Dispatch<React.SetStateAction<NodeFttx[]>>
     edges: Edge[];
     createNewSplitter: (type: string) => void;
+    createNewDistance: () => void;
+    createNewOLT:(props:{name:string,power:number}) => void;
 }
 
 interface DiagramProviderProps {
@@ -30,6 +32,26 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
         setNodes([...nodes,splitter])
     };
 
+    const createNewDistance = () => {
+        const distance:NodeFttx = {
+            id:crypto.randomUUID(),
+            data:{},
+            type:"distance",
+            position:getCenter()
+        }
+        setNodes([...nodes,distance])
+    };
+
+    const createNewOLT = (props:{name:string,power:number}) => {
+        const olt:NodeFttx = {
+            id:crypto.randomUUID(),
+            data:{},
+            type:"olt",
+            position:getCenter()
+        }
+        setNodes([...nodes,olt])
+    };
+
     const getCenter = useCallback(() => {
         const { x, y, zoom } = getViewport();
 
@@ -46,6 +68,8 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
                 setNodes,
                 edges,
                 createNewSplitter,
+                createNewDistance,
+                createNewOLT
             }}
         >
             {children}
