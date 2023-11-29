@@ -6,7 +6,10 @@ interface DBmMeasureContainerProps{
 }
 
 export const DBmMeasureContainer = styled.div<DBmMeasureContainerProps>`
-    height: 23px;
+    height: 40px;
+    width: auto;
+    display: flex;
+    justify-content: center;
     border:1px solid black;
     border-radius: 5px;
     text-align: center;
@@ -14,7 +17,8 @@ export const DBmMeasureContainer = styled.div<DBmMeasureContainerProps>`
         cursor: grab;
     }
     label {
-        font-size: 8px;
+        padding: 10px;
+        align-self: center;
         color:${props=>props.client? props.withinRange ? props.theme['green-300']:'red' : 'black'};
     }
 `;

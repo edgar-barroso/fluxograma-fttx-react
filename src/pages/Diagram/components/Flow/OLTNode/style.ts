@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const OLTStyled = styled.div`
     background-color: white;
-    width: 100px;
+    width: auto;
     padding: 10px 20px;
     border:1px solid black;
     border-radius: 5px;
@@ -20,6 +20,7 @@ export const OLTStyled = styled.div`
     }
     label{
         cursor: grab;
+        padding: 10px;
 
     }
 `;

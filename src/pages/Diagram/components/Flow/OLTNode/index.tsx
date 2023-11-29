@@ -1,11 +1,11 @@
 import {useState,useCallback } from "react";
-import { Handle, Position } from "reactflow";
+import { Handle, NodeResizer, Position } from "reactflow";
 import {  ButtonNodeDelete, NodeToolbarStyled } from "../style";
 import { OLTStyled } from "./style";
 import { BsTrash3 } from "react-icons/bs";
 
 interface OLTNodeProps {
-    data: { label: string };
+    data: {  };
     id: string;
 }
 
@@ -22,7 +22,7 @@ export function OLTNode({ data, id }: OLTNodeProps) {
 
     return (
         <OLTStyled>
-            <label>{data.label}</label>
+            <label>OLT A</label>
             <input
                 autoComplete="off"
                 type="number"

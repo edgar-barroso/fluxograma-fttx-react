@@ -6,14 +6,20 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { NewSplitterModal } from "../NewSplitterModal";
 import { NewBoxModal } from "../NewBoxModal";
 import { NewOLTModal } from "../NewOLTModal";
-import { caixaSVG, splitterSVG, fibraSVG, oltSVG } from "../../assets";
+import { caixaSVG, splitterSVG, fibraSVG, oltSVG, medidorSVG } from "../../assets";
 
 export function ButtonsBar() {
-    const { nodes, edges,createNewDistance } =
+    const { nodes, edges,createNewDistance,createNewDBmMeasure } =
         useContext(DiagramContext);
 
     const handleCreateNewDistance =  () => {
         createNewDistance()
+    }
+
+
+    const handleCreateNewDBmMeasure = () => {
+        createNewDBmMeasure()
+
     }
     // const handleDownloadPng = useCallback(() => {
     //     Project.DownloadPng();
@@ -45,11 +51,11 @@ export function ButtonsBar() {
                 <NewSplitterModal />
             </Dialog.Root>
 
-            {/* <ButtonContainer
+            <ButtonContainer
                 title="Medir dBm"
                 onClick={handleCreateNewDBmMeasure}>
                         <img src={medidorSVG}/>
-            </ButtonContainer> */}
+            </ButtonContainer>
 
             <ButtonContainer
                 title="Distancia"

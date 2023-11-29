@@ -1,32 +1,21 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { ButtonCreate, Content, Overlay, Ports, Title } from "./style";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
-import { useContext, useState ,useCallback} from "react";
-import { Project } from "../../../../utils/Project";
+import { useContext, useState, useCallback } from "react";
 
 export function NewBoxModal() {
-    const { nodes, edges,handleSetNodes, getCenter } = useContext(DiagramContext);
+    const { createNewBox } = useContext(DiagramContext);
     const [nameBox, setNameBox] = useState("");
 
-    const handleCheckboxChange = useCallback(
-        (event: React.ChangeEvent<HTMLInputElement>) => {
-            setNameBox(event.target.value);
-        },
-        []
-    );
+    const handleCheckboxChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        setNameBox(event.target.value);
+    };
 
-    const handleCreateNewBox = useCallback(
-        (event: React.MouseEvent<HTMLButtonElement>) => {
-            Project.createNewBox(
-                nodes,
-                edges,
-                handleSetNodes,
-                { name: nameBox },
-                getCenter()
-            );
-        },
-        [nodes, handleSetNodes, nameBox, getCenter]
-    );
+    const handleCreateNewBox = () => {
+        createNewBox({ name: nameBox });
+    };
 
     return (
         <Dialog.Portal>

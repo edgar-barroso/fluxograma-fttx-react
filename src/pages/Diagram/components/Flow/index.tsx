@@ -54,7 +54,7 @@ const edgeTypes: EdgeTypes = {
 
 
 export function Flow() {
-    const { nodes, edges,setNodes } =
+    const { nodes, edges,setNodes ,onConnect} =
         useContext(DiagramContext);
 
     const onNodesChange = useCallback(
@@ -74,13 +74,14 @@ export function Flow() {
             // onEdgeUpdate={onEdgeUpdate}
             // onEdgeUpdateStart={onEdgeUpdateStart}
             // onEdgeUpdateEnd={onEdgeUpdateEnd}
-            // onConnect={onConnect}
+            onConnect={onConnect}
             attributionPosition="top-right"
             defaultEdgeOptions={edgeOptions}
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
             zoomOnDoubleClick={false}
             maxZoom={4}
+            minZoom={.8}
             fitView>
             <MiniMap
                 style={{
