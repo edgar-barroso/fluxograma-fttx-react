@@ -49,6 +49,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
             load &&
             Math.abs(new Date().getTime() - timelastSave.getTime()) > 1000 * 1 //segundos
         ) {
+
             setTimeLastSave(new Date());
             fetchUpdateDiagram();
         }
@@ -110,6 +111,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
             },
         };
         localStorage.setItem('diagramFttx', JSON.stringify(data));
+        console.log("save")
         // const data = {
         //     id: projectId,
         //     flow: {
