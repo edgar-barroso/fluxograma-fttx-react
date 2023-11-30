@@ -45,8 +45,6 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     }, []);
 
     useEffect(() => {
-        console.log(load)
-        console.log(Math.abs(new Date().getTime() - timelastSave.getTime()) > 1000 * 1 )
         if (
             load &&
             Math.abs(new Date().getTime() - timelastSave.getTime()) > 1000 * 1 //segundos
