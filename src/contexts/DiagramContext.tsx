@@ -45,6 +45,8 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     }, []);
 
     useEffect(() => {
+        console.log(load)
+        console.log(Math.abs(new Date().getTime() - timelastSave.getTime()) > 1000 * 1 )
         if (
             load &&
             Math.abs(new Date().getTime() - timelastSave.getTime()) > 1000 * 1 //segundos
@@ -67,7 +69,6 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
 
     async function fetchGetDiagram() {
         const data = localStorage.getItem('diagramFttx');
-        console.log(data)
         if(data){
             const diagramData:{
                 flow:{
@@ -112,7 +113,6 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
             },
         };
         localStorage.setItem('diagramFttx', JSON.stringify(data));
-        console.log("save")
         // const data = {
         //     id: projectId,
         //     flow: {
