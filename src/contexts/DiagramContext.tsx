@@ -67,6 +67,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
 
     async function fetchGetDiagram() {
         const data = localStorage.getItem('diagramFttx');
+        console.log(data)
         if(data){
             const diagramData:{
                 flow:{
