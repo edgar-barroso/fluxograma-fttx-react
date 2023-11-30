@@ -15,7 +15,7 @@ export function SplitterNode1x32B({ data, id }: SplitterNode1x32BProps) {
                     stroke="black"
                 />
                 <text
-                    x="215"
+                    x="220"
                     y="65"
                     style={{
                         fontFamily: "Arial",
@@ -23,7 +23,7 @@ export function SplitterNode1x32B({ data, id }: SplitterNode1x32BProps) {
                         fill: "black",
                     }}
                 >
-                    1x32B
+                    1x32
                 </text>
             </svg>
 

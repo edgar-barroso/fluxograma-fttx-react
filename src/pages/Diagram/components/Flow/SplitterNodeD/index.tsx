@@ -14,21 +14,25 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                     fill="white"
                     stroke="black"
                 />
-                <text
-                    x="40"
-                    y="50"
-                    style={{
-                        fontFamily: "Arial",
+               
+                    <text
+                        x="0"
+                        y="50"
+                        transform="translate(10, -10)"
+                        style={{
+                            fontFamily: "Arial",
+                        }}
+                    >
+                        1x2
+                    </text>
+                
 
-                    }}
-                >
-                    1x2D
-                </text>
                 <text
                     x="22"
                     y="75"
                     style={{
-                        fontSize:"12px",
+                        fontSize: "14px",
+                        fontWeight: "600",
                     }}
                 >
                     {data.losses[0]}%
@@ -37,8 +41,8 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                     x="80"
                     y="75"
                     style={{
-                        fontSize:"12px",
-
+                        fontSize: "14px",
+                        fontWeight: "600",
                     }}
                 >
                     {data.losses[1]}%
