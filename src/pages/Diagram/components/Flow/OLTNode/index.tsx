@@ -5,12 +5,12 @@ import { OLTStyled } from "./style";
 import { BsTrash3 } from "react-icons/bs";
 
 interface OLTNodeProps {
-    data: {  };
+    data: {olt:{name:string,power:number}  };
     id: string;
 }
 
 export function OLTNode({ data, id }: OLTNodeProps) {
-    const [powerOLT, setPowerOLT] = useState(5)
+    const [powerOLT, setPowerOLT] = useState(data.olt.power)
 
 
     const handleInputPowerOLTChange = useCallback(
@@ -22,7 +22,7 @@ export function OLTNode({ data, id }: OLTNodeProps) {
 
     return (
         <OLTStyled>
-            <label>OLT A</label>
+            <label>{data.olt.name}</label>
             <input
                 autoComplete="off"
                 type="number"

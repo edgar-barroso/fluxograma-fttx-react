@@ -22,7 +22,7 @@ export const DiagramContext = createContext({} as DiagramContextType);
 
 export function DiagramProvider({ children }: DiagramProviderProps) {
     const { getViewport } = useReactFlow();
-    const [nodes, setNodes, onNodesChange] = useNodesState<NodeFttx[]>([]);
+    const [nodes, setNodes] = useState<NodeFttx[]>([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState<Edge[]>([]);
     const onConnect = useCallback((params:any) => setEdges((eds:Edge[]) => addEdge(params, eds)), [setEdges]);
 
@@ -38,7 +38,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const createNewSplitter = (type: string) => {
         const splitter: NodeFttx = {
             id: crypto.randomUUID(),
-            data: {losses:type.includes("D") && type.split("-")[1].split("/").map((v)=>Number(v)) },
+            data: {},
             type: `splitterNode${type}`,
             position: getCenter(),
         };
@@ -58,7 +58,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const createNewOLT = (props: { name: string; power: number }) => {
         const olt: NodeFttx = {
             id: crypto.randomUUID(),
-            data: {},
+            data: {olt:{...props}},
             type: "olt",
             position: getCenter(),
         };
@@ -68,7 +68,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const createNewBox = (props: { name: string }) => {
         const box: NodeFttx = {
             id: crypto.randomUUID(),
-            data: {},
+            data: {box:{...props}},
             type: "box",
             position: getCenter(),
             style: { zIndex: -999 },

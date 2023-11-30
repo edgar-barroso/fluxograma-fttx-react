@@ -1,4 +1,5 @@
-import { Handle, Position } from "reactflow";
+import { Position } from "reactflow";
+import CustomHandle from "../CustomHandle";
 import { SplitterStyled } from "./style";
 interface SplitterNodeDProps {
     data: { losses: [number, number] };
@@ -16,9 +17,9 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                 />
                
                     <text
-                        x="0"
-                        y="50"
-                        transform="translate(10, -10)"
+                        x="-20"
+                        y="45"
+                        transform="rotate(-52 0 0)"
                         style={{
                             fontFamily: "Arial",
                         }}
@@ -31,7 +32,7 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                     x="22"
                     y="75"
                     style={{
-                        fontSize: "14px",
+                        fontSize: "16px",
                         fontWeight: "600",
                     }}
                 >
@@ -41,34 +42,32 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                     x="80"
                     y="75"
                     style={{
-                        fontSize: "14px",
+                        fontSize: "16px",
                         fontWeight: "600",
                     }}
                 >
                     {data.losses[1]}%
                 </text>
             </svg>
-
-            <Handle type="target" position={Position.Top} isConnectable />
-            <Handle
+            <CustomHandle type="target" position={Position.Top} isConnectable={1} />
+            <CustomHandle
                 type="source"
                 id="port-1"
                 position={Position.Bottom}
                 style={{
                     left: "25%",
                 }}
-                onConnect={(params) => console.log("handle onConnect", params)}
-                isConnectable
+                isConnectable={1}
             />
 
-            <Handle
+            <CustomHandle
                 type="source"
                 position={Position.Bottom}
                 id="port-2"
                 style={{
                     left: "75%",
                 }}
-                isConnectable
+                isConnectable={1}
             />
         </SplitterStyled>
     );

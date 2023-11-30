@@ -4,6 +4,10 @@ import z from "zod";
 
 declare module "reactflow" {
     export interface NodeFttx extends Node {
+        data:{
+            olt?:{name:string,power:number}
+            box?:{name:string}
+        }
     }
 
 }

@@ -2,14 +2,14 @@ import { Handle, NodeResizer, Position } from "reactflow";
 import { BoxStyled } from "./style";
 
 interface BoxNodeProps {
-    data: {};
+    data: {box:{name:string}};
     id: string;
 }
 
 export function BoxNode({ data, id }: BoxNodeProps) {
     return (
         <BoxStyled>
-            <h1>Caixa A</h1>
+            <h1>{data.box.name}</h1>
             <NodeResizer
                 lineStyle={{
                     border: "1px solid black",

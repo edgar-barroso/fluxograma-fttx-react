@@ -1,5 +1,6 @@
-import { Handle, Position } from "reactflow";
+import { Position } from "reactflow";
 import { SplitterStyled } from "./style";
+import CustomHandle from "../CustomHandle";
 interface SplitterNode1x2BProps {
     data: {};
     id: string;
@@ -27,26 +28,26 @@ export function SplitterNode1x2B({ data, id }: SplitterNode1x2BProps) {
                 </text>
             </svg>
 
-            <Handle type="target" position={Position.Top} isConnectable />
-            <Handle
+            <CustomHandle id="port-0" type="target" position={Position.Top} isConnectable={1} />
+            <CustomHandle
                 type="source"
                 id="port-1"
                 position={Position.Bottom}
                 style={{
                     left: "15%",
                 }}
-                onConnect={(params) => console.log("handle onConnect", params)}
-                isConnectable
+                isConnectable={1}
+            
             />
 
-            <Handle
+            <CustomHandle
                 type="source"
                 position={Position.Bottom}
                 id="port-2"
                 style={{
                     left: "85%",
                 }}
-                isConnectable
+                isConnectable={1}
             />
         </SplitterStyled>
     );
