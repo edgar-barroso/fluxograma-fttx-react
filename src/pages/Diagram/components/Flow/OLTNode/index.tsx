@@ -1,8 +1,9 @@
-import {useState,useCallback } from "react";
+import {useState,useCallback, useContext } from "react";
 import { Handle, NodeResizer, Position } from "reactflow";
 import {  ButtonNodeDelete, NodeToolbarStyled } from "../style";
 import { OLTStyled } from "./style";
 import { BsTrash3 } from "react-icons/bs";
+import { DiagramContext } from "../../../../../contexts/DiagramContext";
 
 interface OLTNodeProps {
     data: {olt:{name:string,power:number}  };
@@ -11,11 +12,16 @@ interface OLTNodeProps {
 
 export function OLTNode({ data, id }: OLTNodeProps) {
     const [powerOLT, setPowerOLT] = useState(data.olt.power)
-
+    const {setNodes,nodes} = useContext(DiagramContext)
 
     const handleInputPowerOLTChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
-            setPowerOLT(Number(event.target.value));
+            const power = Number(event.target.value)
+            setPowerOLT(Number(power));
+            setNodes(nodes.map(node=>{
+                if(node.id===id) node.data.olt!.power=power
+                return node
+            }))
         },
         [setPowerOLT]
     );

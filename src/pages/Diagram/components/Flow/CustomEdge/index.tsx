@@ -25,7 +25,7 @@ export const CustomEdge: FC<EdgeProps> = ({
     });
     return (
         <>
-        <BaseEdge path={edgePath} style={style}  />
+        <BaseEdge  path={edgePath} style={{...style}}  />
             <EdgeLabelRenderer>
                 <div
                     style={{

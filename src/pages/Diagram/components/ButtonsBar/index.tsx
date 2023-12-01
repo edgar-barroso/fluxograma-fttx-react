@@ -21,14 +21,9 @@ export function ButtonsBar() {
         createNewDBmMeasure()
 
     }
-    // const handleDownloadPng = useCallback(() => {
-    //     Project.DownloadPng();
-    // }, []);
-
-    // const handleCreateNewDBmMeasure = useCallback(() => {
-    //     Project.createNewDBmMeasure(nodes, edges, handleSetNodes, getCenter());
-    // }, [nodes, handleSetNodes, getCenter]);
-
+   const handlePrintData = () => {
+    console.log(nodes,edges)
+   }
 
 
     return (
@@ -73,9 +68,9 @@ export function ButtonsBar() {
                 <NewOLTModal />
             </Dialog.Root>
 
-            {/* <ButtonContainer title="Print" onClick={handleDownloadPng}>
-                <AiFillPrinter />
-            </ButtonContainer> */}
+            <ButtonContainer title="Print" onClick={handlePrintData}>
+                Print
+            </ButtonContainer>
         </ButtonsBarContainer>
     );
 }

@@ -15,9 +15,7 @@ export default function CustomHandle(props:any){
 
     const isHandleConnectable = useMemo(() => {
         if (typeof props.isConnectable === 'function') {
-            const node = nodeInternals.get(nodeId);
-            const connectedEdges = getConnectedEdges([node], edges);
-            return props.isConnectable({ node, connectedEdges });
+
         }
 
         if (typeof props.isConnectable === 'number') {
@@ -37,6 +35,16 @@ export default function CustomHandle(props:any){
         return props.isConnectable;
     }, [nodeInternals, edges, nodeId, props.isConnectable]);
 
+    // let extraProps:any = {}
+    // extraProps = {...props}
+    // if(extraProps.connectiontype==="fusion"){
+    //     if( extraProps.style){
+    //         extraProps.style.backgroundColor = "red"
+    //     }else{
+    //         extraProps = {...extraProps,style:{backgroundColor:"red"}}
+    //     }
+        
+    // }
     return (
         <Handle {...props} isConnectable={isHandleConnectable}></Handle>
     );

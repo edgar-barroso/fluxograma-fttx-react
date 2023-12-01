@@ -2,6 +2,7 @@ import { NodeToolbar, ReactFlow } from "reactflow";
 import styled from "styled-components";
 
 export const ReactFlowContainer = styled(ReactFlow)`
+
     background: white;
 
 

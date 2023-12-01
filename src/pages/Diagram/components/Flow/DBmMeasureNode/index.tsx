@@ -1,24 +1,25 @@
 import { Handle, Position } from "reactflow";
 import { DBmMeasureContainer } from "./style";
+import CustomHandle from "../CustomHandle";
 
 interface DistanceNodeProps {
     id: string;
-    data: {};
+    data: {dBm:{value:number}};
 }
 
 export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
-
     return (
         <DBmMeasureContainer
             withinRange
             client
             >
-            <Handle type="target" position={Position.Top} isConnectable />
-            <label> -22dBm</label>
-            <Handle
+            <CustomHandle id={`${id}_port-0`} type="target" position={Position.Top} isConnectable={1} />
+            <label>{data.dBm.value}dBm</label>
+            <CustomHandle
                 type="source"
+                id={`${id}_port-1`}
                 position={Position.Bottom}
-                isConnectable
+                isConnectable={1}
             />
             
         </DBmMeasureContainer>

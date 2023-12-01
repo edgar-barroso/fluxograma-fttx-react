@@ -28,12 +28,12 @@ export function SplitterNode1x8B({ data, id }: SplitterNode1x8BProps) {
                 </text>
             </svg>
 
-            <CustomHandle type="target" position={Position.Top} isConnectable={1} />
+            <CustomHandle type="target" id={`${id}_port-0`} position={Position.Top} isConnectable={1} />
             {new Array(8).fill(0).map((_, index) => (
                 <CustomHandle
                     type="source"
-                    key={`port$-${index + 1}`}
-                    id={`port$-${index + 1}`}
+                    kkey={`${id}_port-${index + 1}`}
+                    id={`${id}_port-${index + 1}`}
                     position={Position.Bottom}
                     style={{
                         left: `${index * (100 / 8) + 100 / 8 / 2}%`,

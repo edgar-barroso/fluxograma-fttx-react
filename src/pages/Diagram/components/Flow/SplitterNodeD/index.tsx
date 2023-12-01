@@ -2,11 +2,12 @@ import { Position } from "reactflow";
 import CustomHandle from "../CustomHandle";
 import { SplitterStyled } from "./style";
 interface SplitterNodeDProps {
-    data: { losses: [number, number] };
+    data: {};
     id: string;
+    type:string;
 }
 
-export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
+export function SplitterNodeD({ data, id,type }: SplitterNodeDProps) {
     return (
         <SplitterStyled>
             <svg width="120" height="80">
@@ -36,7 +37,7 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                         fontWeight: "600",
                     }}
                 >
-                    {data.losses[0]}%
+                    {type.split("-")[1].split("/")[0]}%
                 </text>
                 <text
                     x="80"
@@ -46,13 +47,13 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
                         fontWeight: "600",
                     }}
                 >
-                    {data.losses[1]}%
+                    {type.split("-")[1].split("/")[1]}%
                 </text>
             </svg>
-            <CustomHandle type="target" position={Position.Top} isConnectable={1} />
+            <CustomHandle type="target" id={`${id}_port-0`} position={Position.Top} isConnectable={1} />
             <CustomHandle
                 type="source"
-                id="port-1"
+                id={`${id}_port-1`}
                 position={Position.Bottom}
                 style={{
                     left: "25%",
@@ -63,7 +64,7 @@ export function SplitterNodeD({ data, id }: SplitterNodeDProps) {
             <CustomHandle
                 type="source"
                 position={Position.Bottom}
-                id="port-2"
+                id={`${id}_port-2`}
                 style={{
                     left: "75%",
                 }}

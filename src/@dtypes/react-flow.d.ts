@@ -7,6 +7,8 @@ declare module "reactflow" {
         data:{
             olt?:{name:string,power:number}
             box?:{name:string}
+            distance?:{value:number}
+            dBm?:{value:number}
         }
     }
 

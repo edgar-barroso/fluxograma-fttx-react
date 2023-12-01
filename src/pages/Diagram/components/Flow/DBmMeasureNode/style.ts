@@ -6,6 +6,7 @@ interface DBmMeasureContainerProps{
 }
 
 export const DBmMeasureContainer = styled.div<DBmMeasureContainerProps>`
+    background-color: white;
     height: 40px;
     width: auto;
     display: flex;
