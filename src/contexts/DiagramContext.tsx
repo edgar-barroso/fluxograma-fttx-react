@@ -26,9 +26,9 @@ interface DiagramContextType {
     createNewDBmMeasure: () => void;
     onEdgeUpdateStart: () => void;
     onEdgeUpdate: (oldEdge: Edge, newConnection: any) => void;
-    onEdgeUpdateEnd: (_: any, edge: Edge)  => void;
+    onEdgeUpdateEnd: (_: any, edge: Edge) => void;
     onNodesChange: (changes: NodeChange[]) => void;
-    onEdgesChange:(changes: EdgeChange[]) => void;
+    onEdgesChange: (changes: EdgeChange[]) => void;
 }
 
 interface DiagramProviderProps {
@@ -59,7 +59,7 @@ export function DiagramProvider({ children }: DiagramProviderProps) {
     const createNewSplitter = (type: string) => {
         const splitter: NodeFttx = {
             id: crypto.randomUUID(),
-            data: {},
+            data: {splitter:{isConnector:false}},
             type: `splitterNode${type}`,
             position: getCenter(),
         };

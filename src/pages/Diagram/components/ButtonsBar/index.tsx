@@ -7,6 +7,7 @@ import { NewSplitterModal } from "../NewSplitterModal";
 import { NewBoxModal } from "../NewBoxModal";
 import { NewOLTModal } from "../NewOLTModal";
 import { caixaSVG, splitterSVG, fibraSVG, oltSVG, medidorSVG } from "../../assets";
+import { Project } from "../../../../utils/Project";
 
 export function ButtonsBar() {
     const { nodes, edges,createNewDistance,createNewDBmMeasure } =
@@ -23,6 +24,7 @@ export function ButtonsBar() {
     }
    const handlePrintData = () => {
     console.log(nodes,edges)
+    Project.updatePowerDBmMeasures(nodes,edges,nodes.find((node)=>node.type==="olt"))
    }
 
 

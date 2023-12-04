@@ -66,6 +66,19 @@ export function Flow() {
     const { nodes, edges, onConnect ,onEdgeUpdateStart,onEdgeUpdateEnd,onEdgeUpdate,onEdgesChange,onNodesChange} =
         useContext(DiagramContext);
 
+        
+    // const handleKeyDown = (event: React.KeyboardEvent) => {
+    //     if (event.key === "Delete") {
+    //         Project.deleteNodesById(
+    //             selectedNodes.map((node) => node.id),
+    //             nodes,
+    //             edges,
+    //             setNodes,
+    //             setEdges
+    //         );
+    //     }
+    // };
+
 
     return (
         <ReactFlowContainer

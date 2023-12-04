@@ -10,7 +10,7 @@ export const DistanceStyled = styled.div`
     margin: 6px;
     padding: 6px;
     input {
-        width: 80px;
+        width: 50px;
         text-align: center;
         border: 1px solid #00b37e;
         color: #000;

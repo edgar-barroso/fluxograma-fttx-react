@@ -1,13 +1,28 @@
 import { Position } from "reactflow";
 import CustomHandle from "../CustomHandle";
 import { SplitterStyled } from "./style";
+import { useContext, useState } from "react";
+import { connectorIcon } from "../../../assets";
+import { NodeToolbarStyled, ButtonNode } from "../style";
+import { DiagramContext } from "../../../../../contexts/DiagramContext";
 interface SplitterNodeDProps {
-    data: {};
+    data: {splitter:{isConnector:boolean}};
     id: string;
     type:string;
 }
 
 export function SplitterNodeD({ data, id,type }: SplitterNodeDProps) {
+    const [isConnector,setIsConnector] = useState(data.splitter.isConnector)
+    const {setNodes,nodes} = useContext(DiagramContext)
+
+    const handleChangeConnection = () => {
+        setIsConnector(!isConnector)
+        setNodes(nodes.map((node)=>{
+            if(node.id===id) node.data.splitter!.isConnector=!isConnector
+            return node
+        }))
+
+    }
     return (
         <SplitterStyled>
             <svg width="120" height="80">
@@ -57,6 +72,8 @@ export function SplitterNodeD({ data, id,type }: SplitterNodeDProps) {
                 position={Position.Bottom}
                 style={{
                     left: "25%",
+                    backgroundColor:isConnector && "blue",
+
                 }}
                 isConnectable={1}
             />
@@ -67,9 +84,16 @@ export function SplitterNodeD({ data, id,type }: SplitterNodeDProps) {
                 id={`${id}_port-2`}
                 style={{
                     left: "75%",
+                    backgroundColor:isConnector && "blue",
+
                 }}
                 isConnectable={1}
             />
+                <NodeToolbarStyled>
+                <ButtonNode  onClick={()=>handleChangeConnection()}>
+                <img height={20} src={connectorIcon}   />
+                </ButtonNode>
+            </NodeToolbarStyled>
         </SplitterStyled>
     );
 }

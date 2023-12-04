@@ -2,9 +2,7 @@ import { NodeToolbar, ReactFlow } from "reactflow";
 import styled from "styled-components";
 
 export const ReactFlowContainer = styled(ReactFlow)`
-
     background: white;
-
 
     .react-flow__node {
         border: none;
@@ -43,8 +41,8 @@ export const ReactFlowContainer = styled(ReactFlow)`
         box-shadow: none;
     }
     .react-flow__handle {
-        width: 5px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
         border-radius: 0;
         background-color: ${(props) => props.theme["green-300"]};
         border: 1px solid black;
@@ -86,7 +84,7 @@ export const ReactFlowContainer = styled(ReactFlow)`
 export const ButtonContainer = styled.button`
     width: 70px;
     display: flex;
-    padding: .5rem;
+    padding: 0.5rem;
     font-size: 1.5rem;
     align-items: center;
     justify-content: center;
@@ -98,7 +96,6 @@ export const ButtonContainer = styled.button`
     font-weight: bold;
     border-radius: 6px;
     cursor: pointer;
-
 `;
 
 interface ButtonNodeProps {
@@ -132,5 +129,6 @@ export const ButtonNodeDelete = styled(ButtonNode)`
 export const NodeToolbarStyled = styled(NodeToolbar)`
     gap: 5px;
     display: flex;
-    flex-direction: column;
+    justify-content: end;
+    width: 100px;
 `;

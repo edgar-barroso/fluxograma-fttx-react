@@ -9,6 +9,7 @@ declare module "reactflow" {
             box?:{name:string}
             distance?:{value:number}
             dBm?:{value:number}
+            splitter?:{isConnector:boolean}
         }
     }
 

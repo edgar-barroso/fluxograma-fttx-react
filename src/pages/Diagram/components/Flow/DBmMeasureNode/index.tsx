@@ -14,7 +14,7 @@ export function DBmMeasureNode({ id, data }: DistanceNodeProps) {
             client
             >
             <CustomHandle id={`${id}_port-0`} type="target" position={Position.Top} isConnectable={1} />
-            <label>{data.dBm.value}dBm</label>
+            <label>{data.dBm.value.toFixed(2)}dBm</label>
             <CustomHandle
                 type="source"
                 id={`${id}_port-1`}
