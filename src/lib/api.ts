@@ -8,7 +8,7 @@ interface AxiosErrorResponse {
 export function setupAPIClient() {
     const cookieToken = Cookies.get("auth.diagram.token");
     const api = axios.create({
-        baseURL: "https://api-diagrama-fttx.onrender.com",
+        baseURL: "http://localhost:3333",
         headers: {
             Authorization: `Bearer ${cookieToken}`,
         },
@@ -26,16 +26,12 @@ export function setupAPIClient() {
                 try {
                     const response = await api.patch("token/refresh");
                     const newToken = await response.data.token;
-                    Cookies.set("auth.diagram.token", newToken);
-
-                    // Retorna a resposta atualizada e o erro
+                    Cookies.set("auth.diagram.token", newToken,{sameSite:"None"});
                     return Promise.reject({ response, error });
                 } catch {
                     Cookies.remove("auth.diagram.token");
                 }
             }
-
-            // Retorna apenas o erro original
             return Promise.reject(error);
         }
     );

@@ -14,7 +14,7 @@ export function NewBoxModal() {
     };
 
     const handleCreateNewBox = () => {
-        createNewBox({ name: nameBox });
+        createNewBox({ name: nameBox , isLocked:false});
     };
 
     return (

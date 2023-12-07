@@ -44,6 +44,20 @@ export const Content = styled(Dialog.Content)`
                 color: ${(props) => props.theme["gray-100"]};
             }
         }
+        input,
+        select {
+            background-color: transparent;
+            margin-left: 0.5rem;
+            border-radius: 6px;
+            border: 0;
+            border: 2px solid ${(props) => props.theme["green-300"]};
+            padding: 0.5rem;
+            color: ${(props) => props.theme["green-300"]};
+
+            &::placeholder {
+                color: ${(props) => props.theme["gray-100"]};
+            }
+        }
     }
 `;
 

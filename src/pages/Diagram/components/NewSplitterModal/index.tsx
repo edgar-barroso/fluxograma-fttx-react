@@ -29,7 +29,7 @@ export function NewSplitterModal() {
         setSelectedSplitter(selectedOption);
     };
 
-    const handelCreateNewSplitter = () =>{
+    const handleCreateNewSplitter = () =>{
         if(selectedSplitter.includes("D")){
             createNewSplitter(selectedSplitter,)
 
@@ -50,7 +50,7 @@ export function NewSplitterModal() {
                             </option>
                         ))}
                     </select>
-                    <ButtonCreate onClick={handelCreateNewSplitter}>CRIAR</ButtonCreate>
+                    <ButtonCreate onClick={handleCreateNewSplitter}>CRIAR</ButtonCreate>
                 </form>
             </Content>
         </Dialog.Portal>

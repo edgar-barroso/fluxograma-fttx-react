@@ -129,6 +129,4 @@ export const ButtonNodeDelete = styled(ButtonNode)`
 export const NodeToolbarStyled = styled(NodeToolbar)`
     gap: 5px;
     display: flex;
-    justify-content: end;
-    width: 100px;
 `;

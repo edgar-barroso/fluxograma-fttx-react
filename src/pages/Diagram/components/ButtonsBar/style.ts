@@ -6,6 +6,7 @@ export const ButtonsBarContainer = styled.div`
     top: 0px;
     gap: 10px;
     margin: 15px;
+    background-color: white;
     @media (max-width: 767px) {
         flex-direction: column;
 }

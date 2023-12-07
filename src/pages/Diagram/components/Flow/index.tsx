@@ -1,16 +1,19 @@
-import { useCallback, useContext, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import {
     DefaultEdgeOptions,
     EdgeTypes,
     MiniMap,
     Controls,
     Background,
-    NodeChange,
-    applyNodeChanges,
-    updateEdge,
+    useOnSelectionChange,
+    NodeFttx,
+    getConnectedEdges,
+    getIncomers,
+    getOutgoers,
     Edge,
-    applyEdgeChanges,
-    EdgeChange,
+    useKeyPress,
+    KeyCode,
+    BackgroundVariant,
 } from "reactflow";
 import { DiagramContext } from "../../../../contexts/DiagramContext";
 import { BoxNode } from "./BoxNode";
@@ -57,33 +60,57 @@ const edgeOptions: DefaultEdgeOptions = {
     animated: true,
     style: {
         stroke: "#00b37e",
-        opacity: 0.8,
-        strokeWidth: 1,
+        opacity:1,
+        strokeWidth: 2,
+
     },
+    type:"smoothstep"
 };
 
+
 export function Flow() {
-    const { nodes, edges, onConnect ,onEdgeUpdateStart,onEdgeUpdateEnd,onEdgeUpdate,onEdgesChange,onNodesChange} =
-        useContext(DiagramContext);
+    const {
+        nodes,
+        edges,
+        onConnect,
+        onEdgeUpdateStart,
+        onEdgeUpdateEnd,
+        onEdgeUpdate,
+        onEdgesChange,
+        onNodesChange,
+        setEdges,
+    } = useContext(DiagramContext);
 
-        
-    // const handleKeyDown = (event: React.KeyboardEvent) => {
-    //     if (event.key === "Delete") {
-    //         Project.deleteNodesById(
-    //             selectedNodes.map((node) => node.id),
-    //             nodes,
-    //             edges,
-    //             setNodes,
-    //             setEdges
-    //         );
-    //     }
-    // };
 
+    const onNodesDelete = useCallback(
+        (deleted:any) => {
+            setEdges(
+                deleted.reduce((acc:any, node:NodeFttx) => {
+                    const incomers = getIncomers(node, nodes, edges);
+                    const outgoers = getOutgoers(node, nodes, edges);
+                    const connectedEdges = getConnectedEdges([node], edges);
+
+                    const remainingEdges = acc.filter(
+                        (edge:Edge) => !connectedEdges.includes(edge)
+                    );
+
+                    const createdEdges = incomers.flatMap(({ id: source }) =>
+                        outgoers.map(({ id: target }) => ({
+                            id: `${source}->${target}`,
+                            source,
+                            target,
+                        }))
+                    );
+
+                    return [...remainingEdges, ...createdEdges];
+                }, edges)
+            );
+        },
+        [nodes, edges]
+    );
 
     return (
         <ReactFlowContainer
-            // onKeyDown={handleKeyDown }
-            // onContextMenu={(event)=>{event.preventDefault()}}
             nodes={nodes}
             edges={edges}
             onNodesChange={onNodesChange}
@@ -92,6 +119,8 @@ export function Flow() {
             onEdgeUpdateStart={onEdgeUpdateStart}
             onEdgeUpdateEnd={onEdgeUpdateEnd}
             onConnect={onConnect}
+            onNodesDelete={onNodesDelete}
+            deleteKeyCode={"Delete"}
             attributionPosition="top-right"
             defaultEdgeOptions={edgeOptions}
             nodeTypes={nodeTypes}
@@ -105,11 +134,10 @@ export function Flow() {
                 style={{
                     height: 120,
                 }}
-                zoomable
                 pannable
             />
             <Controls />
-            <Background />
+            <Background variant={BackgroundVariant.Dots} gap={20} size={1}/>
         </ReactFlowContainer>
     );
 }

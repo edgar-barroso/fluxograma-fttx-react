@@ -8,13 +8,14 @@ export function Router() {
     return (
         <Routes>
             <Route
-                path="/"
+                path="/diagram/:projectId"
                 element={<Diagram />}
             />
-            {/* <Route path="/my-projects" element={<UserProjects />} /> */}
-            {/* <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register/>} /> */}
-            {/* <Route path="*" element={<Navigate to="/" />} /> */}
+            <Route path="/my-projects" element={<UserProjects />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="*" element={<Navigate to="/login" />} />
+
         </Routes>
     );
 }

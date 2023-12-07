@@ -1,739 +1,364 @@
-export const initialProject = {
-    flow: {
-      nodes: [
-        {
-          id: "10e023d4-e7ee-4cf6-9ba1-3371f80680c3",
-          type: "olt",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 2,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 3,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 4,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 5,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 6,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 7,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 8,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 9,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 10,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 11,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 12,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 13,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 14,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 15,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 16,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 17,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 18,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 19,
-                loss: 100,
-                used: false
-              },
-              {
-                port: 20,
-                loss: 100,
-                used: false
-              }
-            ],
+export default {
+    nodes: [
+      {
+        id: "bb934edd-878b-48f5-9733-ef83726d3620",
+        data: {
+          olt: {
+            name: "OLT A",
             power: 5.38
-          },
-          data: {
-            label: "OLT A"
-          },
-          position: {
-            x: 644.8817308377003,
-            y: 203.59015634846608
-          },
-          style: {}
-        },
-        {
-          id: "74aad981-5ee0-4bba-8062-9cfb06ff9a01",
-          type: "distance",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 100,
-                used: false
-              }
-            ],
-            meters: 1600
-          },
-          data: {
-            label: "1600",
-            visible: true
-          },
-          position: {
-            x: 734.8535538771449,
-            y: 315.87078457376697
-          },
-          style: {}
-        },
-        {
-          id: "24548a90-3ffe-4b98-aefd-c63d686faee6",
-          type: "box",
-          fttx: {},
-          data: {
-            label: "CAIXA 1"
-          },
-          position: {
-            x: 563.9934579278209,
-            y: 417.9893302371638
-          },
-          style: {
-            width: 300,
-            height: 200,
-            zIndex: -1
           }
         },
-        {
-          id: "2e44293b-5d82-4954-bcfe-e3bd61e559e3",
-          type: "splitter",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 10,
-                used: true
-              },
-              {
-                port: 2,
-                loss: 90,
-                used: false
-              }
-            ],
-            unbalanced: true
-          },
-          data: {
-            label: "1x2 D",
-            title: "10 | 90",
-            fusion: true
-          },
-          position: {
-            x: 678.2722148055916,
-            y: 450.694268520283
-          },
-          style: {}
+        type: "olt",
+        position: {
+          x: 937.5,
+          y: 405
         },
-        {
-          id: "0b090298-95b7-4dfa-a748-a84ff6946690",
-          type: "splitter",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 6.25,
-                used: true
-              },
-              {
-                port: 2,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 3,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 4,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 5,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 6,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 7,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 8,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 9,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 10,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 11,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 12,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 13,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 14,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 15,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 16,
-                loss: 6.25,
-                used: false
-              }
-            ],
-            unbalanced: false
-          },
-          data: {
-            label: "1x16 B",
-            title: "6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25",
-            fusion: false
-          },
-          position: {
-            x: 588.4835583369614,
-            y: 532.4440022935263
-          },
-          style: {}
+        width: 215,
+        height: 71,
+        selected: false,
+        positionAbsolute: {
+          x: 937.5,
+          y: 405
         },
-        {
-          id: "4bf3938a-f3bb-4bab-b418-2777e617f473",
-          type: "distance",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 100,
-                used: true
-              }
-            ],
-            meters: 50
-          },
-          data: {
-            label: "50",
-            visible: false
-          },
-          position: {
-            x: 509.8599222268616,
-            y: 583.541451266887
-          },
-          style: {}
-        },
-        {
-          id: "e813a6b0-f1e8-4f4c-a775-bc2c02be0cb8",
-          type: "dBmMeasure",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 100,
-                used: false
-              }
-            ],
-            meters: 0
-          },
-          data: {
-            label: "-21.70dBm",
-            client: true
-          },
-          position: {
-            x: 422.18518816175566,
-            y: 654.5566535492005
-          },
-          style: {
-            width: 50,
-            height: 25
+        dragging: false
+      },
+      {
+        id: "d4b92bb8-4c53-47bb-b295-1f6ec9087702",
+        data: {
+          splitter: {
+            isConnector: false
           }
         },
-        {
-          id: "4d66747c-b2c2-4a32-af7a-54ac15e30db4",
-          type: "box",
-          fttx: {},
-          data: {
-            label: "CAIXA 2"
-          },
-          position: {
-            x: 548.221480707766,
-            y: 846.9130739959264
-          },
-          style: {
-            width: 300,
-            height: 200,
-            zIndex: -1
+        type: "splitterNode1x2D-10/90",
+        position: {
+          x: 301.47258812114524,
+          y: 63.134879827353984
+        },
+        width: 120,
+        height: 84,
+        selected: false,
+        positionAbsolute: {
+          x: 974.2430921352159,
+          y: 701.8747685395964
+        },
+        dragging: false,
+        parentNode: "6ab9252e-8b62-48d3-89ad-48e49ed850ee",
+        extent: "parent"
+      },
+      {
+        id: "61b7fee1-5374-42a2-b3f8-78ec7155cb0e",
+        data: {
+          distance: {
+            value: 1600
           }
         },
-        {
-          id: "9c724625-d76d-48ce-85d8-f82c70a1f2f4",
-          type: "splitter",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 10,
-                used: true
-              },
-              {
-                port: 2,
-                loss: 90,
-                used: false
-              }
-            ],
-            unbalanced: true
-          },
-          data: {
-            label: "1x2 D",
-            title: "10 | 90",
-            fusion: true
-          },
-          position: {
-            x: 677.5987011849522,
-            y: 877.9080380405123
-          },
-          style: {}
+        type: "distance",
+        position: {
+          x: 983.2673472666345,
+          y: 566.272248238841
         },
-        {
-          id: "610789ce-c706-4493-be9d-a536fc0548b8",
-          type: "distance",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 100,
-                used: true
-              }
-            ],
-            meters: 200
-          },
-          data: {
-            label: "200",
-            visible: true
-          },
-          position: {
-            x: 699.8779578184975,
-            y: 635.1572381345488
-          },
-          style: {}
-        },
-        {
-          id: "61024647-7171-4537-b379-49f946bdccce",
-          type: "splitter",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 6.25,
-                used: true
-              },
-              {
-                port: 2,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 3,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 4,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 5,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 6,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 7,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 8,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 9,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 10,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 11,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 12,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 13,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 14,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 15,
-                loss: 6.25,
-                used: false
-              },
-              {
-                port: 16,
-                loss: 6.25,
-                used: false
-              }
-            ],
-            unbalanced: false
-          },
-          data: {
-            label: "1x16 B",
-            title: "6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25 | 6.25",
-            fusion: false
-          },
-          position: {
-            x: 597.151936256829,
-            y: 942.4330474099445
-          },
-          style: {}
-        },
-        {
-          id: "1f788f95-2f81-4e76-a8b6-819dc8d5b840",
-          type: "distance",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 100,
-                used: true
-              }
-            ],
-            meters: 50
-          },
-          data: {
-            label: "50",
-            visible: false
-          },
-          position: {
-            x: 481.7874368273938,
-            y: 998.7174854346536
-          },
-          style: {}
-        },
-        {
-          id: "be590be5-7877-4325-ba63-d13de1210df2",
-          type: "dBmMeasure",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 100,
-                used: false
-              }
-            ],
-            meters: 0
-          },
-          data: {
-            label: "-22.67dBm",
-            client: true
-          },
-          position: {
-            x: 404.8314830153133,
-            y: 1075.535014093949
-          },
-          style: {
-            width: 50,
-            height: 25
-          }
-        },
-        {
-          id: "388d321e-7da4-43e9-a827-b4816e78da34",
-          type: "dBmMeasure",
-          fttx: {
-            ports: [
-              {
-                port: 1,
-                loss: 100,
-                used: true
-              }
-            ],
-            meters: 0
-          },
-          data: {
-            label: "3.25dBm",
-            client: false
-          },
-          position: {
-            x: 672.2076907395234,
-            y: 760.8764613369697
-          },
-          style: {
-            width: 50,
-            height: 25
-          }
+        width: 105,
+        height: 50,
+        selected: false,
+        dragging: false,
+        positionAbsolute: {
+          x: 983.2673472666345,
+          y: 566.272248238841
         }
-      ],
-      edges: [
-        {
-          animated: true,
-          id: "reactflow__edge-10e023d4-e7ee-4cf6-9ba1-3371f80680c3-74aad981-5ee0-4bba-8062-9cfb06ff9a01",
-          label: "",
-          port: 1,
-          sourceHandle: null,
-          source: "10e023d4-e7ee-4cf6-9ba1-3371f80680c3",
-          target: "74aad981-5ee0-4bba-8062-9cfb06ff9a01",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+      },
+      {
+        id: "6ab9252e-8b62-48d3-89ad-48e49ed850ee",
+        data: {
+          box: {
+            name: ""
+          }
         },
-        {
-          animated: true,
-          id: "reactflow__edge-74aad981-5ee0-4bba-8062-9cfb06ff9a01-2e44293b-5d82-4954-bcfe-e3bd61e559e3",
-          label: "",
-          port: 1,
-          sourceHandle: null,
-          source: "74aad981-5ee0-4bba-8062-9cfb06ff9a01",
-          target: "2e44293b-5d82-4954-bcfe-e3bd61e559e3",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        type: "box",
+        position: {
+          x: 704.4616233484876,
+          y: 701.6372963154429
         },
-        {
-          animated: true,
-          id: "reactflow__edge-4bf3938a-f3bb-4bab-b418-2777e617f473-e813a6b0-f1e8-4f4c-a775-bc2c02be0cb8",
-          label: "",
-          port: 1,
-          sourceHandle: null,
-          source: "4bf3938a-f3bb-4bab-b418-2777e617f473",
-          target: "e813a6b0-f1e8-4f4c-a775-bc2c02be0cb8",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        style: {
+          zIndex: -999
         },
-        {
-          animated: true,
-          id: "reactflow__edge-2e44293b-5d82-4954-bcfe-e3bd61e559e3-610789ce-c706-4493-be9d-a536fc0548b8",
-          label: "90%",
-          port: 2,
-          sourceHandle: null,
-          source: "2e44293b-5d82-4954-bcfe-e3bd61e559e3",
-          target: "610789ce-c706-4493-be9d-a536fc0548b8",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        width: 624,
+        height: 374,
+        selected: false,
+        positionAbsolute: {
+          x: 704.4616233484876,
+          y: 701.6372963154429
         },
-        {
-          animated: true,
-          id: "reactflow__edge-9c724625-d76d-48ce-85d8-f82c70a1f2f4-61024647-7171-4537-b379-49f946bdccce",
-          label: "10%",
-          port: 1,
-          sourceHandle: null,
-          source: "9c724625-d76d-48ce-85d8-f82c70a1f2f4",
-          target: "61024647-7171-4537-b379-49f946bdccce",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        dragging: false
+      },
+      {
+        id: "3f01eae2-8402-4210-a5a2-8a802cbe2084",
+        data: {
+          splitter: {
+            isConnector: true
+          }
         },
-        {
-          animated: true,
-          id: "reactflow__edge-61024647-7171-4537-b379-49f946bdccce-1f788f95-2f81-4e76-a8b6-819dc8d5b840",
-          label: "6.25%",
-          port: 1,
-          sourceHandle: null,
-          source: "61024647-7171-4537-b379-49f946bdccce",
-          target: "1f788f95-2f81-4e76-a8b6-819dc8d5b840",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        type: "splitterNode1x16B",
+        position: {
+          x: 62.22517950718827,
+          y: 226.42884894711779
         },
-        {
-          animated: true,
-          id: "reactflow__edge-1f788f95-2f81-4e76-a8b6-819dc8d5b840-be590be5-7877-4325-ba63-d13de1210df2",
-          label: "",
-          port: 1,
-          sourceHandle: null,
-          source: "1f788f95-2f81-4e76-a8b6-819dc8d5b840",
-          target: "be590be5-7877-4325-ba63-d13de1210df2",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        width: 250,
+        height: 84,
+        selected: false,
+        positionAbsolute: {
+          x: 774.1868028556759,
+          y: 919.3161452625607
         },
-        {
-          animated: true,
-          id: "reactflow__edge-388d321e-7da4-43e9-a827-b4816e78da34-9c724625-d76d-48ce-85d8-f82c70a1f2f4",
-          label: "",
-          port: 1,
-          sourceHandle: null,
-          source: "388d321e-7da4-43e9-a827-b4816e78da34",
-          target: "9c724625-d76d-48ce-85d8-f82c70a1f2f4",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        dragging: false,
+        parentNode: "6ab9252e-8b62-48d3-89ad-48e49ed850ee",
+        extent: "parent"
+      },
+      {
+        id: "4ef623af-5662-4526-bd50-5207c356118a",
+        data: {
+          dBm: {
+            value: -21.18
+          }
         },
-        {
-          animated: true,
-          id: "reactflow__edge-610789ce-c706-4493-be9d-a536fc0548b8-388d321e-7da4-43e9-a827-b4816e78da34",
-          label: "",
-          port: 1,
-          sourceHandle: null,
-          source: "610789ce-c706-4493-be9d-a536fc0548b8",
-          target: "388d321e-7da4-43e9-a827-b4816e78da34",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        type: "dBmMeasure",
+        position: {
+          x: 531.341655066953,
+          y: 1003.8664778448825
         },
-        {
-          animated: true,
-          id: "reactflow__edge-2e44293b-5d82-4954-bcfe-e3bd61e559e3-0b090298-95b7-4dfa-a748-a84ff6946690",
-          label: "10%",
-          port: 1,
-          sourceHandle: null,
-          source: "2e44293b-5d82-4954-bcfe-e3bd61e559e3",
-          target: "0b090298-95b7-4dfa-a748-a84ff6946690",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
+        width: 99,
+        height: 42,
+        selected: false,
+        positionAbsolute: {
+          x: 531.341655066953,
+          y: 1003.8664778448825
         },
-        {
-          animated: true,
-          id: "reactflow__edge-0b090298-95b7-4dfa-a748-a84ff6946690-4bf3938a-f3bb-4bab-b418-2777e617f473",
-          label: "6.25%",
-          port: 1,
-          sourceHandle: null,
-          source: "0b090298-95b7-4dfa-a748-a84ff6946690",
-          target: "4bf3938a-f3bb-4bab-b418-2777e617f473",
-          targetHandle: null,
-          style: {
-            stroke: "#00B37E"
-          },
-          type: "custom"
-        }
-      ]
-    }
+        dragging: false
+      },
+      {
+        id: "c5c84e9a-74ba-4f7a-b906-ec9fcfd71a20",
+        data: {
+          box: {
+            name: ""
+          }
+        },
+        type: "box",
+        position: {
+          x: 663.7838778765541,
+          y: 1330.491132046533
+        },
+        style: {
+          zIndex: -999
+        },
+        width: 624,
+        height: 374,
+        selected: false,
+        positionAbsolute: {
+          x: 663.7838778765541,
+          y: 1330.491132046533
+        },
+        dragging: false
+      },
+      {
+        id: "9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d",
+        data: {
+          splitter: {
+            isConnector: false
+          }
+        },
+        type: "splitterNode1x2D-10/90",
+        position: {
+          x: 270,
+          y: 72.50000000000045
+        },
+        width: 120,
+        height: 84,
+        selected: false,
+        positionAbsolute: {
+          x: 971.2838778765541,
+          y: 1384.2411320465335
+        },
+        dragging: false,
+        parentNode: "c5c84e9a-74ba-4f7a-b906-ec9fcfd71a20",
+        extent: "parent"
+      },
+      {
+        id: "92ce24e2-75f0-45d2-9de9-ee3a7b590f97",
+        data: {
+          distance: {
+            value: 200
+          }
+        },
+        type: "distance",
+        position: {
+          x: 1022.533877876554,
+          y: 1134.2411320465335
+        },
+        width: 105,
+        height: 50,
+        selected: false,
+        positionAbsolute: {
+          x: 1022.533877876554,
+          y: 1134.2411320465335
+        },
+        dragging: false
+      },
+      {
+        id: "24074ec7-e9c3-4454-ba0f-f7b71d7d7952",
+        data: {
+          splitter: {
+            isConnector: true
+          }
+        },
+        type: "splitterNode1x16B",
+        position: {
+          x: 43.0910241104109,
+          y: 225.10581789286653
+        },
+        width: 250,
+        height: 84,
+        selected: false,
+        positionAbsolute: {
+          x: 744.374901986965,
+          y: 1536.8469499393996
+        },
+        dragging: false,
+        parentNode: "c5c84e9a-74ba-4f7a-b906-ec9fcfd71a20",
+        extent: "parent"
+      },
+      {
+        id: "badc3005-e330-49cc-bc2d-68e86e0ac7f8",
+        data: {
+          dBm: {
+            value: -22.15
+          }
+        },
+        type: "dBmMeasure",
+        position: {
+          x: 533.9613770432497,
+          y: 1734.1127897814226
+        },
+        width: 99,
+        height: 42,
+        selected: false,
+        positionAbsolute: {
+          x: 533.9613770432497,
+          y: 1734.1127897814226
+        },
+        dragging: false
+      }
+    ],
+    edges: [
+      {
+        animated: true,
+        style: {
+          stroke: "#00b37e",
+          opacity: 1,
+          strokeWidth: 2
+        },
+        type: "smoothstep",
+        source: "bb934edd-878b-48f5-9733-ef83726d3620",
+        sourceHandle: null,
+        target: "61b7fee1-5374-42a2-b3f8-78ec7155cb0e",
+        targetHandle: "61b7fee1-5374-42a2-b3f8-78ec7155cb0e_port-0",
+        id: "reactflow__edge-bb934edd-878b-48f5-9733-ef83726d3620-61b7fee1-5374-42a2-b3f8-78ec7155cb0e61b7fee1-5374-42a2-b3f8-78ec7155cb0e_port-0"
+      },
+      {
+        animated: true,
+        style: {
+          stroke: "#00b37e",
+          opacity: 1,
+          strokeWidth: 2
+        },
+        type: "smoothstep",
+        source: "d4b92bb8-4c53-47bb-b295-1f6ec9087702",
+        sourceHandle: "d4b92bb8-4c53-47bb-b295-1f6ec9087702_port-1",
+        target: "3f01eae2-8402-4210-a5a2-8a802cbe2084",
+        targetHandle: "3f01eae2-8402-4210-a5a2-8a802cbe2084_port-0",
+        id: "reactflow__edge-d4b92bb8-4c53-47bb-b295-1f6ec9087702d4b92bb8-4c53-47bb-b295-1f6ec9087702_port-1-3f01eae2-8402-4210-a5a2-8a802cbe20843f01eae2-8402-4210-a5a2-8a802cbe2084_port-0"
+      },
+      {
+        animated: true,
+        style: {
+          stroke: "#00b37e",
+          opacity: 1,
+          strokeWidth: 2
+        },
+        type: "smoothstep",
+        source: "61b7fee1-5374-42a2-b3f8-78ec7155cb0e",
+        sourceHandle: "61b7fee1-5374-42a2-b3f8-78ec7155cb0e_port-1",
+        target: "d4b92bb8-4c53-47bb-b295-1f6ec9087702",
+        targetHandle: "d4b92bb8-4c53-47bb-b295-1f6ec9087702_port-0",
+        id: "reactflow__edge-61b7fee1-5374-42a2-b3f8-78ec7155cb0e61b7fee1-5374-42a2-b3f8-78ec7155cb0e_port-1-d4b92bb8-4c53-47bb-b295-1f6ec9087702d4b92bb8-4c53-47bb-b295-1f6ec9087702_port-0"
+      },
+      {
+        animated: true,
+        style: {
+          stroke: "#00b37e",
+          opacity: 1,
+          strokeWidth: 2
+        },
+        type: "smoothstep",
+        source: "3f01eae2-8402-4210-a5a2-8a802cbe2084",
+        sourceHandle: "3f01eae2-8402-4210-a5a2-8a802cbe2084_port-1",
+        target: "4ef623af-5662-4526-bd50-5207c356118a",
+        targetHandle: "4ef623af-5662-4526-bd50-5207c356118a_port-0",
+        id: "reactflow__edge-3f01eae2-8402-4210-a5a2-8a802cbe20843f01eae2-8402-4210-a5a2-8a802cbe2084_port-1-4ef623af-5662-4526-bd50-5207c356118a4ef623af-5662-4526-bd50-5207c356118a_port-0"
+      },
+      {
+        animated: true,
+        style: {
+          stroke: "#00b37e",
+          opacity: 1,
+          strokeWidth: 2
+        },
+        type: "smoothstep",
+        source: "d4b92bb8-4c53-47bb-b295-1f6ec9087702",
+        sourceHandle: "d4b92bb8-4c53-47bb-b295-1f6ec9087702_port-2",
+        target: "92ce24e2-75f0-45d2-9de9-ee3a7b590f97",
+        targetHandle: "92ce24e2-75f0-45d2-9de9-ee3a7b590f97_port-0",
+        id: "reactflow__edge-d4b92bb8-4c53-47bb-b295-1f6ec9087702d4b92bb8-4c53-47bb-b295-1f6ec9087702_port-2-92ce24e2-75f0-45d2-9de9-ee3a7b590f9792ce24e2-75f0-45d2-9de9-ee3a7b590f97_port-0"
+      },
+      {
+        animated: true,
+        style: {
+          stroke: "#00b37e",
+          opacity: 1,
+          strokeWidth: 2
+        },
+        type: "smoothstep",
+        source: "92ce24e2-75f0-45d2-9de9-ee3a7b590f97",
+        sourceHandle: "92ce24e2-75f0-45d2-9de9-ee3a7b590f97_port-1",
+        target: "9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d",
+        targetHandle: "9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d_port-0",
+        id: "reactflow__edge-92ce24e2-75f0-45d2-9de9-ee3a7b590f9792ce24e2-75f0-45d2-9de9-ee3a7b590f97_port-1-9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d_port-0"
+      },
+      {
+        animated: true,
+        style: {
+          stroke: "#00b37e",
+          opacity: 1,
+          strokeWidth: 2
+        },
+        type: "smoothstep",
+        source: "9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d",
+        sourceHandle: "9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d_port-1",
+        target: "24074ec7-e9c3-4454-ba0f-f7b71d7d7952",
+        targetHandle: "24074ec7-e9c3-4454-ba0f-f7b71d7d7952_port-0",
+        id: "reactflow__edge-9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d9ea279ef-4ac0-4bae-ae70-c9ac7a6e194d_port-1-24074ec7-e9c3-4454-ba0f-f7b71d7d795224074ec7-e9c3-4454-ba0f-f7b71d7d7952_port-0"
+      },
+      {
+        animated: true,
+        style: {
+          stroke: "#00b37e",
+          opacity: 1,
+          strokeWidth: 2
+        },
+        type: "smoothstep",
+        source: "24074ec7-e9c3-4454-ba0f-f7b71d7d7952",
+        sourceHandle: "24074ec7-e9c3-4454-ba0f-f7b71d7d7952_port-1",
+        target: "badc3005-e330-49cc-bc2d-68e86e0ac7f8",
+        targetHandle: "badc3005-e330-49cc-bc2d-68e86e0ac7f8_port-0",
+        id: "reactflow__edge-24074ec7-e9c3-4454-ba0f-f7b71d7d795224074ec7-e9c3-4454-ba0f-f7b71d7d7952_port-1-badc3005-e330-49cc-bc2d-68e86e0ac7f8badc3005-e330-49cc-bc2d-68e86e0ac7f8_port-0"
+      }
+    ]
   }

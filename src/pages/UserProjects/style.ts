@@ -9,14 +9,22 @@ export const ProjectsContainer = styled.div`
 `;
 
 export const ProjectButton = styled.button`
-  background-color: #4CAF50;    
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  margin: 10px;
-  cursor: pointer;
+  display: flex;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    z-index: 10;
+    background: transparent;
+    border: 1px solid ${(props) => props.theme["green-300"]};
+    color: ${(props) => props.theme["green-300"]};
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
 
   &:hover {
-    background-color: #3e8e41;
+    background:${(props) => props.theme["green-300"]};
+    color:white;
   }
 `;

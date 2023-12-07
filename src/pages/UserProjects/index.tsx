@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
-import { ProjectsContainer } from "./style";
+import { ProjectButton, ProjectsContainer } from "./style";
 import { ButtonContainer } from "../Diagram/components/Flow/style";
 import { setupAPIClient } from "../../lib/api";
 
@@ -32,11 +32,11 @@ export function UserProjects() {
         <ProjectsContainer>
             {arrayProjects.map((item) => {
                 return (
-                    <ButtonContainer onClick={() => {
+                    <ProjectButton onClick={() => {
                         navigate(`/diagram/${item.id}`)
                         }} key={item.id}>
                         {item.name}
-                    </ButtonContainer   >
+                    </ProjectButton   >
                 );
             })}
         </ProjectsContainer>

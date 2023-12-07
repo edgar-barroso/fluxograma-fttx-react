@@ -4,6 +4,9 @@ export const BoxStyled = styled.div`
     margin: 10px;
     text-align: left;
     word-wrap: break-word;
-    min-height: 100%;
-    min-width: 200px
+    height: 350px;
+    width: 600px;
+    border-radius: 10px;
+    background-color: white;
+    border: 2px solid ${props=>props.theme["green-300"]};
 `;
