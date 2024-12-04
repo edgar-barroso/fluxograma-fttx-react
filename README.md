@@ -1,7 +1,13 @@
 
 ## Getting Started
+First, clone the repository:
 
-First, install the dependencies:
+```bash
+git clone https://github.com/edgar-barroso/fluxograma-fttx-react
+cd fluxograma-fttx-react
+```
+
+Then, install the dependencies:
 
 ```bash
 npm install
@@ -13,7 +19,7 @@ pnpm install
 bun install
 ```
 
-run the development server:
+Finally, run the development server:
 
 ```bash
 npm run dev
