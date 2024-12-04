@@ -1,3 +1,8 @@
+## Prerequisites
+
+Ensure you have the following installed on your system:
+	•	Node.js (version 16 or higher recommended): Required to run the development environment and manage packages. You can download it from https://nodejs.org.
+	•	A package manager such as npm, yarn, pnpm, or bun. npm comes bundled with Node.js.
 
 ## Getting Started
 First, clone the repository:
